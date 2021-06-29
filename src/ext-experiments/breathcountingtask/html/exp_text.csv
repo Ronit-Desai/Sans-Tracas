@@ -1,0 +1,21 @@
+keys;text_elements;must_press
+instr_demo;Welcome and thank you for taking part in this study. Before we begin, please ensure that you are in a quiet room and are sitting comfortably in front of your computer. The task will take approximately 20 minutes with no breaks. Please turn off your phone and other notifications on the computer and ask anyone else in the room to ensure that you are not disturbed in the next 20 minutes.~Press the <SPACE> bar to see the instructions.;space
+instr_demo;"In this task, we would like you to be aware of your breath. Please be aware of the movement of breath in and out in the space below your nose and above your upper lip. There’s no need to control the breath. Just breathe normally.~At some point you may notice your attention has wandered from the breath. That is okay. Just gently place it back on the breath.~~To help attention stay with the breath, you’ll use a small part of your attention to silently count breaths from 1 to 9, again and again. An in and out breath together makes one count. Say the count softly in your mind so it only gets a little attention while most of the attention is on feeling the breath. Please press the <Left Arrow> using your index finger with breaths 1-8, and the <Right Arrow> using your 4th finger with breath 9. This means you’ll be pressing a button with each breath.~~If you find that you have forgotten the count, just press the <SPACE> with your left index finger. You can re- start the count at 1 with the next breath. Do not count the breaths using your fingers but only in your head.~~We suggest you sit in an upright, relaxed posture that feels comfortable. Please keep your eyes at least partly open and resting on the screen during the experiment. The task will last about 20 minutes.~~If you need to quit the experiment for any reason before the task is complete, please press ""q"" on your keyboard. ~~Press the <SPACE> button when you are ready to start a quick practice demonstration.";space
+instr_demo;This is your first breath - press the <LEFT> arrow key.;left
+instr_demo;This is your second breath - press the <LEFT> arrow key.;left
+instr_demo;This is your third breath - press the <LEFT> arrow key.;left
+instr_demo;This is your fourth breath - press the <LEFT> arrow key.;left
+instr_demo;This is your fifth breath - press the <LEFT> arrow key.;left
+instr_demo;This is your sixth breath - press the <LEFT> arrow key.;left
+instr_demo;This is your seventh breath - press the <LEFT> arrow key.;left
+instr_demo;This is your eighth breath - press the <LEFT> arrow key.;left
+instr_demo;This is your ninth breath - press the <RIGHT> arrow key. ;right
+instr_demo;You have completed the practice demo. Please press the <SPACE> bar to move onto the meditation task.;space
+during_task_instr;LEFT <-- (Breaths 1-8)     RIGHT--> (Breath 9)   SPACE BAR (restart);NA
+warn_text;Please remember to relax and breath normally. ~~ If you have lost count, please press the space bar to restart your count. ;NA
+completion_text;Thank you for your patience in finishing the task! Now that you have completed the task, please answer these short follow-up questions.~Press the <SPACE> bar to begin.;NA
+quit_early_text;You've ended the task a bit early, but thank you for participating. Please answer these short follow-up questions.~Press the <SPACE> bar to begin.;NA
+end_question;Did you fall asleep at any point during the task?~Please type 'yes' or 'no' and press return.;NA
+end_question;Were you interrupted during the task by someone or something else (e.g., phone, person coming to talk to you, etc)? ~Please type in 'yes' or 'no' and press return.;NA
+end_question;Did you have any technical difficulties? Please describe.~Press return when you have finished typing your answer.;NA
+end_question;Any other comments that you think we should know?~Press return when you have finished typing your answer.;NA

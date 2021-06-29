@@ -1,0 +1,7 @@
+--face images--
+https://www.kaggle.com/kpvisionlab/tufts-face-database
+http://tdface.ece.tufts.edu/
+
+
+--house images--
+https://www.kaggle.com/ted8080/house-prices-and-images-socal

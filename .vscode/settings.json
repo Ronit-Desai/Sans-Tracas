@@ -1,0 +1,5 @@
+{
+    "editor.formatOnSave": true,
+    "appService.defaultWebAppToDeploy": "/subscriptions/d7ec0e2f-4454-4159-862b-481f6ed2651e/resourceGroups/museapp_frontend_test2-rg/providers/Microsoft.Web/sites/museapp-frontend-test2",
+    "appService.deploySubpath": "build"
+}
