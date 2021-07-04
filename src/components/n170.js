@@ -661,7 +661,7 @@ class N170 extends React.Component {
           >
             {this.state.currentImageIndex ? (
               <img
-                alt="n170-image"
+                alt="n170-main"
                 src={experimentImages[this.state.currentImageIndex].image}
                 height={200}
                 width={200}
