@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { CSVLink } from "react-csv";
 import moment from "moment";
 import HelperUtil from "../util/HelperUtil";
@@ -71,6 +70,7 @@ class MaskAndFaces extends React.Component {
           </button>
 
           <iframe
+            title="experiment-frame"
             style={{
               width: "99%",
               height: "96vh",

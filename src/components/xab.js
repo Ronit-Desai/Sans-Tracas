@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { CSVLink } from "react-csv";
 import moment from "moment";
 import HelperUtil from "../util/HelperUtil";
@@ -171,6 +170,7 @@ class XAB extends React.Component {
               }}
             >
               <img
+                alt="xab-primary"
                 src={experimentImages[this.state.xabPrimaryImageIndex].image}
                 height={200}
                 width={200}
@@ -190,6 +190,7 @@ class XAB extends React.Component {
               }}
             >
               <img
+                alt="xab-left"
                 src={experimentImages[this.state.xabOptionLeftIndex].image}
                 height={200}
                 width={200}
@@ -200,7 +201,7 @@ class XAB extends React.Component {
                   this.xabReadings[lastElementIndex].mode = "click";
 
                   if (
-                    this.state.xabPrimaryImageIndex ==
+                    this.state.xabPrimaryImageIndex ===
                     this.state.xabOptionLeftIndex
                   ) {
                     this.xabReadings[lastElementIndex].correctness = "true";
@@ -214,6 +215,7 @@ class XAB extends React.Component {
               />
 
               <img
+                alt="xab-right"
                 src={experimentImages[this.state.xabOptionRightIndex].image}
                 height={200}
                 width={200}
@@ -224,7 +226,7 @@ class XAB extends React.Component {
                   this.xabReadings[lastElementIndex].mode = "click";
 
                   if (
-                    this.state.xabPrimaryImageIndex ==
+                    this.state.xabPrimaryImageIndex ===
                     this.state.xabOptionRightIndex
                   ) {
                     this.xabReadings[lastElementIndex].correctness = "true";
@@ -327,7 +329,7 @@ class XAB extends React.Component {
         });
     } else {
       let randomIndex = Math.floor(Math.random() * experimentImages.length);
-      while (randomIndex == this.state.xabPrimaryImageIndex) {
+      while (randomIndex === this.state.xabPrimaryImageIndex) {
         randomIndex = Math.floor(Math.random() * experimentImages.length);
         console.log("same index found in xabShowPrimary");
       }
@@ -344,7 +346,7 @@ class XAB extends React.Component {
   xabShowOptions = () => {
     setTimeout(() => {
       let randomIndex = Math.floor(Math.random() * experimentImages.length);
-      while (randomIndex == this.state.xabPrimaryImageIndex) {
+      while (randomIndex === this.state.xabPrimaryImageIndex) {
         randomIndex = Math.floor(Math.random() * experimentImages.length);
         console.log("same index found in xabShowOptions");
       }
@@ -421,14 +423,14 @@ class XAB extends React.Component {
 
   keyPressed = (e) => {
     if (!this.state.xabShowingPrimary) {
-      if (e.keyCode == 37) {
+      if (e.keyCode === 37) {
         console.log("left arrow clicked");
 
         let lastElementIndex = this.xabReadings.length - 1;
         this.xabReadings[lastElementIndex].timestamp = Date.now();
         this.xabReadings[lastElementIndex].selection = "left";
         this.xabReadings[lastElementIndex].mode = "key";
-        if (this.state.xabPrimaryImageIndex == this.state.xabOptionLeftIndex) {
+        if (this.state.xabPrimaryImageIndex === this.state.xabOptionLeftIndex) {
           this.xabReadings[lastElementIndex].correctness = "true";
         } else {
           this.xabReadings[lastElementIndex].correctness = "false";
@@ -436,14 +438,16 @@ class XAB extends React.Component {
 
         this.xabOptionSelected = true;
         this.xabShowPrimary();
-      } else if (e.keyCode == 39) {
+      } else if (e.keyCode === 39) {
         console.log("right arrow clicked");
 
         let lastElementIndex = this.xabReadings.length - 1;
         this.xabReadings[lastElementIndex].timestamp = Date.now();
         this.xabReadings[lastElementIndex].selection = "right";
         this.xabReadings[lastElementIndex].mode = "key";
-        if (this.state.xabPrimaryImageIndex == this.state.xabOptionRightIndex) {
+        if (
+          this.state.xabPrimaryImageIndex === this.state.xabOptionRightIndex
+        ) {
           this.xabReadings[lastElementIndex].correctness = "true";
         } else {
           this.xabReadings[lastElementIndex].correctness = "false";

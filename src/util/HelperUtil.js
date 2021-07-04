@@ -16,9 +16,9 @@ export default class HelperUtil {
       let prevTimeStamp = this.getPrevTimeStamp(readings, i);
 
       for (let j = 0; j < readings.length; j++) {
-        if (readings[j].index == i) {
+        if (readings[j].index === i) {
           let timeGap = (readings[j].timestamp - prevTimeStamp) / 12;
-          if (i == minIndex) {
+          if (i === minIndex) {
             timeGap = 1000 / 256;
           }
 
@@ -98,6 +98,10 @@ export default class HelperUtil {
                 }
               }
               break;
+            default:
+              console.log(
+                "New node found in while cleaning data in Helper-util class"
+              );
           }
         }
       }
@@ -111,7 +115,7 @@ export default class HelperUtil {
   static getPrevTimeStamp(readings, index) {
     let readingsLength = readings.length;
     for (let i = 0; i < readingsLength; i++) {
-      if (readings[i].index == index - 1) {
+      if (readings[i].index === index - 1) {
         return readings[i].timestamp;
       }
     }

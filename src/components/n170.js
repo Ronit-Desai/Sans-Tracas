@@ -1,5 +1,4 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { CSVLink } from "react-csv";
 import moment from "moment";
 import HelperUtil from "../util/HelperUtil";
@@ -662,6 +661,7 @@ class N170 extends React.Component {
           >
             {this.state.currentImageIndex ? (
               <img
+                alt="n170-image"
                 src={experimentImages[this.state.currentImageIndex].image}
                 height={200}
                 width={200}
@@ -797,7 +797,7 @@ class N170 extends React.Component {
           });
       } else {
         let nextImage = Math.floor(Math.random() * experimentImages.length);
-        while (nextImage == this.state.currentImageIndex) {
+        while (nextImage === this.state.currentImageIndex) {
           nextImage = Math.floor(Math.random() * experimentImages.length);
           console.log("same index found in n170");
         }

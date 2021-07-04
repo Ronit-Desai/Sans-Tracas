@@ -1,6 +1,5 @@
 import "./App.css";
 import React from "react";
-import ReactDOM from "react-dom";
 import { MuseClient } from "muse-js";
 import N170 from "./components/n170";
 import XAB from "./components/xab";
@@ -171,7 +170,7 @@ class App extends React.Component {
   }
 
   recordParticipantId = () => {
-    if (this.state.participantId.length != 0) {
+    if (this.state.participantId.length !== 0) {
       this.setState({ isParticipantIdValid: true });
     } else {
       this.setState({ showParticipantError: true });
