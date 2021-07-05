@@ -314,7 +314,10 @@ class XAB extends React.Component {
         body: jsonBody,
       };
 
-      fetch("http://localhost:8080/saveData", postData)
+      fetch(
+        "https://museapp-backend-test1.azurewebsites.net/saveData",
+        postData
+      )
         .then((response) => {
           console.log("Data sent to server");
 
