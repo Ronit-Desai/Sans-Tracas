@@ -27,16 +27,16 @@ class App extends React.Component {
     if (!this.state.isParticipantIdValid) {
       return (
         <div className="App">
-          <div style={{ marginTop: 30 }}>
+          <div className="m-3">
             <input
               type="text"
               name="participantId"
               placeholder="Enter Participant ID"
               value={this.state.participantId}
               onChange={this.handleChange}
+              className="form-control"
             />
           </div>
-
           {this.state.showParticipantError ? (
             <p style={{ color: "red" }}> Please enter participant ID</p>
           ) : null}
@@ -45,6 +45,7 @@ class App extends React.Component {
           <p>
             <input
               type="checkbox"
+              className="form-check-input"
               defaultChecked={this.state.auxConnected}
               onChange={() => {
                 this.setState({ auxConnected: !this.state.auxConnected });
@@ -55,7 +56,12 @@ class App extends React.Component {
           </p>
 
           <br />
-          <button onClick={this.recordParticipantId}>Submit</button>
+          <button
+            onClick={this.recordParticipantId}
+            className="btn btn-outline-primary"
+          >
+            Submit
+          </button>
         </div>
       );
     }
@@ -63,7 +69,11 @@ class App extends React.Component {
     if (!this.state.deviceConnected) {
       return (
         <div className="App">
-          <button style={{ marginTop: 50, padding: 20 }} onClick={this.connect}>
+          <button
+            style={{ marginTop: 50, padding: 20 }}
+            onClick={this.connect}
+            className="btn btn-outline-primary"
+          >
             Connect Device
           </button>
         </div>
@@ -75,6 +85,7 @@ class App extends React.Component {
         <div className="App">
           <p>Device connected successfully. Select experiment to begin!</p>
           <button
+            className="btn btn-outline-primary"
             style={{ width: 150, height: 50, marginRight: 20 }}
             onClick={() => {
               this.setState({ experimentSelected: "n170" });
@@ -83,6 +94,7 @@ class App extends React.Component {
             Visual N170
           </button>
           <button
+            className="btn btn-outline-primary"
             style={{ width: 150, height: 50, marginRight: 20 }}
             onClick={() => {
               this.setState({ experimentSelected: "xab" });
@@ -91,6 +103,7 @@ class App extends React.Component {
             Face XAB
           </button>
           <button
+            className="btn btn-outline-primary"
             style={{ width: 150, height: 50, marginRight: 20 }}
             onClick={() => {
               this.setState({ experimentSelected: "maskandfaces" });
@@ -99,6 +112,7 @@ class App extends React.Component {
             Mask and Faces
           </button>
           <button
+            className="btn btn-outline-primary"
             style={{ width: 150, height: 50, marginRight: 20 }}
             onClick={() => {
               this.setState({ experimentSelected: "xabfrompavlovia" });
@@ -107,6 +121,7 @@ class App extends React.Component {
             Xab From Pavlovia
           </button>
           <button
+            className="btn btn-outline-primary"
             style={{ width: 150, height: 50 }}
             onClick={() => {
               this.setState({ experimentSelected: "breathcounting" });
