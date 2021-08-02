@@ -26,23 +26,25 @@ class App extends React.Component {
   render() {
     if (!this.state.isParticipantIdValid) {
       return (
-        <div className="App">
-          <div className="m-3">
-            <input
-              type="text"
-              name="participantId"
-              placeholder="Enter Participant ID"
-              value={this.state.participantId}
-              onChange={this.handleChange}
-              className="form-control"
-            />
-          </div>
-          {this.state.showParticipantError ? (
-            <p style={{ color: "red" }}> Please enter participant ID</p>
-          ) : null}
+        <div className="App text-center">
+          <div class="col-md-4 mx-auto mt-5 pt-5 w-50">
+            <div className="m-3">
+              <span class="material-icons">account_circle</span>
+              <input
+                type="text"
+                name="participantId"
+                placeholder="Enter Participant ID"
+                value={this.state.participantId}
+                onChange={this.handleChange}
+                className="form-control"
+              />
+            </div>
 
-          <br />
-          <p>
+            {this.state.showParticipantError ? (
+              <h2> Please enter participant ID</h2>
+            ) : null}
+
+            <br />
             <input
               type="checkbox"
               className="form-check-input"
@@ -51,17 +53,19 @@ class App extends React.Component {
                 this.setState({ auxConnected: !this.state.auxConnected });
               }}
             />
-            Have you connected anything to the Muse's AUX port for today's
-            experiment?
-          </p>
+            <h4>
+              Have you connected anything to the Muse's AUX port for today's
+              experiment?
+            </h4>
 
-          <br />
-          <button
-            onClick={this.recordParticipantId}
-            className="btn btn-outline-primary"
-          >
-            Submit
-          </button>
+            <br />
+            <button
+              className="btn btn-primary"
+              onClick={this.recordParticipantId}
+            >
+              Submit
+            </button>
+          </div>
         </div>
       );
     }
@@ -71,8 +75,8 @@ class App extends React.Component {
         <div className="App">
           <button
             style={{ marginTop: 50, padding: 20 }}
+            className="btn btn-outline-secondary"
             onClick={this.connect}
-            className="btn btn-outline-primary"
           >
             Connect Device
           </button>
@@ -85,8 +89,8 @@ class App extends React.Component {
         <div className="App">
           <p>Device connected successfully. Select experiment to begin!</p>
           <button
-            className="btn btn-outline-primary"
             style={{ width: 150, height: 50, marginRight: 20 }}
+            className="btn btn-outline-success"
             onClick={() => {
               this.setState({ experimentSelected: "n170" });
             }}
@@ -94,8 +98,8 @@ class App extends React.Component {
             Visual N170
           </button>
           <button
-            className="btn btn-outline-primary"
             style={{ width: 150, height: 50, marginRight: 20 }}
+            className="btn btn-outline-success"
             onClick={() => {
               this.setState({ experimentSelected: "xab" });
             }}
@@ -103,8 +107,8 @@ class App extends React.Component {
             Face XAB
           </button>
           <button
-            className="btn btn-outline-primary"
             style={{ width: 150, height: 50, marginRight: 20 }}
+            className="btn btn-outline-success"
             onClick={() => {
               this.setState({ experimentSelected: "maskandfaces" });
             }}
@@ -112,8 +116,8 @@ class App extends React.Component {
             Mask and Faces
           </button>
           <button
-            className="btn btn-outline-primary"
             style={{ width: 150, height: 50, marginRight: 20 }}
+            className="btn btn-outline-success"
             onClick={() => {
               this.setState({ experimentSelected: "xabfrompavlovia" });
             }}
@@ -121,8 +125,8 @@ class App extends React.Component {
             Xab From Pavlovia
           </button>
           <button
-            className="btn btn-outline-primary"
             style={{ width: 150, height: 50 }}
+            className="btn btn-outline-primary"
             onClick={() => {
               this.setState({ experimentSelected: "breathcounting" });
             }}
