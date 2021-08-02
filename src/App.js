@@ -27,9 +27,14 @@ class App extends React.Component {
     if (!this.state.isParticipantIdValid) {
       return (
         <div className="App text-center">
-          <div class="col-md-4 mx-auto mt-5 pt-5 w-50">
+          <div class="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
             <div className="m-3">
-              <span class="material-icons">account_circle</span>
+              <span
+                class="material-icons mb-2"
+                style={{ fontSize: 100, color: "#57a8ff" }}
+              >
+                account_circle
+              </span>
               <input
                 type="text"
                 name="participantId"
@@ -45,18 +50,20 @@ class App extends React.Component {
             ) : null}
 
             <br />
-            <input
-              type="checkbox"
-              className="form-check-input"
-              defaultChecked={this.state.auxConnected}
-              onChange={() => {
-                this.setState({ auxConnected: !this.state.auxConnected });
-              }}
-            />
-            <h4>
-              Have you connected anything to the Muse's AUX port for today's
-              experiment?
-            </h4>
+            <h5>
+              <input
+                type="checkbox"
+                className="form-check-input mr-2"
+                defaultChecked={this.state.auxConnected}
+                onChange={() => {
+                  this.setState({ auxConnected: !this.state.auxConnected });
+                }}
+              />
+              <span className="ml-1">
+                I have already connected to the Muse's AUX port for today's
+                experiment.
+              </span>
+            </h5>
 
             <br />
             <button
@@ -72,67 +79,82 @@ class App extends React.Component {
 
     if (!this.state.deviceConnected) {
       return (
-        <div className="App">
-          <button
-            style={{ marginTop: 50, padding: 20 }}
-            className="btn btn-outline-secondary"
-            onClick={this.connect}
-          >
-            Connect Device
-          </button>
+        <div className="App text-center">
+          <div class="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+            <h5>
+              Please turn on your device Bluetooth and press the button below to
+              connect with the EEG device.
+            </h5>
+            <button
+              className="btn btn-primary btn-block m-3"
+              onClick={this.connect}
+            >
+              Connect Device
+            </button>
+            <p>
+              PLease make sure you've followed the video to properly fit the
+              Muse on your head and turned it on.
+            </p>
+          </div>
         </div>
       );
     }
 
     if (!this.state.experimentSelected) {
       return (
-        <div className="App">
-          <p>Device connected successfully. Select experiment to begin!</p>
-          <button
-            style={{ width: 150, height: 50, marginRight: 20 }}
-            className="btn btn-outline-success"
-            onClick={() => {
-              this.setState({ experimentSelected: "n170" });
-            }}
-          >
-            Visual N170
-          </button>
-          <button
-            style={{ width: 150, height: 50, marginRight: 20 }}
-            className="btn btn-outline-success"
-            onClick={() => {
-              this.setState({ experimentSelected: "xab" });
-            }}
-          >
-            Face XAB
-          </button>
-          <button
-            style={{ width: 150, height: 50, marginRight: 20 }}
-            className="btn btn-outline-success"
-            onClick={() => {
-              this.setState({ experimentSelected: "maskandfaces" });
-            }}
-          >
-            Mask and Faces
-          </button>
-          <button
-            style={{ width: 150, height: 50, marginRight: 20 }}
-            className="btn btn-outline-success"
-            onClick={() => {
-              this.setState({ experimentSelected: "xabfrompavlovia" });
-            }}
-          >
-            Xab From Pavlovia
-          </button>
-          <button
-            style={{ width: 150, height: 50 }}
-            className="btn btn-outline-primary"
-            onClick={() => {
-              this.setState({ experimentSelected: "breathcounting" });
-            }}
-          >
-            BreathCounting
-          </button>
+        <div className="App text-center">
+          <div class="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+            <h5>Device connected successfully. Select experiment to begin!</h5>
+            <br />
+            <button
+              className="btn btn-outline-success btn-block w-100 m-2"
+              onClick={() => {
+                this.setState({ experimentSelected: "n170" });
+              }}
+            >
+              Visual N170
+            </button>
+            <br />
+
+            <button
+              className="btn btn-outline-success btn-block w-100 m-2"
+              onClick={() => {
+                this.setState({ experimentSelected: "xab" });
+              }}
+            >
+              Face XAB
+            </button>
+            <br />
+
+            <button
+              className="btn btn-outline-success btn-block w-100 m-2"
+              onClick={() => {
+                this.setState({ experimentSelected: "maskandfaces" });
+              }}
+            >
+              Mask and Faces
+            </button>
+            <br />
+
+            <button
+              className="btn btn-outline-success btn-block w-100 m-2"
+              onClick={() => {
+                this.setState({ experimentSelected: "xabfrompavlovia" });
+              }}
+            >
+              Xab From Pavlovia
+            </button>
+            <br />
+
+            <button
+              className="btn btn-outline-success btn-block w-100 m-2"
+              onClick={() => {
+                this.setState({ experimentSelected: "breathcounting" });
+              }}
+            >
+              BreathCounting
+            </button>
+          </div>
         </div>
       );
     }
