@@ -21,6 +21,7 @@ class App extends React.Component {
     };
 
     this.client = new MuseClient();
+    this.elem = document.documentElement;
   }
 
   render() {
@@ -110,6 +111,7 @@ class App extends React.Component {
               className="btn btn-outline-success btn-block w-100 m-2"
               onClick={() => {
                 this.setState({ experimentSelected: "n170" });
+                this.openFullscreen();
               }}
             >
               Visual N170
@@ -120,6 +122,7 @@ class App extends React.Component {
               className="btn btn-outline-success btn-block w-100 m-2"
               onClick={() => {
                 this.setState({ experimentSelected: "xab" });
+                this.openFullscreen();
               }}
             >
               Face XAB
@@ -130,6 +133,7 @@ class App extends React.Component {
               className="btn btn-outline-success btn-block w-100 m-2"
               onClick={() => {
                 this.setState({ experimentSelected: "maskandfaces" });
+                this.openFullscreen();
               }}
             >
               Mask and Faces
@@ -140,6 +144,7 @@ class App extends React.Component {
               className="btn btn-outline-success btn-block w-100 m-2"
               onClick={() => {
                 this.setState({ experimentSelected: "xabfrompavlovia" });
+                this.openFullscreen();
               }}
             >
               Xab From Pavlovia
@@ -150,6 +155,7 @@ class App extends React.Component {
               className="btn btn-outline-success btn-block w-100 m-2"
               onClick={() => {
                 this.setState({ experimentSelected: "breathcounting" });
+                this.openFullscreen();
               }}
             >
               BreathCounting
@@ -215,6 +221,18 @@ class App extends React.Component {
       this.setState({ isParticipantIdValid: true });
     } else {
       this.setState({ showParticipantError: true });
+    }
+  };
+
+  openFullscreen = async () => {
+    if (this.elem.requestFullscreen) {
+      this.elem.requestFullscreen();
+    } else if (this.elem.webkitRequestFullscreen) {
+      /* Safari */
+      this.elem.webkitRequestFullscreen();
+    } else if (this.elem.msRequestFullscreen) {
+      /* IE11 */
+      this.elem.msRequestFullscreen();
     }
   };
 
