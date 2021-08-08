@@ -30,23 +30,23 @@ class App extends React.Component {
   }
 
   toggleNav(expNo) {
-    if (expNo == 1) {
+    if (expNo === 1) {
       this.setState({
         exp1DescShow: !this.state.exp1DescShow,
       });
-    } else if (expNo == 2) {
+    } else if (expNo === 2) {
       this.setState({
         exp2DescShow: !this.state.exp2DescShow,
       });
-    } else if (expNo == 3) {
+    } else if (expNo === 3) {
       this.setState({
         exp3DescShow: !this.state.exp3DescShow,
       });
-    } else if (expNo == 4) {
+    } else if (expNo === 4) {
       this.setState({
         exp4DescShow: !this.state.exp4DescShow,
       });
-    } else if (expNo == 5) {
+    } else if (expNo === 5) {
       this.setState({
         exp5DescShow: !this.state.exp5DescShow,
       });
