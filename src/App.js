@@ -18,20 +18,49 @@ class App extends React.Component {
       deviceConnected: false,
       auxConnected: false,
       experimentSelected: false,
+      exp1DescShow: false,
+      exp2DescShow: false,
+      exp3DescShow: false,
+      exp4DescShow: false,
+      exp5DescShow: false,
     };
 
+    this.toggleNav = this.toggleNav.bind(this);
     this.client = new MuseClient();
-    this.elem = document.documentElement;
+  }
+
+  toggleNav(expNo) {
+    if (expNo == 1) {
+      this.setState({
+        exp1DescShow: !this.state.exp1DescShow,
+      });
+    } else if (expNo == 2) {
+      this.setState({
+        exp2DescShow: !this.state.exp2DescShow,
+      });
+    } else if (expNo == 3) {
+      this.setState({
+        exp3DescShow: !this.state.exp3DescShow,
+      });
+    } else if (expNo == 4) {
+      this.setState({
+        exp4DescShow: !this.state.exp4DescShow,
+      });
+    } else if (expNo == 5) {
+      this.setState({
+        exp5DescShow: !this.state.exp5DescShow,
+      });
+    }
   }
 
   render() {
     if (!this.state.isParticipantIdValid) {
       return (
         <div className="App text-center">
-          <div class="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
             <div className="m-3">
               <span
-                class="material-icons mb-2"
+                className="material-icons mb-2"
                 style={{ fontSize: 100, color: "#57a8ff" }}
               >
                 account_circle
@@ -52,18 +81,48 @@ class App extends React.Component {
 
             <br />
             <h5>
-              <input
+              {/* <input
                 type="checkbox"
                 className="form-check-input mr-2"
                 defaultChecked={this.state.auxConnected}
                 onChange={() => {
                   this.setState({ auxConnected: !this.state.auxConnected });
                 }}
-              />
+              /> */}
               <span className="ml-1">
                 I have already connected to the Muse's AUX port for today's
                 experiment.
               </span>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "20px",
+                }}
+              >
+                <div>
+                  <input
+                    type="radio"
+                    checked={this.state.auxConnected}
+                    onChange={() => {
+                      this.setState({ auxConnected: true });
+                    }}
+                  />
+                  Yes
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    checked={!this.state.auxConnected}
+                    onChange={() => {
+                      this.setState({ auxConnected: false });
+                    }}
+                  />
+                  No
+                </div>
+              </div>
             </h5>
 
             <br />
@@ -81,7 +140,7 @@ class App extends React.Component {
     if (!this.state.deviceConnected) {
       return (
         <div className="App text-center">
-          <div class="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
             <h5>
               Please turn on your device Bluetooth and press the button below to
               connect with the EEG device.
@@ -103,63 +162,284 @@ class App extends React.Component {
 
     if (!this.state.experimentSelected) {
       return (
-        <div className="App text-center">
-          <div class="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+        <div className="App">
+          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
             <h5>Device connected successfully. Select experiment to begin!</h5>
             <br />
-            <button
-              className="btn btn-outline-success btn-block w-100 m-2"
-              onClick={() => {
-                this.setState({ experimentSelected: "n170" });
-                this.openFullscreen();
-              }}
-            >
-              Visual N170
-            </button>
+            <div className="card p-2">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <div className="col-md-6 col-sm-6 text-start fw-bold">
+                  <span
+                    class="material-icons"
+                    style={{ fontSize: 35, color: "#57a8ff" }}
+                  >
+                    psychology
+                  </span>
+                  Visual N170
+                </div>
+                <div className="col-md-6 col-sm-6 text-end">
+                  <button
+                    className="btn btn-link"
+                    onClick={() => this.toggleNav(1)}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#333634" }}
+                    >
+                      menu
+                    </span>
+                  </button>
+                  <button
+                    className="btn btn-link"
+                    onClick={() => {
+                      this.setState({ experimentSelected: "n170" });
+                    }}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#21eb89" }}
+                    >
+                      play_circle_outline
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div
+                className={
+                  (this.state.exp1DescShow ? "show" : "") + " collapse"
+                }
+                id="collapseExample"
+              >
+                <div className="card-body">
+                  Visual N170 Experiemnt Description.
+                  <br />
+                </div>
+              </div>
+            </div>
             <br />
 
-            <button
-              className="btn btn-outline-success btn-block w-100 m-2"
-              onClick={() => {
-                this.setState({ experimentSelected: "xab" });
-                this.openFullscreen();
-              }}
-            >
-              Face XAB
-            </button>
+            <div className="card p-2">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <div className="col-md-6 col-sm-6 text-start fw-bold">
+                  <span
+                    className="material-icons"
+                    style={{ fontSize: 35, color: "#57a8ff" }}
+                  >
+                    psychology
+                  </span>
+                  Face XAB
+                </div>
+                <div className="col-md-6 col-sm-6 text-end">
+                  <button
+                    className="btn btn-link"
+                    onClick={() => this.toggleNav(2)}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#333634" }}
+                    >
+                      menu
+                    </span>
+                  </button>
+                  <button
+                    className="btn btn-link"
+                    onClick={() => {
+                      this.setState({ experimentSelected: "xab" });
+                    }}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#21eb89" }}
+                    >
+                      play_circle_outline
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div
+                className={
+                  (this.state.exp2DescShow ? "show" : "") + " collapse"
+                }
+                id="collapseExample"
+              >
+                <div className="card-body">
+                  Face XAB Experiemnt Description.
+                  <br />
+                </div>
+              </div>
+            </div>
             <br />
 
-            <button
-              className="btn btn-outline-success btn-block w-100 m-2"
-              onClick={() => {
-                this.setState({ experimentSelected: "maskandfaces" });
-                this.openFullscreen();
-              }}
-            >
-              Mask and Faces
-            </button>
+            <div className="card p-2">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <div className="col-md-6 col-sm-6 text-start fw-bold">
+                  <span
+                    className="material-icons"
+                    style={{ fontSize: 35, color: "#57a8ff" }}
+                  >
+                    psychology
+                  </span>
+                  Mask and Faces
+                </div>
+                <div className="col-md-6 col-sm-6 text-end">
+                  <button
+                    className="btn btn-link"
+                    onClick={() => this.toggleNav(3)}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#333634" }}
+                    >
+                      menu
+                    </span>
+                  </button>
+                  <button
+                    className="btn btn-link"
+                    onClick={() => {
+                      this.setState({ experimentSelected: "maskandfaces" });
+                    }}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#21eb89" }}
+                    >
+                      play_circle_outline
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div
+                className={
+                  (this.state.exp3DescShow ? "show" : "") + " collapse"
+                }
+                id="collapseExample"
+              >
+                <div className="card-body">
+                  Mask and Faces Experiemnt Description.
+                  <br />
+                </div>
+              </div>
+            </div>
             <br />
 
-            <button
-              className="btn btn-outline-success btn-block w-100 m-2"
-              onClick={() => {
-                this.setState({ experimentSelected: "xabfrompavlovia" });
-                this.openFullscreen();
-              }}
-            >
-              Xab From Pavlovia
-            </button>
+            <div className="card p-2">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <div className="col-md-6 col-sm-6 text-start fw-bold">
+                  <span
+                    className="material-icons"
+                    style={{ fontSize: 35, color: "#57a8ff" }}
+                  >
+                    psychology
+                  </span>
+                  Xab From Pavlovia
+                </div>
+                <div className="col-md-6 col-sm-6 text-end">
+                  <button
+                    className="btn btn-link"
+                    onClick={() => this.toggleNav(4)}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#333634" }}
+                    >
+                      menu
+                    </span>
+                  </button>
+                  <button
+                    className="btn btn-link"
+                    onClick={() => {
+                      this.setState({ experimentSelected: "xabfrompavlovia" });
+                    }}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#21eb89" }}
+                    >
+                      play_circle_outline
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div
+                className={
+                  (this.state.exp4DescShow ? "show" : "") + " collapse"
+                }
+                id="collapseExample"
+              >
+                <div className="card-body">
+                  Xab From Pavlovia Experiemnt Description.
+                  <br />
+                </div>
+              </div>
+            </div>
             <br />
 
-            <button
-              className="btn btn-outline-success btn-block w-100 m-2"
-              onClick={() => {
-                this.setState({ experimentSelected: "breathcounting" });
-                this.openFullscreen();
-              }}
-            >
-              BreathCounting
-            </button>
+            <div className="card p-2">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <div className="col-md-6 col-sm-6 text-start fw-bold">
+                  <span
+                    className="material-icons"
+                    style={{ fontSize: 35, color: "#57a8ff" }}
+                  >
+                    psychology
+                  </span>
+                  Breath Counting
+                </div>
+                <div className="col-md-6 col-sm-6 text-end">
+                  <button
+                    className="btn btn-link"
+                    onClick={() => this.toggleNav(5)}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#333634" }}
+                    >
+                      menu
+                    </span>
+                  </button>
+                  <button
+                    className="btn btn-link"
+                    onClick={() => {
+                      this.setState({ experimentSelected: "breathcounting" });
+                    }}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#21eb89" }}
+                    >
+                      play_circle_outline
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div
+                className={
+                  (this.state.exp5DescShow ? "show" : "") + " collapse"
+                }
+                id="collapseExample"
+              >
+                <div className="card-body">
+                  Breath Counting Experiemnt Description.
+                  <br />
+                </div>
+              </div>
+            </div>
+            <br />
           </div>
         </div>
       );
@@ -221,18 +501,6 @@ class App extends React.Component {
       this.setState({ isParticipantIdValid: true });
     } else {
       this.setState({ showParticipantError: true });
-    }
-  };
-
-  openFullscreen = async () => {
-    if (this.elem.requestFullscreen) {
-      this.elem.requestFullscreen();
-    } else if (this.elem.webkitRequestFullscreen) {
-      /* Safari */
-      this.elem.webkitRequestFullscreen();
-    } else if (this.elem.msRequestFullscreen) {
-      /* IE11 */
-      this.elem.msRequestFullscreen();
     }
   };
 

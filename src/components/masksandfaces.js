@@ -75,7 +75,7 @@ class MaskAndFaces extends React.Component {
               width: "99%",
               height: "96vh",
             }}
-            src="https://grassgreen.000webhostapp.com/Ronit/MaskandFaces/index.html"
+            src="../ext-experiments/maskandfaces/index.html"
           />
         </div>
       );

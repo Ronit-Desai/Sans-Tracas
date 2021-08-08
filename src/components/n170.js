@@ -2,6 +2,7 @@ import React from "react";
 import { CSVLink } from "react-csv";
 import moment from "moment";
 import HelperUtil from "../util/HelperUtil";
+import Results from "./results";
 
 import face_1 from "../images/faces/1.jpg";
 import face_2 from "../images/faces/2.jpg";
@@ -674,33 +675,26 @@ class N170 extends React.Component {
 
     return (
       <div className="App">
-        <p>Your CSV file is ready to download</p>
-        <CSVLink data={this.readings}>Download me</CSVLink>
-        <br />
-        <CSVLink
-          headers={this.state.isAuxConnected ? headersWithAux : headers}
-          data={this.processedData}
-          filename={
+        <Results
+          rawReadings={this.readings}
+          processedDataHeaders={
+            this.state.isAuxConnected ? headersWithAux : headers
+          }
+          processedData={this.processedData}
+          processedFileName={
             this.state.participantId +
             "_n170_eeg_" +
             moment(new Date()).format("YYYYMMDDHHmmss") +
             ".csv"
           }
-        >
-          Processed file
-        </CSVLink>
-        <br />
-        <CSVLink
-          data={this.n170Readings}
-          filename={
+          experimentReadings={this.n170Readings}
+          experimentFileName={
             this.state.participantId +
             "_n170_readings_" +
             moment(new Date()).format("YYYYMMDDHHmmss") +
             ".csv"
           }
-        >
-          N170 Readings
-        </CSVLink>
+        ></Results>
       </div>
     );
   }
