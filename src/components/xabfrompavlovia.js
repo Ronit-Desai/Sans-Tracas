@@ -1,5 +1,4 @@
 import React from "react";
-import { CSVLink } from "react-csv";
 import moment from "moment";
 import HelperUtil from "../util/HelperUtil";
 import Results from "./results";
