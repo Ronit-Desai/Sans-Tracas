@@ -2,6 +2,7 @@ import React from "react";
 import { CSVLink } from "react-csv";
 import moment from "moment";
 import HelperUtil from "../util/HelperUtil";
+import Results from "./results";
 
 import face_1 from "../images/faces/1.jpg";
 import face_2 from "../images/faces/2.jpg";
@@ -246,33 +247,26 @@ class XAB extends React.Component {
 
     return (
       <div className="App">
-        <p>Your CSV file is ready to download</p>
-        <CSVLink data={this.readings}>Download me</CSVLink>
-        <br />
-        <CSVLink
-          headers={this.state.isAuxConnected ? headersWithAux : headers}
-          data={this.processedData}
-          filename={
+        <Results
+          rawReadings={this.readings}
+          processedDataHeaders={
+            this.state.isAuxConnected ? headersWithAux : headers
+          }
+          processedData={this.processedData}
+          processedFileName={
             this.state.participantId +
             "_xab_eeg_" +
             moment(new Date()).format("YYYYMMDDHHmmss") +
             ".csv"
           }
-        >
-          Processed file
-        </CSVLink>
-        <br />
-        <CSVLink
-          data={this.xabReadings}
-          filename={
+          experimentReadings={this.xabReadings}
+          experimentFileName={
             this.state.participantId +
             "_xab_readings_" +
             moment(new Date()).format("YYYYMMDDHHmmss") +
             ".csv"
           }
-        >
-          XAB Readings
-        </CSVLink>
+        ></Results>
       </div>
     );
   }

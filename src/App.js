@@ -27,6 +27,7 @@ class App extends React.Component {
 
     this.toggleNav = this.toggleNav.bind(this);
     this.client = new MuseClient();
+    this.elem = document.documentElement;
   }
 
   toggleNav(expNo) {
@@ -196,6 +197,7 @@ class App extends React.Component {
                     className="btn btn-link"
                     onClick={() => {
                       this.setState({ experimentSelected: "n170" });
+                      this.openFullscreen();
                     }}
                   >
                     <span
@@ -251,6 +253,7 @@ class App extends React.Component {
                     className="btn btn-link"
                     onClick={() => {
                       this.setState({ experimentSelected: "xab" });
+                      this.openFullscreen();
                     }}
                   >
                     <span
@@ -306,6 +309,7 @@ class App extends React.Component {
                     className="btn btn-link"
                     onClick={() => {
                       this.setState({ experimentSelected: "maskandfaces" });
+                      this.openFullscreen();
                     }}
                   >
                     <span
@@ -361,6 +365,7 @@ class App extends React.Component {
                     className="btn btn-link"
                     onClick={() => {
                       this.setState({ experimentSelected: "xabfrompavlovia" });
+                      this.openFullscreen();
                     }}
                   >
                     <span
@@ -416,6 +421,7 @@ class App extends React.Component {
                     className="btn btn-link"
                     onClick={() => {
                       this.setState({ experimentSelected: "breathcounting" });
+                      this.openFullscreen();
                     }}
                   >
                     <span
@@ -501,6 +507,18 @@ class App extends React.Component {
       this.setState({ isParticipantIdValid: true });
     } else {
       this.setState({ showParticipantError: true });
+    }
+  };
+
+  openFullscreen = async () => {
+    if (this.elem.requestFullscreen) {
+      this.elem.requestFullscreen();
+    } else if (this.elem.webkitRequestFullscreen) {
+      /* Safari */
+      this.elem.webkitRequestFullscreen();
+    } else if (this.elem.msRequestFullscreen) {
+      /* IE11 */
+      this.elem.msRequestFullscreen();
     }
   };
 

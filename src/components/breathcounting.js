@@ -2,6 +2,7 @@ import React from "react";
 import { CSVLink } from "react-csv";
 import moment from "moment";
 import HelperUtil from "../util/HelperUtil";
+import Results from "./results";
 
 let headers = [
   { label: "TimeStamp", key: "timestamp" },
@@ -91,21 +92,19 @@ class BreathCounting extends React.Component {
 
     return (
       <div className="App">
-        <p>Your CSV file is ready to download</p>
-        <CSVLink data={this.readings}>Download me</CSVLink>
-        <br />
-        <CSVLink
-          headers={this.state.isAuxConnected ? headersWithAux : headers}
-          data={this.processedData}
-          filename={
+        <Results
+          rawReadings={this.readings}
+          processedDataHeaders={
+            this.state.isAuxConnected ? headersWithAux : headers
+          }
+          processedData={this.processedData}
+          processedFileName={
             this.state.participantId +
             "_breathcounting_eeg_" +
             moment(new Date()).format("YYYYMMDDHHmmss") +
             ".csv"
           }
-        >
-          Processed file
-        </CSVLink>
+        ></Results>
       </div>
     );
   }
