@@ -16,7 +16,7 @@ class Results extends React.Component {
   }
 
   doItAgain() {
-    location.reload();
+    window.location.reload();
   }
 
   render() {
