@@ -80,18 +80,24 @@ class App extends React.Component {
               <h2> Please enter participant ID</h2>
             ) : null}
 
-            <br />
+            <button
+              className="btn btn-primary"
+              onClick={this.recordParticipantId}
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    if (!this.state.deviceConnected) {
+      return (
+        <div className="App text-center">
+          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
             <h5>
-              {/* <input
-                type="checkbox"
-                className="form-check-input mr-2"
-                defaultChecked={this.state.auxConnected}
-                onChange={() => {
-                  this.setState({ auxConnected: !this.state.auxConnected });
-                }}
-              /> */}
               <span className="ml-1">
-                I have already connected to the Muse's AUX port for today's
+                Have you connected anything to the Muse's AUX port for today's
                 experiment.
               </span>
               <div
@@ -125,23 +131,6 @@ class App extends React.Component {
                 </div>
               </div>
             </h5>
-
-            <br />
-            <button
-              className="btn btn-primary"
-              onClick={this.recordParticipantId}
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-      );
-    }
-
-    if (!this.state.deviceConnected) {
-      return (
-        <div className="App text-center">
-          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
             <h5>
               Please turn on your device Bluetooth and press the button below to
               connect with the EEG device.
