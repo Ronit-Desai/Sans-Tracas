@@ -1,5 +1,6 @@
 {
   "name": "museapp",
+  "author": "Ronit Desai",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -16,6 +17,8 @@
     "react": "^17.0.1",
     "react-csv": "^2.0.3",
     "react-dom": "^17.0.1",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "web-vitals": "^0.2.4",
     "webbluetooth": "^2.1.0"

@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import HelperUtil from "../util/HelperUtil";
+import HelperUtil from "../../util/HelperUtil";
 import Results from "./results";
 
 let headers = [
