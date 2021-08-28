@@ -16,7 +16,7 @@ class App extends React.Component {
           <nav>
             <ul>
               <li>
-                <Link to="/">Home</Link>
+                <Link to="/">Home and Hello</Link>
               </li>
               <li>
                 <Link to="/documentation">Documentation</Link>
