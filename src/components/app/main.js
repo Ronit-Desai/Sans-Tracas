@@ -434,6 +434,62 @@ class AppMain extends React.Component {
               </div>
             </div>
             <br />
+                    
+                    <div className="card p-2">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <div className="col-md-6 col-sm-6 text-start fw-bold">
+                  <span
+                    className="material-icons"
+                    style={{ fontSize: 35, color: "#57a8ff" }}
+                  >
+                    psychology
+                  </span>
+                  Test Xab From Pavlovia
+                </div>
+                <div className="col-md-6 col-sm-6 text-end">
+                  <button
+                    className="btn btn-link"
+                    onClick={() => this.toggleNav(4)}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#333634" }}
+                    >
+                      menu
+                    </span>
+                  </button>
+                  <button
+                    className="btn btn-link"
+                    onClick={() => {
+                      this.setState({ experimentSelected: "testxabfrompavlovia" });
+                      this.openFullscreen();
+                    }}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#21eb89" }}
+                    >
+                      play_circle_outline
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div
+                className={
+                  (this.state.exp4DescShow ? "show" : "") + " collapse"
+                }
+                id="collapseExample"
+              >
+                <div className="card-body">
+                  Test Xab From Pavlovia Experiemnt Description.
+                  <br />
+                </div>
+              </div>
+            </div>
+            <br />
           </div>
         </div>
       );
@@ -482,6 +538,16 @@ class AppMain extends React.Component {
     if (this.state.experimentSelected === "breathcounting") {
       return (
         <BreathCounting
+          museClient={this.client}
+          participantId={this.state.participantId}
+          isAuxConnected={this.state.auxConnected}
+        />
+      );
+    }
+    
+    if (this.state.experimentSelected === "testxabfrompavlovia") {
+      return (
+        <XabFromPavloviaTest
           museClient={this.client}
           participantId={this.state.participantId}
           isAuxConnected={this.state.auxConnected}
