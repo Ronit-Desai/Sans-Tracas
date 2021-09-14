@@ -5,6 +5,7 @@ import XAB from "./xab";
 import MaskAndFaces from "./masksandfaces";
 import XabFromPavlovia from "./xabfrompavlovia";
 import BreathCounting from "./breathcounting";
+import { CartesianGrid, Line, LineChart, YAxis } from "recharts";
 
 class AppMain extends React.Component {
   constructor(props) {
@@ -17,6 +18,8 @@ class AppMain extends React.Component {
       deviceConnected: false,
       auxConnected: false,
       experimentSelected: false,
+      calibrationDone: false,
+      calibrationStatus: "not-started",
       exp1DescShow: false,
       exp2DescShow: false,
       exp3DescShow: false,
@@ -90,64 +93,64 @@ class AppMain extends React.Component {
       );
     }
 
-    if (!this.state.deviceConnected) {
-      return (
-        <div className="App text-center">
-          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
-            <h5>
-              <span className="ml-1">
-                Have you connected anything to the Muse's AUX port for today's
-                experiment.
-              </span>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "20px",
-                }}
-              >
-                <div>
-                  <input
-                    type="radio"
-                    checked={this.state.auxConnected}
-                    onChange={() => {
-                      this.setState({ auxConnected: true });
-                    }}
-                  />
-                  Yes
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    checked={!this.state.auxConnected}
-                    onChange={() => {
-                      this.setState({ auxConnected: false });
-                    }}
-                  />
-                  No
-                </div>
-              </div>
-            </h5>
-            <h5>
-              Please turn on your device Bluetooth and press the button below to
-              connect with the EEG device.
-            </h5>
-            <button
-              className="btn btn-primary btn-block m-3"
-              onClick={this.connect}
-            >
-              Connect Device
-            </button>
-            <p>
-              PLease make sure you've followed the video to properly fit the
-              Muse on your head and turned it on.
-            </p>
-          </div>
-        </div>
-      );
-    }
+    // if (!this.state.deviceConnected) {
+    //   return (
+    //     <div className="App text-center">
+    //       <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+    //         <h5>
+    //           <span className="ml-1">
+    //             Have you connected anything to the Muse's AUX port for today's
+    //             experiment.
+    //           </span>
+    //           <div
+    //             style={{
+    //               display: "flex",
+    //               flexDirection: "row",
+    //               justifyContent: "center",
+    //               alignItems: "center",
+    //               gap: "20px",
+    //             }}
+    //           >
+    //             <div>
+    //               <input
+    //                 type="radio"
+    //                 checked={this.state.auxConnected}
+    //                 onChange={() => {
+    //                   this.setState({ auxConnected: true });
+    //                 }}
+    //               />
+    //               Yes
+    //             </div>
+    //             <div>
+    //               <input
+    //                 type="radio"
+    //                 checked={!this.state.auxConnected}
+    //                 onChange={() => {
+    //                   this.setState({ auxConnected: false });
+    //                 }}
+    //               />
+    //               No
+    //             </div>
+    //           </div>
+    //         </h5>
+    //         <h5>
+    //           Please turn on your device Bluetooth and press the button below to
+    //           connect with the EEG device.
+    //         </h5>
+    //         <button
+    //           className="btn btn-primary btn-block m-3"
+    //           onClick={this.connect}
+    //         >
+    //           Connect Device
+    //         </button>
+    //         <p>
+    //           Please make sure you've followed the video to properly fit the
+    //           Muse on your head and turned it on.
+    //         </p>
+    //       </div>
+    //     </div>
+    //   );
+    // }
 
     if (!this.state.experimentSelected) {
       return (
@@ -439,6 +442,30 @@ class AppMain extends React.Component {
       );
     }
 
+    if (!this.state.calibrationDone) {
+      return (
+        <div className="App">
+          {this.state.calibrationStatus === "not-started" ? (
+            <button onClick={this.startRecording}>Start Recording</button>
+          ) : null}
+          {this.state.calibrationStatus === "process" ? (
+            <h2>Calibration In Process</h2>
+          ) : null}
+          {this.state.calibrationStatus === "complete" ? (
+            <LineChart
+              width={150}
+              height={150}
+              data={[{ y: 2 }, { y: 4 }, { y: 0 }, { y: -2 }, { y: 6 }]}
+            >
+              <Line type="monotone" dataKey="y" stroke="#8884d8"></Line>
+              <CartesianGrid stroke="#ccc" />
+              <YAxis />
+            </LineChart>
+          ) : null}
+        </div>
+      );
+    }
+
     if (this.state.experimentSelected === "n170") {
       return (
         <N170
@@ -516,6 +543,17 @@ class AppMain extends React.Component {
     }
     await this.client.connect();
     this.setState({ deviceConnected: true });
+  };
+
+  startRecording = () => {
+    this.setState({ calibrationStatus: "process" });
+    setTimeout(() => {
+      this.stopRecording();
+    }, 3000);
+  };
+
+  stopRecording = () => {
+    this.setState({ calibrationStatus: "complete" });
   };
 
   handleChange = ({ target }) => {
