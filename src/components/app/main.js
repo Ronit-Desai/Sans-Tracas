@@ -5,7 +5,20 @@ import XAB from "./xab";
 import MaskAndFaces from "./masksandfaces";
 import XabFromPavlovia from "./xabfrompavlovia";
 import BreathCounting from "./breathcounting";
-import { CartesianGrid, Line, LineChart, YAxis } from "recharts";
+import {
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  YAxis,
+  BarChart,
+  Bar,
+  Cell,
+  XAxis,
+  Tooltip,
+  Legend,
+  CartesianAxis,
+} from "recharts";
 
 class AppMain extends React.Component {
   constructor(props) {
@@ -20,6 +33,28 @@ class AppMain extends React.Component {
       experimentSelected: false,
       calibrationDone: false,
       calibrationStatus: "not-started",
+      chartData: [
+        {
+          name: "TP1",
+          total: 13,
+          verdict: "Great",
+        },
+        {
+          name: "TP2",
+          total: 21,
+          verdict: "Good",
+        },
+        {
+          name: "TP3",
+          total: 44,
+          verdict: "Okay",
+        },
+        {
+          name: "TP4",
+          total: 49,
+          verdict: "Bad",
+        },
+      ],
       exp1DescShow: false,
       exp2DescShow: false,
       exp3DescShow: false,
@@ -31,6 +66,8 @@ class AppMain extends React.Component {
     this.client = new MuseClient();
     this.elem = document.documentElement;
   }
+
+  barColors = ["#FFFF00", "#ff7f0e", "#2ca02c", "#FF0000"];
 
   toggleNav(expNo) {
     if (expNo === 1) {
@@ -55,6 +92,20 @@ class AppMain extends React.Component {
       });
     }
   }
+
+  CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="name">{`${payload[0].payload.name}`}</p>
+          <p className="total">Total: {`${payload[0].payload.total}`}</p>
+          <p className="verdict">Verdict: {`${payload[0].payload.verdict}`}</p>
+        </div>
+      );
+    }
+
+    return null;
+  };
 
   render() {
     if (!this.state.isParticipantIdValid) {
@@ -452,15 +503,81 @@ class AppMain extends React.Component {
             <h2>Calibration In Process</h2>
           ) : null}
           {this.state.calibrationStatus === "complete" ? (
-            <LineChart
-              width={150}
-              height={150}
-              data={[{ y: 2 }, { y: 4 }, { y: 0 }, { y: -2 }, { y: 6 }]}
-            >
-              <Line type="monotone" dataKey="y" stroke="#8884d8"></Line>
-              <CartesianGrid stroke="#ccc" />
-              <YAxis />
-            </LineChart>
+            <>
+              <LineChart
+                width={1350}
+                height={150}
+                data={[{ y: 2 }, { y: 4 }, { y: 0 }, { y: -2 }, { y: 6 }]}
+              >
+                <Legend align="left" verticalAlign="middle" />
+                <Line
+                  name="TP1"
+                  type="monotone"
+                  dataKey="y"
+                  stroke="#8884d8"
+                ></Line>
+                <CartesianAxis axisLine="true" />
+                <YAxis domain={[-10, 10]} />
+              </LineChart>
+              <LineChart
+                width={1350}
+                height={150}
+                data={[{ y: 2 }, { y: 4 }, { y: 0 }, { y: -2 }, { y: 6 }]}
+              >
+                <Line type="monotone" dataKey="y" stroke="#8884d8"></Line>
+                <CartesianGrid stroke="#ccc" />
+                <YAxis />
+              </LineChart>
+              <LineChart
+                width={1350}
+                height={150}
+                data={[{ y: 2 }, { y: 4 }, { y: 0 }, { y: -2 }, { y: 6 }]}
+              >
+                <Line type="monotone" dataKey="y" stroke="#8884d8"></Line>
+                <CartesianGrid stroke="#ccc" />
+                <YAxis />
+              </LineChart>
+              <LineChart
+                width={1350}
+                height={150}
+                data={[{ y: 2 }, { y: 4 }, { y: 0 }, { y: -2 }, { y: 6 }]}
+              >
+                <Line type="monotone" dataKey="y" stroke="#8884d8"></Line>
+                <CartesianGrid stroke="#ccc" />
+                <YAxis />
+              </LineChart>
+              <ResponsiveContainer width="95%" height={450}>
+                <BarChart
+                  data={this.state.chartData.slice()}
+                  margin={{ top: 20, right: 20, left: 20, bottom: 5 }}
+                  data={this.state.chartData}
+                >
+                  <XAxis dataKey="name" stroke="#000000" />
+                  <YAxis stroke="#000000" />
+                  <Tooltip
+                    wrapperStyle={{
+                      width: 100,
+                      color: "white",
+                      backgroundColor: "black",
+                    }}
+                    content={<this.CustomTooltip />}
+                  />
+                  <Bar
+                    dataKey="total"
+                    fill="#00a0fc"
+                    stroke="#000000"
+                    strokeWidth={1}
+                  >
+                    {this.state.chartData.map((entry, index) => (
+                      <Cell
+                        key={`cell-${index}`}
+                        fill={this.barColors[index % 20]}
+                      />
+                    ))}
+                  </Bar>
+                </BarChart>
+              </ResponsiveContainer>
+            </>
           ) : null}
         </div>
       );
