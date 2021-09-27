@@ -9,19 +9,53 @@ class App extends React.Component {
     super();
   }
 
+  state = {
+    navCollapsed: true,
+  };
+
+  _onToggleNav = () => {
+    this.setState({ navCollapsed: !this.state.navCollapsed });
+  };
+
   render() {
+    const { navCollapsed } = this.state;
+
     return (
       <Router>
         <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/documentation">Documentation</Link>
-              </li>
-            </ul>
+          <nav
+            className="navbar navbar-expand-lg navbar-light"
+            style={{ backgroundColor: "#e3f2fd" }}
+          >
+            <span className="navbar-brand p-2">Muse App</span>
+            <button
+              class="navbar-toggler"
+              onClick={this._onToggleNav}
+              type="button"
+              data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div
+              className={(navCollapsed ? "collapse" : "") + " navbar-collapse"}
+            >
+              <ul className="navbar-nav">
+                <li>
+                  <Link className="nav-item nav-link" to="/">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link className="nav-item nav-link" to="/documentation">
+                    Documentation
+                  </Link>
+                </li>
+              </ul>
+            </div>
           </nav>
 
           {/* A <Switch> looks through its children <Route>s and

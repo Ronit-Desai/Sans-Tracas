@@ -1,10 +1,5 @@
 import React from "react";
 import { MuseClient } from "muse-js";
-import N170 from "./n170";
-import XAB from "./xab";
-import MaskAndFaces from "./masksandfaces";
-import XabFromPavlovia from "./xabfrompavlovia";
-import BreathCounting from "./breathcounting";
 import {
   CartesianGrid,
   Line,
@@ -19,6 +14,12 @@ import {
   Legend,
   CartesianAxis,
 } from "recharts";
+import ProgressBar from "react-bootstrap/ProgressBar";
+import N170 from "./n170";
+import XAB from "./xab";
+import MaskAndFaces from "./masksandfaces";
+import XabFromPavlovia from "./xabfrompavlovia";
+import BreathCounting from "./breathcounting";
 
 class AppMain extends React.Component {
   constructor(props) {
@@ -68,44 +69,6 @@ class AppMain extends React.Component {
   }
 
   barColors = ["#FFFF00", "#ff7f0e", "#2ca02c", "#FF0000"];
-
-  toggleNav(expNo) {
-    if (expNo === 1) {
-      this.setState({
-        exp1DescShow: !this.state.exp1DescShow,
-      });
-    } else if (expNo === 2) {
-      this.setState({
-        exp2DescShow: !this.state.exp2DescShow,
-      });
-    } else if (expNo === 3) {
-      this.setState({
-        exp3DescShow: !this.state.exp3DescShow,
-      });
-    } else if (expNo === 4) {
-      this.setState({
-        exp4DescShow: !this.state.exp4DescShow,
-      });
-    } else if (expNo === 5) {
-      this.setState({
-        exp5DescShow: !this.state.exp5DescShow,
-      });
-    }
-  }
-
-  CustomTooltip = ({ active, payload }) => {
-    if (active && payload && payload.length) {
-      return (
-        <div className="custom-tooltip">
-          <p className="name">{`${payload[0].payload.name}`}</p>
-          <p className="total">Total: {`${payload[0].payload.total}`}</p>
-          <p className="verdict">Verdict: {`${payload[0].payload.verdict}`}</p>
-        </div>
-      );
-    }
-
-    return null;
-  };
 
   render() {
     if (!this.state.isParticipantIdValid) {
@@ -500,7 +463,10 @@ class AppMain extends React.Component {
             <button onClick={this.startRecording}>Start Recording</button>
           ) : null}
           {this.state.calibrationStatus === "process" ? (
-            <h2>Calibration In Process</h2>
+            <>
+              <h2>Calibration In Process</h2>
+              <ProgressBar animated variant="success" now={21} />
+            </>
           ) : null}
           {this.state.calibrationStatus === "complete" ? (
             <>
@@ -514,7 +480,7 @@ class AppMain extends React.Component {
                   name="TP1"
                   type="monotone"
                   dataKey="y"
-                  stroke="#8884d8"
+                  stroke="black"
                 ></Line>
                 <CartesianAxis axisLine="true" />
                 <YAxis domain={[-10, 10]} />
@@ -524,7 +490,12 @@ class AppMain extends React.Component {
                 height={150}
                 data={[{ y: 2 }, { y: 4 }, { y: 0 }, { y: -2 }, { y: 6 }]}
               >
-                <Line type="monotone" dataKey="y" stroke="#8884d8"></Line>
+                <Line
+                  name="TP2"
+                  type="monotone"
+                  dataKey="y"
+                  stroke="#ff7f0e"
+                ></Line>
                 <CartesianGrid stroke="#ccc" />
                 <YAxis />
               </LineChart>
@@ -533,7 +504,12 @@ class AppMain extends React.Component {
                 height={150}
                 data={[{ y: 2 }, { y: 4 }, { y: 0 }, { y: -2 }, { y: 6 }]}
               >
-                <Line type="monotone" dataKey="y" stroke="#8884d8"></Line>
+                <Line
+                  name="TP3"
+                  type="monotone"
+                  dataKey="y"
+                  stroke="#2ca02c"
+                ></Line>
                 <CartesianGrid stroke="#ccc" />
                 <YAxis />
               </LineChart>
@@ -542,7 +518,12 @@ class AppMain extends React.Component {
                 height={150}
                 data={[{ y: 2 }, { y: 4 }, { y: 0 }, { y: -2 }, { y: 6 }]}
               >
-                <Line type="monotone" dataKey="y" stroke="#8884d8"></Line>
+                <Line
+                  name="TP4"
+                  type="monotone"
+                  dataKey="y"
+                  stroke="#FF0000"
+                ></Line>
                 <CartesianGrid stroke="#ccc" />
                 <YAxis />
               </LineChart>
@@ -555,9 +536,10 @@ class AppMain extends React.Component {
                   <YAxis stroke="#000000" />
                   <Tooltip
                     wrapperStyle={{
-                      width: 100,
-                      color: "white",
-                      backgroundColor: "black",
+                      width: 175,
+                      color: "black",
+                      backgroundColor: "white",
+                      borderRadius: 17,
                     }}
                     content={<this.CustomTooltip />}
                   />
@@ -670,6 +652,44 @@ class AppMain extends React.Component {
 
   stopRecording = () => {
     this.setState({ calibrationStatus: "complete" });
+  };
+
+  toggleNav(expNo) {
+    if (expNo === 1) {
+      this.setState({
+        exp1DescShow: !this.state.exp1DescShow,
+      });
+    } else if (expNo === 2) {
+      this.setState({
+        exp2DescShow: !this.state.exp2DescShow,
+      });
+    } else if (expNo === 3) {
+      this.setState({
+        exp3DescShow: !this.state.exp3DescShow,
+      });
+    } else if (expNo === 4) {
+      this.setState({
+        exp4DescShow: !this.state.exp4DescShow,
+      });
+    } else if (expNo === 5) {
+      this.setState({
+        exp5DescShow: !this.state.exp5DescShow,
+      });
+    }
+  }
+
+  CustomTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p className="name">{`${payload[0].payload.name}`}</p>
+          <p className="total">Total: {`${payload[0].payload.total}`}</p>
+          <p className="verdict">Verdict: {`${payload[0].payload.verdict}`}</p>
+        </div>
+      );
+    }
+
+    return null;
   };
 
   handleChange = ({ target }) => {
