@@ -1,5 +1,9 @@
 export default class HelperUtil {
-  static cleanData(readings, experiment, participant_id) {
+  static cleanData(
+    readings,
+    experiment = undefined,
+    participant_id = undefined
+  ) {
     let samplesLength = 12;
     let minIndex = readings[0].index;
     let maxIndex = readings[readings.length - 1].index;

@@ -20,8 +20,9 @@ import XAB from "./xab";
 import MaskAndFaces from "./masksandfaces";
 import XabFromPavlovia from "./xabfrompavlovia";
 import BreathCounting from "./breathcounting";
+import HelperUtil from "../../util/HelperUtil";
 
-const calibrationTime = 5000;
+const calibrationTime = 30000;
 
 class AppMain extends React.Component {
   constructor(props) {
@@ -69,6 +70,8 @@ class AppMain extends React.Component {
     this.toggleNav = this.toggleNav.bind(this);
     this.client = new MuseClient();
     this.elem = document.documentElement;
+    this.readings = [];
+    this.processedData = [];
   }
 
   barColors = ["#FFFF00", "#ff7f0e", "#2ca02c", "#FF0000"];
@@ -109,65 +112,6 @@ class AppMain extends React.Component {
         </div>
       );
     }
-
-    // if (!this.state.deviceConnected) {
-    //   return (
-    //     <div className="App text-center">
-    //       <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
-    //         <h5>
-    //           <span className="ml-1">
-    //             Have you connected anything to the Muse's AUX port for today's
-    //             experiment.
-    //           </span>
-    //           <div
-    //             style={{
-    //               display: "flex",
-    //               flexDirection: "row",
-    //               justifyContent: "center",
-    //               alignItems: "center",
-    //               gap: "20px",
-    //             }}
-    //           >
-    //             <div>
-    //               <input
-    //                 type="radio"
-    //                 checked={this.state.auxConnected}
-    //                 onChange={() => {
-    //                   this.setState({ auxConnected: true });
-    //                 }}
-    //               />
-    //               Yes
-    //             </div>
-    //             <div>
-    //               <input
-    //                 type="radio"
-    //                 checked={!this.state.auxConnected}
-    //                 onChange={() => {
-    //                   this.setState({ auxConnected: false });
-    //                 }}
-    //               />
-    //               No
-    //             </div>
-    //           </div>
-    //         </h5>
-    //         <h5>
-    //           Please turn on your device Bluetooth and press the button below to
-    //           connect with the EEG device.
-    //         </h5>
-    //         <button
-    //           className="btn btn-primary btn-block m-3"
-    //           onClick={this.connect}
-    //         >
-    //           Connect Device
-    //         </button>
-    //         <p>
-    //           Please make sure you've followed the video to properly fit the
-    //           Muse on your head and turned it on.
-    //         </p>
-    //       </div>
-    //     </div>
-    //   );
-    // }
 
     if (!this.state.experimentSelected) {
       return (
@@ -459,6 +403,65 @@ class AppMain extends React.Component {
       );
     }
 
+    if (!this.state.deviceConnected) {
+      return (
+        <div className="App text-center">
+          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+            <h5>
+              <span className="ml-1">
+                Have you connected anything to the Muse's AUX port for today's
+                experiment.
+              </span>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  gap: "20px",
+                }}
+              >
+                <div>
+                  <input
+                    type="radio"
+                    checked={this.state.auxConnected}
+                    onChange={() => {
+                      this.setState({ auxConnected: true });
+                    }}
+                  />
+                  Yes
+                </div>
+                <div>
+                  <input
+                    type="radio"
+                    checked={!this.state.auxConnected}
+                    onChange={() => {
+                      this.setState({ auxConnected: false });
+                    }}
+                  />
+                  No
+                </div>
+              </div>
+            </h5>
+            <h5>
+              Please turn on your device Bluetooth and press the button below to
+              connect with the EEG device.
+            </h5>
+            <button
+              className="btn btn-primary btn-block m-3"
+              onClick={this.connect}
+            >
+              Connect Device
+            </button>
+            <p>
+              Please make sure you've followed the video to properly fit the
+              Muse on your head and turned it on.
+            </p>
+          </div>
+        </div>
+      );
+    }
+
     if (!this.state.calibrationDone) {
       return (
         <div className="App">
@@ -483,59 +486,47 @@ class AppMain extends React.Component {
           ) : null}
           {this.state.calibrationStatus === "complete" ? (
             <>
-              <LineChart
-                width={1350}
-                height={150}
-                data={[{ y: 2 }, { y: 4 }, { y: 0 }, { y: -2 }, { y: 6 }]}
-              >
+              <LineChart width={1350} height={150} data={this.processedData}>
                 <Legend align="left" verticalAlign="middle" />
                 <Line
                   name="TP1"
                   type="monotone"
-                  dataKey="y"
+                  dataKey="ch_0"
                   stroke="black"
+                  dot={false}
                 ></Line>
                 <CartesianAxis axisLine="true" />
-                <YAxis domain={[-10, 10]} />
+                <YAxis />
               </LineChart>
-              <LineChart
-                width={1350}
-                height={150}
-                data={[{ y: 2 }, { y: 4 }, { y: 0 }, { y: -2 }, { y: 6 }]}
-              >
+              <LineChart width={1350} height={150} data={this.processedData}>
                 <Line
                   name="TP2"
                   type="monotone"
-                  dataKey="y"
+                  dataKey="ch_1"
                   stroke="#ff7f0e"
+                  dot={false}
                 ></Line>
                 <CartesianGrid stroke="#ccc" />
                 <YAxis />
               </LineChart>
-              <LineChart
-                width={1350}
-                height={150}
-                data={[{ y: 2 }, { y: 4 }, { y: 0 }, { y: -2 }, { y: 6 }]}
-              >
+              <LineChart width={1350} height={150} data={this.processedData}>
                 <Line
                   name="TP3"
                   type="monotone"
-                  dataKey="y"
+                  dataKey="ch_2"
                   stroke="#2ca02c"
+                  dot={false}
                 ></Line>
                 <CartesianGrid stroke="#ccc" />
                 <YAxis />
               </LineChart>
-              <LineChart
-                width={1350}
-                height={150}
-                data={[{ y: 2 }, { y: 4 }, { y: 0 }, { y: -2 }, { y: 6 }]}
-              >
+              <LineChart width={1350} height={150} data={this.processedData}>
                 <Line
                   name="TP4"
                   type="monotone"
-                  dataKey="y"
+                  dataKey="ch_3"
                   stroke="#FF0000"
+                  dot={false}
                 ></Line>
                 <CartesianGrid stroke="#ccc" />
                 <YAxis />
@@ -656,7 +647,11 @@ class AppMain extends React.Component {
     this.setState({ deviceConnected: true });
   };
 
-  startRecording = () => {
+  startRecording = async () => {
+    await this.client.start();
+    this.client.eegReadings.subscribe((reading) => {
+      this.readings.push(reading);
+    });
     this.setState({ calibrationStatus: "process" });
     this.calculateRecordingTiming();
   };
@@ -675,6 +670,9 @@ class AppMain extends React.Component {
   };
 
   stopRecording = () => {
+    this.client.disconnect();
+    this.processedData = HelperUtil.cleanData(this.readings);
+
     this.setState({ calibrationStatus: "complete" });
   };
 
