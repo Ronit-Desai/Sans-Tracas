@@ -21,6 +21,8 @@ import MaskAndFaces from "./masksandfaces";
 import XabFromPavlovia from "./xabfrompavlovia";
 import BreathCounting from "./breathcounting";
 
+const calibrationTime = 5000;
+
 class AppMain extends React.Component {
   constructor(props) {
     super();
@@ -34,6 +36,7 @@ class AppMain extends React.Component {
       experimentSelected: false,
       calibrationDone: false,
       calibrationStatus: "not-started",
+      currentCalibrationTime: calibrationTime,
       chartData: [
         {
           name: "TP1",
@@ -179,7 +182,7 @@ class AppMain extends React.Component {
               >
                 <div className="col-md-6 col-sm-6 text-start fw-bold">
                   <span
-                    class="material-icons"
+                    className="material-icons"
                     style={{ fontSize: 35, color: "#57a8ff" }}
                   >
                     psychology
@@ -465,7 +468,17 @@ class AppMain extends React.Component {
           {this.state.calibrationStatus === "process" ? (
             <>
               <h2>Calibration In Process</h2>
-              <ProgressBar animated variant="success" now={21} />
+              <ProgressBar
+                animated
+                variant="success"
+                now={
+                  (calibrationTime - this.state.currentCalibrationTime) / 1000
+                }
+                max={calibrationTime / 1000}
+              />
+              <h1>
+                {this.state.currentCalibrationTime / 1000} Seconds Remaining
+              </h1>
             </>
           ) : null}
           {this.state.calibrationStatus === "complete" ? (
@@ -645,9 +658,20 @@ class AppMain extends React.Component {
 
   startRecording = () => {
     this.setState({ calibrationStatus: "process" });
-    setTimeout(() => {
+    this.calculateRecordingTiming();
+  };
+
+  calculateRecordingTiming = () => {
+    if (this.state.currentCalibrationTime <= 0) {
       this.stopRecording();
-    }, 3000);
+    } else {
+      this.setState({
+        currentCalibrationTime: this.state.currentCalibrationTime - 1000,
+      });
+      setTimeout(() => {
+        this.calculateRecordingTiming();
+      }, 1000);
+    }
   };
 
   stopRecording = () => {

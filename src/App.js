@@ -29,7 +29,7 @@ class App extends React.Component {
           >
             <span className="navbar-brand p-2">Muse App</span>
             <button
-              class="navbar-toggler"
+              className="navbar-toggler"
               onClick={this._onToggleNav}
               type="button"
               data-toggle="collapse"
@@ -38,7 +38,7 @@ class App extends React.Component {
               aria-expanded="false"
               aria-label="Toggle navigation"
             >
-              <span class="navbar-toggler-icon"></span>
+              <span className="navbar-toggler-icon"></span>
             </button>
             <div
               className={(navCollapsed ? "collapse" : "") + " navbar-collapse"}
