@@ -22,7 +22,7 @@ class Results extends React.Component {
   render() {
     return (
       <div className="App">
-        <div class="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+        <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
           <h5>
             Congratulations! on successfully completing a BCI experiment. Please
             use the buttons below, if you wish to download your EEG and

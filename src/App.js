@@ -27,7 +27,7 @@ class App extends React.Component {
             className="navbar navbar-expand-lg navbar-light"
             style={{ backgroundColor: "#e3f2fd" }}
           >
-            <span className="navbar-brand p-2">Muse App</span>
+            <span className="navbar-brand p-2">Sans Tracas</span>
             <button
               className="navbar-toggler"
               onClick={this._onToggleNav}

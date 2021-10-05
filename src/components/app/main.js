@@ -1,5 +1,6 @@
 import React from "react";
 import { MuseClient } from "muse-js";
+import { create, all } from "mathjs";
 import {
   CartesianGrid,
   Line,
@@ -22,7 +23,9 @@ import XabFromPavlovia from "./xabfrompavlovia";
 import BreathCounting from "./breathcounting";
 import HelperUtil from "../../util/HelperUtil";
 
-const calibrationTime = 30000;
+const calibrationTime = 31000;
+const config = {};
+const math = create(all, config);
 
 class AppMain extends React.Component {
   constructor(props) {
@@ -38,28 +41,6 @@ class AppMain extends React.Component {
       calibrationDone: false,
       calibrationStatus: "not-started",
       currentCalibrationTime: calibrationTime,
-      chartData: [
-        {
-          name: "TP1",
-          total: 13,
-          verdict: "Great",
-        },
-        {
-          name: "TP2",
-          total: 21,
-          verdict: "Good",
-        },
-        {
-          name: "TP3",
-          total: 44,
-          verdict: "Okay",
-        },
-        {
-          name: "TP4",
-          total: 49,
-          verdict: "Bad",
-        },
-      ],
       exp1DescShow: false,
       exp2DescShow: false,
       exp3DescShow: false,
@@ -72,52 +53,15 @@ class AppMain extends React.Component {
     this.elem = document.documentElement;
     this.readings = [];
     this.processedData = [];
+    this.chartData = [];
   }
 
-  barColors = ["#FFFF00", "#ff7f0e", "#2ca02c", "#FF0000"];
-
   render() {
-    if (!this.state.isParticipantIdValid) {
-      return (
-        <div className="App text-center">
-          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
-            <div className="m-3">
-              <span
-                className="material-icons mb-2"
-                style={{ fontSize: 100, color: "#57a8ff" }}
-              >
-                account_circle
-              </span>
-              <input
-                type="text"
-                name="participantId"
-                placeholder="Enter Participant ID"
-                value={this.state.participantId}
-                onChange={this.handleChange}
-                className="form-control"
-              />
-            </div>
-
-            {this.state.showParticipantError ? (
-              <h2> Please enter participant ID</h2>
-            ) : null}
-
-            <button
-              className="btn btn-primary"
-              onClick={this.recordParticipantId}
-            >
-              Submit
-            </button>
-          </div>
-        </div>
-      );
-    }
-
     if (!this.state.experimentSelected) {
       return (
         <div className="App">
           <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
-            <h5>Device connected successfully. Select experiment to begin!</h5>
+            <h2>Please select an experiment to begin!</h2>
             <br />
             <div className="card p-2">
               <div
@@ -149,7 +93,6 @@ class AppMain extends React.Component {
                     className="btn btn-link"
                     onClick={() => {
                       this.setState({ experimentSelected: "n170" });
-                      this.openFullscreen();
                     }}
                   >
                     <span
@@ -205,7 +148,6 @@ class AppMain extends React.Component {
                     className="btn btn-link"
                     onClick={() => {
                       this.setState({ experimentSelected: "xab" });
-                      this.openFullscreen();
                     }}
                   >
                     <span
@@ -261,7 +203,6 @@ class AppMain extends React.Component {
                     className="btn btn-link"
                     onClick={() => {
                       this.setState({ experimentSelected: "maskandfaces" });
-                      this.openFullscreen();
                     }}
                   >
                     <span
@@ -317,7 +258,6 @@ class AppMain extends React.Component {
                     className="btn btn-link"
                     onClick={() => {
                       this.setState({ experimentSelected: "xabfrompavlovia" });
-                      this.openFullscreen();
                     }}
                   >
                     <span
@@ -373,7 +313,6 @@ class AppMain extends React.Component {
                     className="btn btn-link"
                     onClick={() => {
                       this.setState({ experimentSelected: "breathcounting" });
-                      this.openFullscreen();
                     }}
                   >
                     <span
@@ -398,6 +337,42 @@ class AppMain extends React.Component {
               </div>
             </div>
             <br />
+          </div>
+        </div>
+      );
+    }
+
+    if (!this.state.isParticipantIdValid) {
+      return (
+        <div className="App text-center">
+          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+            <div className="m-3">
+              <span
+                className="material-icons mb-2"
+                style={{ fontSize: 100, color: "#57a8ff" }}
+              >
+                account_circle
+              </span>
+              <input
+                type="text"
+                name="participantId"
+                placeholder="Enter Participant ID"
+                value={this.state.participantId}
+                onChange={this.handleChange}
+                className="form-control"
+              />
+            </div>
+
+            {this.state.showParticipantError ? (
+              <h2> Please enter participant ID</h2>
+            ) : null}
+
+            <button
+              className="btn btn-primary"
+              onClick={this.recordParticipantId}
+            >
+              Submit
+            </button>
           </div>
         </div>
       );
@@ -464,29 +439,73 @@ class AppMain extends React.Component {
 
     if (!this.state.calibrationDone) {
       return (
-        <div className="App">
+        <div className="App text-center">
           {this.state.calibrationStatus === "not-started" ? (
-            <button onClick={this.startRecording}>Start Recording</button>
+            <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+              <h5>
+                <span className="ml-1">
+                  <h3>
+                    {" "}
+                    Congratulations! Your device has been successfully connected
+                    to the system.{" "}
+                  </h3>{" "}
+                  <br /> Before starting with the experiment, you will go
+                  through a calibration process. In the end, you will get a
+                  visual representation of the data coming from all channels of
+                  your Muse device and decide whether you want to improve the
+                  data quality before continuing with the experiment.
+                  <br /> <br />
+                  Please click on the button and close your eyes to begin the
+                  calibration process.
+                </span>{" "}
+                <br />
+                <button
+                  className="btn btn-secondary btn-block m-3"
+                  onClick={this.startRecording}
+                >
+                  Start Calibration
+                </button>
+              </h5>
+            </div>
           ) : null}
           {this.state.calibrationStatus === "process" ? (
             <>
-              <h2>Calibration In Process</h2>
-              <ProgressBar
-                animated
-                variant="success"
-                now={
-                  (calibrationTime - this.state.currentCalibrationTime) / 1000
-                }
-                max={calibrationTime / 1000}
-              />
-              <h1>
-                {this.state.currentCalibrationTime / 1000} Seconds Remaining
-              </h1>
+              <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+                <span className="ml-1">
+                  <h1>
+                    Please close your eyes and try to keep a relaxed mind while
+                    the system is calibrating your brain signals.
+                  </h1>
+                  <br />
+                  <ProgressBar
+                    animated
+                    variant="success"
+                    now={
+                      (calibrationTime - this.state.currentCalibrationTime) /
+                      1000
+                    }
+                    max={calibrationTime / 1000}
+                  />
+                  <br />
+                  <h1>
+                    {this.state.currentCalibrationTime / 1000} Seconds Remaining
+                  </h1>
+                </span>
+              </div>
             </>
           ) : null}
           {this.state.calibrationStatus === "complete" ? (
             <>
-              <LineChart width={1350} height={150} data={this.processedData}>
+              <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+                <h5>
+                  <span className="ml-1">
+                    Please see below the visualization of the data stream (in
+                    the form of Line Charts) concerning the channel name [TP1,
+                    TP2, TP3, TP4, and AUX (optional)]
+                  </span>
+                </h5>
+              </div>
+              <LineChart width={2100} height={150} data={this.processedData}>
                 <Legend align="left" verticalAlign="middle" />
                 <Line
                   name="TP1"
@@ -496,9 +515,10 @@ class AppMain extends React.Component {
                   dot={false}
                 ></Line>
                 <CartesianAxis axisLine="true" />
-                <YAxis />
+                <YAxis domain={[-100, 100]} allowDataOverflow="True" />
               </LineChart>
-              <LineChart width={1350} height={150} data={this.processedData}>
+              <LineChart width={2100} height={150} data={this.processedData}>
+                <Legend align="left" verticalAlign="middle" />
                 <Line
                   name="TP2"
                   type="monotone"
@@ -506,10 +526,11 @@ class AppMain extends React.Component {
                   stroke="#ff7f0e"
                   dot={false}
                 ></Line>
-                <CartesianGrid stroke="#ccc" />
+                <CartesianAxis axisLine="true" />
                 <YAxis />
               </LineChart>
-              <LineChart width={1350} height={150} data={this.processedData}>
+              <LineChart width={2100} height={150} data={this.processedData}>
+                <Legend align="left" verticalAlign="middle" />
                 <Line
                   name="TP3"
                   type="monotone"
@@ -518,9 +539,10 @@ class AppMain extends React.Component {
                   dot={false}
                 ></Line>
                 <CartesianGrid stroke="#ccc" />
-                <YAxis />
+                <YAxis domain={[-100, 100]} allowDataOverflow="True" />
               </LineChart>
-              <LineChart width={1350} height={150} data={this.processedData}>
+              <LineChart width={2100} height={150} data={this.processedData}>
+                <Legend align="left" verticalAlign="middle" />
                 <Line
                   name="TP4"
                   type="monotone"
@@ -531,10 +553,21 @@ class AppMain extends React.Component {
                 <CartesianGrid stroke="#ccc" />
                 <YAxis />
               </LineChart>
+              <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+                <h5>
+                  <span className="ml-1">
+                    Please see below Bar Chart to understand the quality of the
+                    data. Hovering over the Bars will display additional
+                    information associated with it. From the additional data,
+                    please look at "Verdict" to properly understand the quality
+                    of your data.
+                  </span>
+                </h5>
+              </div>
               <ResponsiveContainer width="95%" height={450}>
                 <BarChart
                   margin={{ top: 20, right: 20, left: 20, bottom: 5 }}
-                  data={this.state.chartData}
+                  data={this.chartData}
                 >
                   <XAxis dataKey="name" stroke="#000000" />
                   <YAxis stroke="#000000" />
@@ -553,15 +586,53 @@ class AppMain extends React.Component {
                     stroke="#000000"
                     strokeWidth={1}
                   >
-                    {this.state.chartData.map((entry, index) => (
-                      <Cell
-                        key={`cell-${index}`}
-                        fill={this.barColors[index % 20]}
-                      />
+                    {this.chartData.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                   </Bar>
                 </BarChart>
               </ResponsiveContainer>
+              <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+                <h5>
+                  <span className="ml-1">
+                    <h3>
+                      The accepted values for Verdict are "Great," "Good," and
+                      "Okay."{" "}
+                    </h3>{" "}
+                    <br />
+                    Suppose the quality of your data is shown to be "Bad." In
+                    that case, it is strongly advised that you re-connect the
+                    Muse device by clicking the "Re-Connect" button. <br /> Make
+                    sure the Muse device fits properly on your head by following
+                    the video on the next page. You can also use the
+                    "Re-connect" button to improve your data quality. <br />
+                    <br />
+                    Whereas, If you're satisfied with your current data quality,
+                    please click on the "Start Experiment" button to begin your
+                    experiment. <br />
+                    Please focus all your attention on the screen once you start
+                    the experiment. <br /> <br />
+                    <button
+                      className="btn btn-warning btn-block m-3"
+                      onClick={() => {
+                        this.client.disconnect();
+                        this.setState({ deviceConnected: false });
+                      }}
+                    >
+                      Re-Connect
+                    </button>
+                    <button
+                      className="btn btn-success btn-block m-3"
+                      onClick={() => {
+                        this.setState({ calibrationDone: true });
+                        this.openFullscreen();
+                      }}
+                    >
+                      Start Experiemnt
+                    </button>
+                  </span>
+                </h5>
+              </div>
             </>
           ) : null}
         </div>
@@ -670,8 +741,40 @@ class AppMain extends React.Component {
   };
 
   stopRecording = () => {
-    this.client.disconnect();
+    this.client.pause();
     this.processedData = HelperUtil.cleanData(this.readings);
+
+    const stdCh0 = math.std(this.processedData.map((data) => data.ch_0));
+    const stdCh1 = math.std(this.processedData.map((data) => data.ch_1));
+    const stdCh2 = math.std(this.processedData.map((data) => data.ch_2));
+    const stdCh3 = math.std(this.processedData.map((data) => data.ch_3));
+
+    this.chartData.push(
+      {
+        name: "TP1",
+        total: stdCh0,
+        verdict: this.calculateVerdict(stdCh0),
+        color: this.calculateVerdictColor(stdCh0),
+      },
+      {
+        name: "TP2",
+        total: stdCh1,
+        verdict: this.calculateVerdict(stdCh1),
+        color: this.calculateVerdictColor(stdCh1),
+      },
+      {
+        name: "TP3",
+        total: stdCh2,
+        verdict: this.calculateVerdict(stdCh2),
+        color: this.calculateVerdictColor(stdCh2),
+      },
+      {
+        name: "TP4",
+        total: stdCh3,
+        verdict: this.calculateVerdict(stdCh3),
+        color: this.calculateVerdictColor(stdCh3),
+      }
+    );
 
     this.setState({ calibrationStatus: "complete" });
   };
@@ -716,6 +819,30 @@ class AppMain extends React.Component {
 
   handleChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
+  };
+
+  calculateVerdict = (std) => {
+    if (std <= 15) {
+      return "Great";
+    } else if (std > 15 && std <= 30) {
+      return "Good";
+    } else if (std > 30 && std <= 45) {
+      return "Okay";
+    } else {
+      return "Bad";
+    }
+  };
+
+  calculateVerdictColor = (std) => {
+    if (std <= 15) {
+      return "#2ca02c";
+    } else if (std > 15 && std <= 30) {
+      return "#FFFF00";
+    } else if (std > 30 && std <= 45) {
+      return "#ff7f0e";
+    } else {
+      return "#FF0000";
+    }
   };
 }
 
