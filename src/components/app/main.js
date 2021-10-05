@@ -616,7 +616,11 @@ class AppMain extends React.Component {
                       className="btn btn-warning btn-block m-3"
                       onClick={() => {
                         this.client.disconnect();
-                        this.setState({ deviceConnected: false });
+                        this.setState({
+                          deviceConnected: false,
+                          calibrationStatus: "not-started",
+                          currentCalibrationTime: calibrationTime,
+                        });
                       }}
                     >
                       Re-Connect
