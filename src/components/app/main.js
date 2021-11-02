@@ -3,13 +3,11 @@ import { MuseClient } from "muse-js";
 import { create, all } from "mathjs";
 import {
   CartesianGrid,
-  Label,
   LabelList,
   Line,
   LineChart,
   ResponsiveContainer,
   YAxis,
-  BarChart,
   Bar,
   Area,
   Cell,

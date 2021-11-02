@@ -1,7 +1,5 @@
 import React from "react";
-import moment from "moment";
-import HelperUtil from "../../util/HelperUtil";
-import Results from "./results";
+
 import { ButtonGroup, Dropdown, ToggleButton } from "react-bootstrap";
 
 class RestingState extends React.Component {
