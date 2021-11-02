@@ -3,17 +3,21 @@ import { MuseClient } from "muse-js";
 import { create, all } from "mathjs";
 import {
   CartesianGrid,
+  Label,
+  LabelList,
   Line,
   LineChart,
   ResponsiveContainer,
   YAxis,
   BarChart,
   Bar,
+  Area,
   Cell,
   XAxis,
   Tooltip,
   Legend,
   CartesianAxis,
+  ComposedChart,
 } from "recharts";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import N170 from "./n170";
@@ -22,6 +26,7 @@ import MaskAndFaces from "./masksandfaces";
 import XabFromPavlovia from "./xabfrompavlovia";
 import BreathCounting from "./breathcounting";
 import HelperUtil from "../../util/HelperUtil";
+import RestingState from "./restingstate";
 
 const calibrationTime = 31000;
 const config = {};
@@ -46,6 +51,7 @@ class AppMain extends React.Component {
       exp3DescShow: false,
       exp4DescShow: false,
       exp5DescShow: false,
+      exp6DescShow: false,
     };
 
     this.toggleNav = this.toggleNav.bind(this);
@@ -302,12 +308,12 @@ class AppMain extends React.Component {
                     className="btn btn-link"
                     onClick={() => this.toggleNav(5)}
                   >
-                    <span
+                    <spanline
                       className="material-icons"
                       style={{ color: "#333634" }}
                     >
                       menu
-                    </span>
+                    </spanline>
                   </button>
                   <button
                     className="btn btn-link"
@@ -332,6 +338,61 @@ class AppMain extends React.Component {
               >
                 <div className="card-body">
                   Breath Counting Experiemnt Description.
+                  <br />
+                </div>
+              </div>
+            </div>
+            <br />
+
+            <div className="card p-2">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <div className="col-md-6 col-sm-6 text-start fw-bold">
+                  <span
+                    className="material-icons"
+                    style={{ fontSize: 35, color: "#57a8ff" }}
+                  >
+                    psychology
+                  </span>
+                  Resting State
+                </div>
+                <div className="col-md-6 col-sm-6 text-end">
+                  <button
+                    className="btn btn-link"
+                    onClick={() => this.toggleNav(6)}
+                  >
+                    <spanline
+                      className="material-icons"
+                      style={{ color: "#333634" }}
+                    >
+                      menu
+                    </spanline>
+                  </button>
+                  <button
+                    className="btn btn-link"
+                    onClick={() => {
+                      this.setState({ experimentSelected: "restingstate" });
+                    }}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#21eb89" }}
+                    >
+                      play_circle_outline
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div
+                className={
+                  (this.state.exp6DescShow ? "show" : "") + " collapse"
+                }
+                id="collapseExample"
+              >
+                <div className="card-body">
+                  Resting State Experiemnt Description.
                   <br />
                 </div>
               </div>
@@ -419,7 +480,8 @@ class AppMain extends React.Component {
               </div>
             </h5>
             <h5>
-              Please turn on your device Bluetooth and press the button below to
+              Please turn on Bluetooth on your computer (and location too if
+              you're using a tablet/smartphone) and press the button below to
               connect with the EEG device.
             </h5>
             <button
@@ -444,26 +506,32 @@ class AppMain extends React.Component {
             <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
               <h5>
                 <span className="ml-1">
-                  <h3>
-                    {" "}
-                    Congratulations! Your device has been successfully connected
-                    to the system.{" "}
-                  </h3>{" "}
-                  <br /> Before starting with the experiment, you will go
-                  through a calibration process. In the end, you will get a
-                  visual representation of the data coming from all channels of
-                  your Muse device and decide whether you want to improve the
-                  data quality before continuing with the experiment.
+                  <h3> Great! Muse is now connected to the platform. </h3>{" "}
+                  <br />
+                  Before starting the experiment, let's first ensure that the
+                  Muse sensors are receiving good signal. <br /> <br />
+                  During this Signal Quality check, we will ask you to sit with
+                  your eyes closed, and try not to move for 30 seconds while we
+                  record the signals coming from the Muse sensors.  After 30
+                  seconds, you can open your eyes and inspect the results and
+                  can repeat the process until the signal is good enough to
+                  continue.
+                  <br /> <br /> However, before we begin the Signal Quality
+                  check, please place the Muse headband on your head and
+                  double-check that there is no hair between the sensors and
+                  your skin, and that the headband fits snuggly on your head.
                   <br /> <br />
-                  Please click on the button and close your eyes to begin the
-                  calibration process.
+                  When you are ready, click on the “Check my signal” button to
+                  verify if the Muse sensors are receiving a good signal. You
+                  will be asked to relax your jaw, close your eyes, and try not
+                  to move for 30 seconds while the Muse signals are recorded.
                 </span>{" "}
                 <br />
                 <button
                   className="btn btn-secondary btn-block m-3"
                   onClick={this.startRecording}
                 >
-                  Start Calibration
+                  Check my signal
                 </button>
               </h5>
             </div>
@@ -473,8 +541,8 @@ class AppMain extends React.Component {
               <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
                 <span className="ml-1">
                   <h1>
-                    Please close your eyes and try to keep a relaxed mind while
-                    the system is calibrating your brain signals.
+                    Please relax your jaw, close your eyes, and try not to move
+                    for 30 seconds while we record the Muse signals.
                   </h1>
                   <br />
                   <ProgressBar
@@ -499,16 +567,16 @@ class AppMain extends React.Component {
               <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
                 <h5>
                   <span className="ml-1">
-                    Please see below the visualization of the data stream (in
-                    the form of Line Charts) concerning the channel name [TP1,
-                    TP2, TP3, TP4, and AUX (optional)]
+                    Please see below the visualization of the Muse signal for
+                    its respective channel [Left Ear (TP9), Left Front (AF7),
+                    Right Front (AF8), Right Ear (TP10) and AUX (optional)]
                   </span>
                 </h5>
               </div>
               <LineChart width={2100} height={150} data={this.processedData}>
                 <Legend align="left" verticalAlign="middle" />
                 <Line
-                  name="TP1"
+                  name="TP9"
                   type="monotone"
                   dataKey="ch_0"
                   stroke="black"
@@ -520,22 +588,22 @@ class AppMain extends React.Component {
               <LineChart width={2100} height={150} data={this.processedData}>
                 <Legend align="left" verticalAlign="middle" />
                 <Line
-                  name="TP2"
+                  name="AF7"
                   type="monotone"
                   dataKey="ch_1"
-                  stroke="#ff7f0e"
+                  stroke="red"
                   dot={false}
                 ></Line>
                 <CartesianAxis axisLine="true" />
-                <YAxis />
+                <YAxis domain={[-100, 100]} allowDataOverflow="True" />
               </LineChart>
               <LineChart width={2100} height={150} data={this.processedData}>
                 <Legend align="left" verticalAlign="middle" />
                 <Line
-                  name="TP3"
+                  name="AF8"
                   type="monotone"
                   dataKey="ch_2"
-                  stroke="#2ca02c"
+                  stroke="blue"
                   dot={false}
                 ></Line>
                 <CartesianGrid stroke="#ccc" />
@@ -544,28 +612,26 @@ class AppMain extends React.Component {
               <LineChart width={2100} height={150} data={this.processedData}>
                 <Legend align="left" verticalAlign="middle" />
                 <Line
-                  name="TP4"
+                  name="TP10"
                   type="monotone"
                   dataKey="ch_3"
-                  stroke="#FF0000"
+                  stroke="grey"
                   dot={false}
                 ></Line>
                 <CartesianGrid stroke="#ccc" />
-                <YAxis />
+                <YAxis domain={[-100, 100]} allowDataOverflow="True" />
               </LineChart>
               <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
                 <h5>
                   <span className="ml-1">
-                    Please see below Bar Chart to understand the quality of the
-                    data. Hovering over the Bars will display additional
-                    information associated with it. From the additional data,
-                    please look at "Verdict" to properly understand the quality
-                    of your data.
+                    Please see below Bar Chart to understand your Signal
+                    Quality. Hovering over the Bars will display additional
+                    information associated with it.
                   </span>
                 </h5>
               </div>
               <ResponsiveContainer width="95%" height={450}>
-                <BarChart
+                <ComposedChart
                   margin={{ top: 20, right: 20, left: 20, bottom: 5 }}
                   data={this.chartData}
                 >
@@ -580,6 +646,43 @@ class AppMain extends React.Component {
                     }}
                     content={<this.CustomTooltip />}
                   />
+                  <Area
+                    type="monotone"
+                    dataKey="amt"
+                    stackId="1"
+                    stroke="#8884d8"
+                    fill="white"
+                  >
+                    <LabelList dataKey="div_1" position="insideTopRight" />
+                  </Area>
+                  <Area
+                    type="monotone"
+                    dataKey="amt"
+                    stackId="1"
+                    stroke="#82ca9d"
+                    fill="yellow"
+                  >
+                    <LabelList dataKey="div_2" position="insideTopRight" />
+                  </Area>
+                  <Area
+                    type="monotone"
+                    dataKey="amt"
+                    stackId="1"
+                    stroke="#ffc658"
+                    fill="orange"
+                  >
+                    <LabelList dataKey="div_3" position="insideTopRight" />
+                  </Area>
+                  <Area
+                    connectNulls
+                    type="monotone"
+                    dataKey="amt"
+                    stackId="1"
+                    stroke="#ffc658"
+                    fill="pink"
+                  >
+                    <LabelList dataKey="div_4" position="insideTopRight" />
+                  </Area>
                   <Bar
                     dataKey="total"
                     fill="#00a0fc"
@@ -590,7 +693,7 @@ class AppMain extends React.Component {
                       <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
                   </Bar>
-                </BarChart>
+                </ComposedChart>
               </ResponsiveContainer>
               <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
                 <h5>
@@ -600,18 +703,19 @@ class AppMain extends React.Component {
                       "Okay."{" "}
                     </h3>{" "}
                     <br />
-                    Suppose the quality of your data is shown to be "Bad." In
-                    that case, it is strongly advised that you re-connect the
-                    Muse device by clicking the "Re-Connect" button. <br /> Make
-                    sure the Muse device fits properly on your head by following
-                    the video on the next page. You can also use the
-                    "Re-connect" button to improve your data quality. <br />
+                    If your Signal Quality is "Bad." (even for just 1 channel),
+                    it is strongly advised that you Make sure the Muse fits
+                    properly on your head by following the video on the
+                    connection page, and re-check the Signal Quality by clicking
+                    the "Recheck Signal Quality" button. <br /> You can also use
+                    the "Recheck Signal Quality" button to improve your Muse
+                    signals. <br />
                     <br />
-                    Whereas, If you're satisfied with your current data quality,
+                    However, if you're satisfied with your Muse Signal Quality,
                     please click on the "Start Experiment" button to begin your
                     experiment. <br />
-                    Please focus all your attention on the screen once you start
-                    the experiment. <br /> <br />
+                    Once you start the experiment, please focus all your
+                    attention on the screen. <br /> <br />
                     <button
                       className="btn btn-warning btn-block m-3"
                       onClick={() => {
@@ -623,7 +727,7 @@ class AppMain extends React.Component {
                         });
                       }}
                     >
-                      Re-Connect
+                      Recheck Signal Quality
                     </button>
                     <button
                       className="btn btn-success btn-block m-3"
@@ -686,6 +790,16 @@ class AppMain extends React.Component {
     if (this.state.experimentSelected === "breathcounting") {
       return (
         <BreathCounting
+          museClient={this.client}
+          participantId={this.state.participantId}
+          isAuxConnected={this.state.auxConnected}
+        />
+      );
+    }
+
+    if (this.state.experimentSelected === "restingstate") {
+      return (
+        <RestingState
           museClient={this.client}
           participantId={this.state.participantId}
           isAuxConnected={this.state.auxConnected}
@@ -755,28 +869,48 @@ class AppMain extends React.Component {
 
     this.chartData.push(
       {
-        name: "TP1",
+        name: "Left Ear (TP9)",
         total: stdCh0,
         verdict: this.calculateVerdict(stdCh0),
-        color: this.calculateVerdictColor(stdCh0),
+        color: "black",
+        amt: 15,
+        div_1: "Great",
+        div_2: "Good",
+        div_3: "Moderate",
+        div_4: "Too high",
       },
       {
-        name: "TP2",
+        name: "Left Frontal (AF7)",
         total: stdCh1,
         verdict: this.calculateVerdict(stdCh1),
-        color: this.calculateVerdictColor(stdCh1),
+        color: "red",
+        amt: 15,
+        div_1: "Great",
+        div_2: "Good",
+        div_3: "Moderate",
+        div_4: "Too high",
       },
       {
-        name: "TP3",
+        name: "Right Frontal (AF8)",
         total: stdCh2,
         verdict: this.calculateVerdict(stdCh2),
-        color: this.calculateVerdictColor(stdCh2),
+        color: "blue",
+        amt: 15,
+        div_1: "Great",
+        div_2: "Good",
+        div_3: "Moderate",
+        div_4: "Too high",
       },
       {
-        name: "TP4",
+        name: "Right Ear (TP10)",
         total: stdCh3,
         verdict: this.calculateVerdict(stdCh3),
-        color: this.calculateVerdictColor(stdCh3),
+        color: "grey",
+        amt: 15,
+        div_1: "Great",
+        div_2: "Good",
+        div_3: "Moderate",
+        div_4: "Too high",
       }
     );
 
@@ -803,6 +937,10 @@ class AppMain extends React.Component {
     } else if (expNo === 5) {
       this.setState({
         exp5DescShow: !this.state.exp5DescShow,
+      });
+    } else if (expNo === 6) {
+      this.setState({
+        exp6DescShow: !this.state.exp6DescShow,
       });
     }
   }
@@ -834,18 +972,6 @@ class AppMain extends React.Component {
       return "Okay";
     } else {
       return "Bad";
-    }
-  };
-
-  calculateVerdictColor = (std) => {
-    if (std <= 15) {
-      return "#2ca02c";
-    } else if (std > 15 && std <= 30) {
-      return "#FFFF00";
-    } else if (std > 30 && std <= 45) {
-      return "#ff7f0e";
-    } else {
-      return "#FF0000";
     }
   };
 }
