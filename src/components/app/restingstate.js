@@ -98,56 +98,6 @@ class RestingState extends React.Component {
     );
   }
 
-  startN170 = async () => {
-    await this.client.start();
-    this.client.eegReadings.subscribe((reading) => {
-      if (this.state.currentImageIndex !== undefined) {
-        if (experimentImages[this.state.currentImageIndex].type === "face") {
-          reading.type = experimentImages[this.state.currentImageIndex].type;
-          reading.gender =
-            experimentImages[this.state.currentImageIndex].gender;
-          reading.faceOrientation =
-            experimentImages[this.state.currentImageIndex].faceOrientation;
-          reading.eyeOrientation =
-            experimentImages[this.state.currentImageIndex].eyeOrientation;
-          reading.smile = experimentImages[this.state.currentImageIndex].smile;
-          reading.teeth = experimentImages[this.state.currentImageIndex].teeth;
-        } else {
-          reading.type = experimentImages[this.state.currentImageIndex].type;
-        }
-      }
-
-      this.readings.push(reading);
-    });
-
-    setTimeout(() => {
-      this.setState(
-        {
-          currentImageIndex: Math.floor(
-            Math.random() * experimentImages.length
-          ),
-        },
-        () => {
-          this.n170Readings.push({
-            timestamp: Date.now(),
-            participant_id: this.state.participantId,
-            type: experimentImages[this.state.currentImageIndex].type,
-            gender: experimentImages[this.state.currentImageIndex].gender,
-            face_orientation:
-              experimentImages[this.state.currentImageIndex].faceOrientation,
-            eye_orientation:
-              experimentImages[this.state.currentImageIndex].eyeOrientation,
-            smile: experimentImages[this.state.currentImageIndex].smile,
-            teeth: experimentImages[this.state.currentImageIndex].teeth,
-          });
-          this.experimentTime = this.experimentTime - 1;
-          this.changeImageN170();
-          document.body.requestPointerLock();
-        }
-      );
-    }, 200);
-  };
-
   unLoadEvent = (e) => {
     e.preventDefault();
     e.returnValue = "";
