@@ -488,10 +488,7 @@ class AppMain extends React.Component {
             >
               Connect Device
             </button>
-            <p>
-              Please make sure you've followed the video to properly fit the
-              Muse on your head and turned it on.
-            </p>
+            <p>Please ensure that your Muse device is turned on.</p>
           </div>
         </div>
       );
@@ -506,14 +503,11 @@ class AppMain extends React.Component {
                 <span className="ml-1">
                   <h3> Great! Muse is now connected to the platform. </h3>{" "}
                   <br />
-                  Before starting the experiment, let's first ensure that the
-                  Muse sensors are receiving good signal. <br /> <br />
-                  During this Signal Quality check, we will ask you to sit with
-                  your eyes closed, and try not to move for 30 seconds while we
-                  record the signals coming from the Muse sensors.  After 30
-                  seconds, you can open your eyes and inspect the results and
-                  can repeat the process until the signal is good enough to
-                  continue.
+                  Please follow the videos below and place the Muse headband on
+                  your head and double-check that there is no hair between the
+                  sensors and your skin, and that the headband fits snuggly on
+                  your head.
+                  <br /> <br />
                   <iframe
                     width="560"
                     height="315"
@@ -521,11 +515,28 @@ class AppMain extends React.Component {
                     title="YouTube video player"
                     frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                  ></iframe>
-                  <br /> <br /> However, before we begin the Signal Quality
-                  check, please place the Muse headband on your head and
-                  double-check that there is no hair between the sensors and
-                  your skin, and that the headband fits snuggly on your head.
+                  ></iframe>{" "}
+                  Follow the above video for "Muse 2016", and "Muse 2"
+                  headbands.
+                  <br /> <br />
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/61nJZxXwbQc"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                  ></iframe>{" "}
+                  Follow the above video for the "Muse S" headband.
+                  <br /> <br /> Before starting the experiment, let's first
+                  ensure that the Muse sensors are receiving good signal. <br />{" "}
+                  <br />
+                  During this Signal Quality check, we will ask you to sit with
+                  your eyes closed, and try not to move for 30 seconds while we
+                  record the signals coming from the Muse sensors.  After 30
+                  seconds, you can open your eyes and inspect the results and
+                  can repeat the process until the signal is good enough to
+                  continue.
                   <br /> <br />
                   When you are ready, click on the “Check my signal” button to
                   verify if the Muse sensors are receiving a good signal. You
@@ -547,8 +558,9 @@ class AppMain extends React.Component {
               <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
                 <span className="ml-1">
                   <h1>
-                    Please relax your jaw, close your eyes, and try not to move
-                    for 30 seconds while we record the Muse signals.
+                    Please relax your jaw, close your eyes, and count to 30 in
+                    your head. Please try not to move for these 30 seconds while
+                    we record the Muse signals.
                   </h1>
                   <br />
                   <ProgressBar
@@ -630,9 +642,9 @@ class AppMain extends React.Component {
               <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
                 <h5>
                   <span className="ml-1">
-                    Please see below Bar Chart to understand your Signal
-                    Quality. Hovering over the Bars will display additional
-                    information associated with it.
+                    Check the channel of bars below to see their Signal Quality.
+                    Hovering over the Bars will display additional information
+                    associated with it.
                   </span>
                 </h5>
               </div>
