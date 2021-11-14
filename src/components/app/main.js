@@ -514,6 +514,14 @@ class AppMain extends React.Component {
                   seconds, you can open your eyes and inspect the results and
                   can repeat the process until the signal is good enough to
                   continue.
+                  <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/v8xUYqqJAIg"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                  ></iframe>
                   <br /> <br /> However, before we begin the Signal Quality
                   check, please place the Muse headband on your head and
                   double-check that there is no hair between the sensors and
