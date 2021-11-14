@@ -508,25 +508,29 @@ class AppMain extends React.Component {
                   sensors and your skin, and that the headband fits snuggly on
                   your head.
                   <br /> <br />
-                  <iframe
-                    width="560"
-                    height="315"
-                    src="https://www.youtube.com/embed/v8xUYqqJAIg"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                  ></iframe>{" "}
+                  <div className="iframe-container">
+                    <iframe
+                      width="560"
+                      height="315"
+                      src="https://www.youtube.com/embed/v8xUYqqJAIg"
+                      title="YouTube video player"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                    ></iframe>{" "}
+                  </div>
                   Follow the above video for "Muse 2016", and "Muse 2"
                   headbands.
                   <br /> <br />
-                  <iframe
-                    width="560"
-                    height="315"
-                    src="https://www.youtube.com/embed/61nJZxXwbQc"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
-                  ></iframe>{" "}
+                  <div className="iframe-container">
+                    <iframe
+                      width="560"
+                      height="315"
+                      src="https://www.youtube.com/embed/61nJZxXwbQc"
+                      title="YouTube video player"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+                    ></iframe>{" "}
+                  </div>
                   Follow the above video for the "Muse S" headband.
                   <br /> <br /> Before starting the experiment, let's first
                   ensure that the Muse sensors are receiving good signal. <br />{" "}
