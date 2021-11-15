@@ -14,7 +14,6 @@ import {
   XAxis,
   Tooltip,
   Legend,
-  CartesianAxis,
   ComposedChart,
 } from "recharts";
 import ProgressBar from "react-bootstrap/ProgressBar";
