@@ -1,6 +1,6 @@
 import React from "react";
 import { MuseClient } from "muse-js";
-import { create, all } from "mathjs";
+import { create, all, max } from "mathjs";
 import {
   CartesianGrid,
   LabelList,
@@ -25,6 +25,7 @@ import XabFromPavlovia from "./xabfrompavlovia";
 import BreathCounting from "./breathcounting";
 import HelperUtil from "../../util/HelperUtil";
 import RestingState from "./restingstate";
+import audio1 from "../../audio/audio1.mp3";
 
 const calibrationTime = 31000;
 const config = {};
@@ -58,6 +59,7 @@ class AppMain extends React.Component {
     this.readings = [];
     this.processedData = [];
     this.chartData = [];
+    this.audio = new Audio(audio1);
   }
 
   render() {
@@ -601,10 +603,10 @@ class AppMain extends React.Component {
                   name="TP9"
                   type="monotone"
                   dataKey="ch_0"
-                  stroke="black"
+                  stroke="#F5E600"
                   dot={false}
                 ></Line>
-                <CartesianAxis axisLine="true" />
+                <CartesianGrid stroke="#ccc" />
                 <YAxis domain={[-100, 100]} allowDataOverflow="True" />
               </LineChart>
               <LineChart width={2100} height={150} data={this.processedData}>
@@ -613,10 +615,10 @@ class AppMain extends React.Component {
                   name="AF7"
                   type="monotone"
                   dataKey="ch_1"
-                  stroke="red"
+                  stroke="#2026FA"
                   dot={false}
                 ></Line>
-                <CartesianAxis axisLine="true" />
+                <CartesianGrid stroke="#ccc" />
                 <YAxis domain={[-100, 100]} allowDataOverflow="True" />
               </LineChart>
               <LineChart width={2100} height={150} data={this.processedData}>
@@ -625,7 +627,7 @@ class AppMain extends React.Component {
                   name="AF8"
                   type="monotone"
                   dataKey="ch_2"
-                  stroke="blue"
+                  stroke="#FA0E00"
                   dot={false}
                 ></Line>
                 <CartesianGrid stroke="#ccc" />
@@ -637,7 +639,7 @@ class AppMain extends React.Component {
                   name="TP10"
                   type="monotone"
                   dataKey="ch_3"
-                  stroke="grey"
+                  stroke="#EB23F4"
                   dot={false}
                 ></Line>
                 <CartesianGrid stroke="#ccc" />
@@ -652,9 +654,10 @@ class AppMain extends React.Component {
                   </span>
                 </h5>
               </div>
-              <ResponsiveContainer width="95%" height={450}>
+              <br />
+              <ResponsiveContainer width="77%" height={450}>
                 <ComposedChart
-                  margin={{ top: 20, right: 20, left: 20, bottom: 5 }}
+                  margin={{ top: 20, right: 20, left: 315, bottom: 5 }}
                   data={this.chartData}
                 >
                   <XAxis dataKey="name" stroke="#000000" />
@@ -672,38 +675,54 @@ class AppMain extends React.Component {
                     type="monotone"
                     dataKey="amt"
                     stackId="1"
-                    stroke="#8884d8"
+                    stroke="black"
                     fill="white"
                   >
-                    <LabelList dataKey="div_1" position="insideTopRight" />
+                    <LabelList
+                      dataKey="div_1"
+                      position="insideTopRight"
+                      style={{ fontSize: "150%" }}
+                    />
                   </Area>
                   <Area
                     type="monotone"
                     dataKey="amt"
                     stackId="1"
-                    stroke="#82ca9d"
-                    fill="yellow"
+                    stroke="black"
+                    fill="#BDD9BF"
                   >
-                    <LabelList dataKey="div_2" position="insideTopRight" />
+                    <LabelList
+                      dataKey="div_2"
+                      position="insideTopRight"
+                      style={{ fontSize: "150%" }}
+                    />
                   </Area>
                   <Area
                     type="monotone"
                     dataKey="amt"
                     stackId="1"
-                    stroke="#ffc658"
-                    fill="orange"
+                    stroke="black"
+                    fill="#2E4052"
                   >
-                    <LabelList dataKey="div_3" position="insideTopRight" />
+                    <LabelList
+                      dataKey="div_3"
+                      position="insideTopRight"
+                      style={{ fontSize: "150%" }}
+                    />
                   </Area>
                   <Area
                     connectNulls
                     type="monotone"
-                    dataKey="amt"
+                    dataKey="amt2"
                     stackId="1"
-                    stroke="#ffc658"
-                    fill="pink"
+                    stroke="black"
+                    fill="#FFC857"
                   >
-                    <LabelList dataKey="div_4" position="insideTopRight" />
+                    <LabelList
+                      dataKey="div_4"
+                      position="insideTopRight"
+                      style={{ fontSize: "150%" }}
+                    />
                   </Area>
                   <Bar
                     dataKey="total"
@@ -882,6 +901,7 @@ class AppMain extends React.Component {
 
   stopRecording = () => {
     this.client.pause();
+    this.audio.play();
     this.processedData = HelperUtil.cleanData(this.readings);
 
     const stdCh0 = math.std(this.processedData.map((data) => data.ch_0));
@@ -894,8 +914,9 @@ class AppMain extends React.Component {
         name: "Left Ear (TP9)",
         total: stdCh0,
         verdict: this.calculateVerdict(stdCh0),
-        color: "black",
+        color: "#F5E600",
         amt: 15,
+        amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
         div_1: "Great",
         div_2: "Good",
         div_3: "Moderate",
@@ -905,8 +926,9 @@ class AppMain extends React.Component {
         name: "Left Frontal (AF7)",
         total: stdCh1,
         verdict: this.calculateVerdict(stdCh1),
-        color: "red",
+        color: "#2026FA",
         amt: 15,
+        amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
         div_1: "Great",
         div_2: "Good",
         div_3: "Moderate",
@@ -916,8 +938,9 @@ class AppMain extends React.Component {
         name: "Right Frontal (AF8)",
         total: stdCh2,
         verdict: this.calculateVerdict(stdCh2),
-        color: "blue",
+        color: "#FA0E00",
         amt: 15,
+        amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
         div_1: "Great",
         div_2: "Good",
         div_3: "Moderate",
@@ -927,8 +950,9 @@ class AppMain extends React.Component {
         name: "Right Ear (TP10)",
         total: stdCh3,
         verdict: this.calculateVerdict(stdCh3),
-        color: "grey",
+        color: "#EB23F4",
         amt: 15,
+        amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
         div_1: "Great",
         div_2: "Good",
         div_3: "Moderate",
