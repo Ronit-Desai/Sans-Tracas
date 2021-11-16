@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { MuseClient } from "muse-js";
 import { create, all, max } from "mathjs";
 import {
@@ -65,6 +66,42 @@ class AppMain extends React.Component {
     if (!this.state.experimentSelected) {
       return (
         <div className="App">
+          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+            <h1>
+              Welcome to Sans Tracas. The first of its kind cross-platform tool
+              that runs EEG experiments. It's straightforward, entirely online
+              and hassle-free.{" "}
+            </h1>{" "}
+            <br />
+            <br />
+            <h3>
+              Please watch the Sans Tracas introductory video below for a gist
+              of it's working and features.
+            </h3>
+            <div className="iframe-container">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/nKUjdBB1OHw"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+              ></iframe>{" "}
+            </div>{" "}
+            <br /> <br />
+            <h3>
+              Before you start with any of our fun experiments, please go
+              through the{" "}
+              <Link
+                className="nav-item nav-link"
+                to="/documentation/requirements"
+              >
+                platform requirements
+              </Link>
+              to make sure that the devcie you're currently using is compatible
+              with Sans Tracas.
+            </h3>
+          </div>
           <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
             <h2>Please select an experiment to begin!</h2>
             <br />
