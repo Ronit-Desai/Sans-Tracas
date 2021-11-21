@@ -1,14 +1,16 @@
 import React from "react";
-
 import { ButtonGroup, Dropdown, ToggleButton } from "react-bootstrap";
+import ReactCountdownClock from "react-countdown-clock";
 
 class RestingState extends React.Component {
   constructor(props) {
     super();
 
     this.state = {
-      timeInterval: undefined,
-      eyeOption: undefined,
+      experimentStarted: false,
+      experimentCompleted: false,
+      timeInterval: "1",
+      eyeOption: "Open",
     };
 
     this.client = props.museClient;
@@ -30,8 +32,16 @@ class RestingState extends React.Component {
   }
 
   render() {
-    return (
-      <>
+    if (this.state.experimentCompleted) {
+      return (
+        <div className="App">
+          <p>Experiment completed</p>
+        </div>
+      );
+    }
+
+    if (!this.state.experimentStarted) {
+      return (
         <div className="App">
           <Dropdown
             onSelect={(value) => {
@@ -93,15 +103,69 @@ class RestingState extends React.Component {
               Close
             </ToggleButton>
           </ButtonGroup>
+          <div>
+            <button
+              className="btn btn-secondary btn-block m-3"
+              onClick={() => {
+                this.setState({ experimentStarted: true });
+                this.startExperiment();
+              }}
+            >
+              Begin Resting-State Experiment.
+            </button>
+          </div>
+          <div>
+            {this.state.eyeOption === "Open" ? (
+              <p>Eye open instruction</p>
+            ) : (
+              <p>Eye close instruction</p>
+            )}
+          </div>
         </div>
-        <div className="App text-center">
-          <button className="btn btn-secondary btn-block m-3">
-            Begin Resting-State Experiment.
-          </button>
-        </div>
-      </>
-    );
+      );
+    } else {
+      if (this.state.eyeOption === "Open") {
+        return (
+          <div className="App">
+            <div
+              style={{
+                width: "20px",
+                height: "20px",
+                backgroundColor: "red",
+                borderRadius: "50%",
+                marginLeft: "50%",
+                marginTop: "22%",
+              }}
+            ></div>
+            <div>Please keep your focus on red dot</div>
+          </div>
+        );
+      } else {
+        return (
+          <div className="App">
+            <div style={{ marginLeft: "35%", marginTop: "15%" }}>
+              <ReactCountdownClock
+                seconds={this.state.timeInterval * 60}
+                color="#000000"
+                size={300}
+                timeFormat="hms"
+              />
+            </div>
+          </div>
+        );
+      }
+    }
   }
+
+  startExperiment = () => {
+    setTimeout(() => {
+      this.stopExperiment();
+    }, this.state.timeInterval * 60 * 1000);
+  };
+
+  stopExperiment = () => {
+    this.setState({ experimentCompleted: true });
+  };
 
   unLoadEvent = (e) => {
     e.preventDefault();
