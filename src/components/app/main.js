@@ -26,6 +26,7 @@ import BreathCounting from "./breathcounting";
 import HelperUtil from "../../util/HelperUtil";
 import RestingState from "./restingstate";
 import audio1 from "../../audio/audio1.mp3";
+import { data } from "jquery";
 
 const calibrationTime = 3000;
 const config = {};
@@ -966,12 +967,13 @@ class AppMain extends React.Component {
     const temp1 = math.mean(this.processedData.map((data) => data.ch_1));
     const temp2 = math.mean(this.processedData.map((data) => data.ch_2));
     const temp3 = math.mean(this.processedData.map((data) => data.ch_3));
-    this.processedData.map(function (data) {
-      data.ch_0 = data.ch_0 - temp0;
-      data.ch_1 = data.ch_1 - temp1;
-      data.ch_2 = data.ch_2 - temp2;
-      data.ch_3 = data.ch_3 - temp3;
-    });
+
+    for (let i = 0; i < this.processedData.length; i++) {
+      this.processedData[i].ch_0 = this.processedData[i].ch_0 - temp0;
+      this.processedData[i].ch_1 = this.processedData[i].ch_1 - temp1;
+      this.processedData[i].ch_2 = this.processedData[i].ch_2 - temp2;
+      this.processedData[i].ch_3 = this.processedData[i].ch_3 - temp3;
+    }
 
     const stdCh0 = math.std(this.processedData.map((data) => data.ch_0));
     const stdCh1 = math.std(this.processedData.map((data) => data.ch_1));
