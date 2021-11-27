@@ -69,15 +69,12 @@ class AppMain extends React.Component {
           <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
             <h1>
               Welcome to Sans Tracas. The first of its kind cross-platform tool
-              that runs EEG experiments. It's straightforward, entirely online
+              that runs EEG experiments. It's straightforward, entirely online,
               and hassle-free.{" "}
             </h1>{" "}
             <br />
             <br />
-            <h3>
-              Please watch the Sans Tracas introductory video below for a gist
-              of it's working and features.
-            </h3>
+            <h3>The video below demonstrates Sans Tracas in action.</h3>
             <div className="iframe-container">
               <iframe
                 width="560"
@@ -98,7 +95,7 @@ class AppMain extends React.Component {
               >
                 platform requirements
               </Link>
-              to make sure that the devcie you're currently using is compatible
+              to make sure that the device you're currently using is compatible
               with Sans Tracas.
             </h3>
           </div>
@@ -632,7 +629,8 @@ class AppMain extends React.Component {
                     Right Front (AF8), Right Ear (TP10) and AUX (optional)]
                   </span>
                 </h5>
-              </div>
+              </div>{" "}
+              <br />
               <LineChart width={2100} height={150} data={this.processedData}>
                 <Legend align="left" verticalAlign="middle" />
                 <Line
@@ -643,8 +641,13 @@ class AppMain extends React.Component {
                   dot={false}
                 ></Line>
                 <CartesianGrid stroke="#ccc" />
-                <YAxis domain={[-100, 100]} allowDataOverflow="True" />
-              </LineChart>
+                <YAxis
+                  domain={[-100, 100]}
+                  allowDataOverflow="True"
+                  interval={0}
+                />
+              </LineChart>{" "}
+              <br />
               <LineChart width={2100} height={150} data={this.processedData}>
                 <Legend align="left" verticalAlign="middle" />
                 <Line
@@ -655,8 +658,13 @@ class AppMain extends React.Component {
                   dot={false}
                 ></Line>
                 <CartesianGrid stroke="#ccc" />
-                <YAxis domain={[-100, 100]} allowDataOverflow="True" />
-              </LineChart>
+                <YAxis
+                  domain={[-100, 100]}
+                  allowDataOverflow="True"
+                  interval={0}
+                />
+              </LineChart>{" "}
+              <br />
               <LineChart width={2100} height={150} data={this.processedData}>
                 <Legend align="left" verticalAlign="middle" />
                 <Line
@@ -667,8 +675,13 @@ class AppMain extends React.Component {
                   dot={false}
                 ></Line>
                 <CartesianGrid stroke="#ccc" />
-                <YAxis domain={[-100, 100]} allowDataOverflow="True" />
-              </LineChart>
+                <YAxis
+                  domain={[-100, 100]}
+                  allowDataOverflow="True"
+                  interval={0}
+                />
+              </LineChart>{" "}
+              <br />
               <LineChart width={2100} height={150} data={this.processedData}>
                 <Legend align="left" verticalAlign="middle" />
                 <Line
@@ -679,7 +692,11 @@ class AppMain extends React.Component {
                   dot={false}
                 ></Line>
                 <CartesianGrid stroke="#ccc" />
-                <YAxis domain={[-100, 100]} allowDataOverflow="True" />
+                <YAxis
+                  domain={[-100, 100]}
+                  allowDataOverflow="True"
+                  interval={0}
+                />
               </LineChart>
               <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
                 <h5>
@@ -695,23 +712,25 @@ class AppMain extends React.Component {
                 <ComposedChart
                   margin={{ top: 20, right: 20, left: 321, bottom: 20 }}
                   data={this.chartData}
-                  barSize={121}
+                  barSize={125}
                 >
                   <XAxis
                     dataKey="name"
                     stroke="#000000"
                     scale="point"
                     padding={{ left: 0, right: 0 }}
+                    orientation="top"
                     label={{
-                      value: "Muse Channels",
-                      offset: -2,
+                      value: "Signal Noise",
+                      offset: 21,
                       position: "insideBottom",
                     }}
                   />
                   <YAxis
                     stroke="#000000"
+                    reversed="true"
                     label={{
-                      value: "Signal Strength",
+                      value: "Variability",
                       angle: -90,
                       position: "insideLeft",
                     }}
@@ -783,7 +802,7 @@ class AppMain extends React.Component {
                       "Okay."{" "}
                     </h3>{" "}
                     <br />
-                    If your Signal Quality is "Bad." (even for just 1 channel),
+                    If your Signal Quality is "Poor." (even for just 1 channel),
                     it is strongly advised that you Make sure the Muse fits
                     properly on your head by following the video on the
                     connection page, and re-check the Signal Quality by clicking
@@ -943,6 +962,17 @@ class AppMain extends React.Component {
     this.audio.play();
     this.processedData = HelperUtil.cleanData(this.readings);
 
+    const temp0 = math.mean(this.processedData.map((data) => data.ch_0));
+    const temp1 = math.mean(this.processedData.map((data) => data.ch_1));
+    const temp2 = math.mean(this.processedData.map((data) => data.ch_2));
+    const temp3 = math.mean(this.processedData.map((data) => data.ch_3));
+    this.processedData.map((data) => {
+      data.ch_0 = data.ch_0 - temp0;
+      data.ch_1 = data.ch_1 - temp1;
+      data.ch_2 = data.ch_2 - temp2;
+      data.ch_3 = data.ch_3 - temp3;
+    });
+
     const stdCh0 = math.std(this.processedData.map((data) => data.ch_0));
     const stdCh1 = math.std(this.processedData.map((data) => data.ch_1));
     const stdCh2 = math.std(this.processedData.map((data) => data.ch_2));
@@ -959,7 +989,7 @@ class AppMain extends React.Component {
         div_1: "Great",
         div_2: "Good",
         div_3: "Okay",
-        div_4: "Bad",
+        div_4: "Poor",
       },
       {
         name: "Left Ear (TP9)",
@@ -971,7 +1001,7 @@ class AppMain extends React.Component {
         div_1: "Great",
         div_2: "Good",
         div_3: "Okay",
-        div_4: "Bad",
+        div_4: "Poor",
       },
       {
         name: "Left Front (AF7)",
@@ -983,7 +1013,7 @@ class AppMain extends React.Component {
         div_1: "Great",
         div_2: "Good",
         div_3: "Okay",
-        div_4: "Bad",
+        div_4: "Poor",
       },
       {
         name: "Right Front (AF8)",
@@ -995,7 +1025,7 @@ class AppMain extends React.Component {
         div_1: "Great",
         div_2: "Good",
         div_3: "Okay",
-        div_4: "Bad",
+        div_4: "Poor",
       },
       {
         name: "Right Ear (TP10)",
@@ -1007,7 +1037,7 @@ class AppMain extends React.Component {
         div_1: "Great",
         div_2: "Good",
         div_3: "Okay",
-        div_4: "Bad",
+        div_4: "Poor",
       },
       {
         name: " ",
@@ -1080,7 +1110,7 @@ class AppMain extends React.Component {
     } else if (std > 30 && std <= 45) {
       return "Okay";
     } else {
-      return "Bad";
+      return "Poor";
     }
   };
 }
