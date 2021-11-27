@@ -966,7 +966,7 @@ class AppMain extends React.Component {
     const temp1 = math.mean(this.processedData.map((data) => data.ch_1));
     const temp2 = math.mean(this.processedData.map((data) => data.ch_2));
     const temp3 = math.mean(this.processedData.map((data) => data.ch_3));
-    this.processedData.map((data) => {
+    this.processedData.map(function (data) {
       data.ch_0 = data.ch_0 - temp0;
       data.ch_1 = data.ch_1 - temp1;
       data.ch_2 = data.ch_2 - temp2;
