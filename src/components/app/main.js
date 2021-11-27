@@ -26,7 +26,6 @@ import BreathCounting from "./breathcounting";
 import HelperUtil from "../../util/HelperUtil";
 import RestingState from "./restingstate";
 import audio1 from "../../audio/audio1.mp3";
-import { data } from "jquery";
 
 const calibrationTime = 3000;
 const config = {};
