@@ -693,11 +693,29 @@ class AppMain extends React.Component {
               <br />
               <ResponsiveContainer width="77%" height={450}>
                 <ComposedChart
-                  margin={{ top: 20, right: 20, left: 315, bottom: 5 }}
+                  margin={{ top: 20, right: 20, left: 321, bottom: 20 }}
                   data={this.chartData}
+                  barSize={121}
                 >
-                  <XAxis dataKey="name" stroke="#000000" />
-                  <YAxis stroke="#000000" />
+                  <XAxis
+                    dataKey="name"
+                    stroke="#000000"
+                    scale="point"
+                    padding={{ left: 0, right: 0 }}
+                    label={{
+                      value: "Muse Channels",
+                      offset: -2,
+                      position: "insideBottom",
+                    }}
+                  />
+                  <YAxis
+                    stroke="#000000"
+                    label={{
+                      value: "Signal Strength",
+                      angle: -90,
+                      position: "insideLeft",
+                    }}
+                  />
                   <Tooltip
                     wrapperStyle={{
                       width: 175,
@@ -707,16 +725,10 @@ class AppMain extends React.Component {
                     }}
                     content={<this.CustomTooltip />}
                   />
-                  <Area
-                    type="monotone"
-                    dataKey="amt"
-                    stackId="1"
-                    stroke="black"
-                    fill="white"
-                  >
+                  <Area type="monotone" dataKey="amt" stackId="1" fill="white">
                     <LabelList
                       dataKey="div_1"
-                      position="insideTopRight"
+                      position="right"
                       style={{ fontSize: "150%" }}
                     />
                   </Area>
@@ -724,12 +736,11 @@ class AppMain extends React.Component {
                     type="monotone"
                     dataKey="amt"
                     stackId="1"
-                    stroke="black"
                     fill="#BDD9BF"
                   >
                     <LabelList
                       dataKey="div_2"
-                      position="insideTopRight"
+                      position="right"
                       style={{ fontSize: "150%" }}
                     />
                   </Area>
@@ -737,35 +748,27 @@ class AppMain extends React.Component {
                     type="monotone"
                     dataKey="amt"
                     stackId="1"
-                    stroke="black"
                     fill="#2E4052"
                   >
                     <LabelList
                       dataKey="div_3"
-                      position="insideTopRight"
+                      position="right"
                       style={{ fontSize: "150%" }}
                     />
                   </Area>
                   <Area
-                    connectNulls
                     type="monotone"
                     dataKey="amt2"
                     stackId="1"
-                    stroke="black"
                     fill="#FFC857"
                   >
                     <LabelList
                       dataKey="div_4"
-                      position="insideTopRight"
+                      position="right"
                       style={{ fontSize: "150%" }}
                     />
                   </Area>
-                  <Bar
-                    dataKey="total"
-                    fill="#00a0fc"
-                    stroke="#000000"
-                    strokeWidth={1}
-                  >
+                  <Bar dataKey="total" fill="#00a0fc" stroke="#000000">
                     {this.chartData.map((entry, index) => (
                       <Cell key={`cell-${index}`} fill={entry.color} />
                     ))}
@@ -947,6 +950,18 @@ class AppMain extends React.Component {
 
     this.chartData.push(
       {
+        name: "",
+        total: 0,
+        verdict: 0,
+        color: "green",
+        amt: 15,
+        amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
+        div_1: "Great",
+        div_2: "Good",
+        div_3: "Okay",
+        div_4: "Bad",
+      },
+      {
         name: "Left Ear (TP9)",
         total: stdCh0,
         verdict: this.calculateVerdict(stdCh0),
@@ -955,11 +970,11 @@ class AppMain extends React.Component {
         amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
         div_1: "Great",
         div_2: "Good",
-        div_3: "Moderate",
-        div_4: "Too high",
+        div_3: "Okay",
+        div_4: "Bad",
       },
       {
-        name: "Left Frontal (AF7)",
+        name: "Left Front (AF7)",
         total: stdCh1,
         verdict: this.calculateVerdict(stdCh1),
         color: "#2026FA",
@@ -967,11 +982,11 @@ class AppMain extends React.Component {
         amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
         div_1: "Great",
         div_2: "Good",
-        div_3: "Moderate",
-        div_4: "Too high",
+        div_3: "Okay",
+        div_4: "Bad",
       },
       {
-        name: "Right Frontal (AF8)",
+        name: "Right Front (AF8)",
         total: stdCh2,
         verdict: this.calculateVerdict(stdCh2),
         color: "#FA0E00",
@@ -979,8 +994,8 @@ class AppMain extends React.Component {
         amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
         div_1: "Great",
         div_2: "Good",
-        div_3: "Moderate",
-        div_4: "Too high",
+        div_3: "Okay",
+        div_4: "Bad",
       },
       {
         name: "Right Ear (TP10)",
@@ -991,8 +1006,20 @@ class AppMain extends React.Component {
         amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
         div_1: "Great",
         div_2: "Good",
-        div_3: "Moderate",
-        div_4: "Too high",
+        div_3: "Okay",
+        div_4: "Bad",
+      },
+      {
+        name: " ",
+        total: 0,
+        verdict: 0,
+        color: "black",
+        amt: 15,
+        amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
+        div_1: " ",
+        div_2: " ",
+        div_3: " ",
+        div_4: " ",
       }
     );
 
