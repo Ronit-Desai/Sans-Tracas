@@ -637,7 +637,7 @@ class AppMain extends React.Component {
                   name="TP9"
                   type="monotone"
                   dataKey="ch_0"
-                  stroke="#F5E600"
+                  stroke="#00F56E"
                   dot={false}
                 ></Line>
                 <CartesianGrid stroke="#ccc" />
@@ -708,7 +708,7 @@ class AppMain extends React.Component {
                 </h5>
               </div>
               <br />
-              <ResponsiveContainer width="77%" height={450}>
+              <ResponsiveContainer width="83%" height={450}>
                 <ComposedChart
                   margin={{ top: 20, right: 20, left: 321, bottom: 20 }}
                   data={this.chartData}
@@ -719,20 +719,21 @@ class AppMain extends React.Component {
                     stroke="#000000"
                     scale="point"
                     padding={{ left: 0, right: 0 }}
-                    orientation="top"
                     label={{
-                      value: "Signal Noise",
-                      offset: 21,
+                      value: "Muse Channels",
+                      offset: -17,
                       position: "insideBottom",
                     }}
                   />
                   <YAxis
                     stroke="#000000"
-                    reversed="true"
+                    orientation="right"
+                    domain={[0, 100]}
+                    allowDataOverflow="True"
                     label={{
-                      value: "Variability",
-                      angle: -90,
-                      position: "insideLeft",
+                      value: "Signal Variability (Standard deviation)",
+                      angle: 90,
+                      position: "insideBottomRight",
                     }}
                   />
                   <Tooltip
@@ -747,7 +748,7 @@ class AppMain extends React.Component {
                   <Area type="monotone" dataKey="amt" stackId="1" fill="white">
                     <LabelList
                       dataKey="div_1"
-                      position="right"
+                      position="insideTopLeft"
                       style={{ fontSize: "150%" }}
                     />
                   </Area>
@@ -759,7 +760,7 @@ class AppMain extends React.Component {
                   >
                     <LabelList
                       dataKey="div_2"
-                      position="right"
+                      position="insideTopLeft"
                       style={{ fontSize: "150%" }}
                     />
                   </Area>
@@ -771,7 +772,7 @@ class AppMain extends React.Component {
                   >
                     <LabelList
                       dataKey="div_3"
-                      position="right"
+                      position="insideTopLeft"
                       style={{ fontSize: "150%" }}
                     />
                   </Area>
@@ -783,7 +784,7 @@ class AppMain extends React.Component {
                   >
                     <LabelList
                       dataKey="div_4"
-                      position="right"
+                      position="insideTopLeft"
                       style={{ fontSize: "150%" }}
                     />
                   </Area>
@@ -986,7 +987,7 @@ class AppMain extends React.Component {
         verdict: 0,
         color: "green",
         amt: 15,
-        amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
+        amt2: 55,
         div_1: "Great",
         div_2: "Good",
         div_3: "Okay",
@@ -996,13 +997,13 @@ class AppMain extends React.Component {
         name: "Left Ear (TP9)",
         total: stdCh0,
         verdict: this.calculateVerdict(stdCh0),
-        color: "#F5E600",
+        color: "#00F56E",
         amt: 15,
-        amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
-        div_1: "Great",
-        div_2: "Good",
-        div_3: "Okay",
-        div_4: "Poor",
+        amt2: 55,
+        div_1: "",
+        div_2: "",
+        div_3: "",
+        div_4: "",
       },
       {
         name: "Left Front (AF7)",
@@ -1010,11 +1011,11 @@ class AppMain extends React.Component {
         verdict: this.calculateVerdict(stdCh1),
         color: "#2026FA",
         amt: 15,
-        amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
-        div_1: "Great",
-        div_2: "Good",
-        div_3: "Okay",
-        div_4: "Poor",
+        amt2: 55,
+        div_1: "",
+        div_2: "",
+        div_3: "",
+        div_4: "",
       },
       {
         name: "Right Front (AF8)",
@@ -1022,11 +1023,11 @@ class AppMain extends React.Component {
         verdict: this.calculateVerdict(stdCh2),
         color: "#FA0E00",
         amt: 15,
-        amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
-        div_1: "Great",
-        div_2: "Good",
-        div_3: "Okay",
-        div_4: "Poor",
+        amt2: 55,
+        div_1: "",
+        div_2: "",
+        div_3: "",
+        div_4: "",
       },
       {
         name: "Right Ear (TP10)",
@@ -1034,11 +1035,11 @@ class AppMain extends React.Component {
         verdict: this.calculateVerdict(stdCh3),
         color: "#EB23F4",
         amt: 15,
-        amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
-        div_1: "Great",
-        div_2: "Good",
-        div_3: "Okay",
-        div_4: "Poor",
+        amt2: 55,
+        div_1: "",
+        div_2: "",
+        div_3: "",
+        div_4: "",
       },
       {
         name: " ",
@@ -1046,11 +1047,11 @@ class AppMain extends React.Component {
         verdict: 0,
         color: "black",
         amt: 15,
-        amt2: max(stdCh0, stdCh1, stdCh2, stdCh3),
-        div_1: " ",
-        div_2: " ",
-        div_3: " ",
-        div_4: " ",
+        amt2: 55,
+        div_1: "",
+        div_2: "",
+        div_3: "",
+        div_4: "",
       }
     );
 
