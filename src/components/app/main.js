@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { MuseClient } from "muse-js";
-import { create, all, max } from "mathjs";
+import { create, all } from "mathjs";
 import {
   CartesianGrid,
   LabelList,
