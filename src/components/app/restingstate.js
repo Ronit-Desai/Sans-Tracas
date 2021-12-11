@@ -261,43 +261,53 @@ class RestingState extends React.Component {
               this.setState({ timeInterval: value });
             }}
           >
-            <Dropdown.Toggle variant="success" id="time-dropdown">
-              Select time interval
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item
-                eventKey="0.5"
-                active={this.state.timeInterval === "0.5"}
-              >
-                0.5
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="5"
-                active={this.state.timeInterval === "5"}
-              >
-                5
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="10"
-                active={this.state.timeInterval === "10"}
-              >
-                10
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="15"
-                active={this.state.timeInterval === "15"}
-              >
-                15
-              </Dropdown.Item>
-              <Dropdown.Item
-                eventKey="20"
-                active={this.state.timeInterval === "20"}
-              >
-                20
-              </Dropdown.Item>
-            </Dropdown.Menu>
+            {" "}
+            <h3>
+              <Dropdown.Toggle variant="success" id="time-dropdown">
+                Select time interval
+              </Dropdown.Toggle>
+              <Dropdown.Menu>
+                <Dropdown.Item
+                  eventKey="0.5"
+                  active={this.state.timeInterval === "0.5"}
+                >
+                  0.5
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="5"
+                  active={this.state.timeInterval === "5"}
+                >
+                  5
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="5"
+                  active={this.state.timeInterval === "5"}
+                >
+                  2
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="10"
+                  active={this.state.timeInterval === "10"}
+                >
+                  10
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="15"
+                  active={this.state.timeInterval === "15"}
+                >
+                  15
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="20"
+                  active={this.state.timeInterval === "20"}
+                >
+                  20
+                </Dropdown.Item>
+              </Dropdown.Menu>
+              &nbsp; {this.state.timeInterval} minutes.
+            </h3>
           </Dropdown>
+
           <br />
           <ButtonGroup className="mb-2">
             <ToggleButton
@@ -340,38 +350,42 @@ class RestingState extends React.Component {
             </button>
           </div>
           <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
-            {this.state.eyeOption === "Open" ? (
-              <p>
-                In this task, we will record your brain activity while you are
-                at rest. <br /> All you will need to do is sit still with your
-                eyes open for the duration that you've selected via the 'Time
-                Interval' feature. <br /> Please sit still and do not try to do
-                anything special. Try not to move your eyes or fall asleep. You
-                may blink normally during this time. You may also use the red
-                dot as a point of focus while you're performing the experiment.
-                <br /> When you are ready to begin, press the "Begin
-                Resting-State Experiment" button to continue.
-                <br />A reminder to please keep your eyes OPEN for the duration
-                of the experiment and focus on the central fixation. You can
-                blink during this time.
-              </p>
-            ) : (
-              <p>
-                In this task, we will record your brain activity while you are
-                at rest.
-                <br />
-                All you will need to do is sit still with your eyes closed for
-                duration that you've selected via the 'Time Interval' feature.
-                <br />
-                Please sit still and do not try to do anything special. Try not
-                to move your eyes or fall asleep.
-                <br />
-                When you are ready to begin, press the "Begin Resting-State
-                Experiment" button to continue.
-                <br />A reminder to please keep your eyes CLOSED for the
-                duration of the experiment. Open your eyes when you hear a beep.
-              </p>
-            )}
+            <h3>
+              {this.state.eyeOption === "Open" ? (
+                <p>
+                  In this task, we will record your brain activity while you are
+                  at rest. <br /> All you will need to do is sit still with your
+                  eyes open for the duration that you've selected via the 'Time
+                  Interval' feature. <br /> Please sit still and do not try to
+                  do anything special. Try not to move your eyes or fall asleep.
+                  You may blink normally during this time. You may also use the
+                  red dot as a point of focus while you're performing the
+                  experiment.
+                  <br /> When you are ready to begin, press the "Begin
+                  Resting-State Experiment" button to continue.
+                  <br />A reminder to please keep your eyes OPEN for the
+                  duration of the experiment and focus on the central fixation.
+                  You can blink during this time.
+                </p>
+              ) : (
+                <p>
+                  In this task, we will record your brain activity while you are
+                  at rest.
+                  <br />
+                  All you will need to do is sit still with your eyes closed for
+                  duration that you've selected via the 'Time Interval' feature.
+                  <br />
+                  Please sit still and do not try to do anything special. Try
+                  not to move your eyes or fall asleep.
+                  <br />
+                  When you are ready to begin, press the "Begin Resting-State
+                  Experiment" button to continue.
+                  <br />A reminder to please keep your eyes CLOSED for the
+                  duration of the experiment. Open your eyes when you hear a
+                  beep.
+                </p>
+              )}
+            </h3>
           </div>
         </div>
       );
