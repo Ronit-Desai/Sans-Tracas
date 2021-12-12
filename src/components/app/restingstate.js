@@ -3,6 +3,7 @@ import moment from "moment";
 import HelperUtil from "../../util/HelperUtil";
 import Results from "./results";
 import { ButtonGroup, Dropdown, ToggleButton } from "react-bootstrap";
+import ReactCountdownClock from "react-countdown-clock";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import audio1 from "../../audio/audio1.mp3";
 
@@ -39,7 +40,7 @@ class RestingState extends React.Component {
       experimentStarted: false,
       experimentCompleted: false,
       timeInterval: "2",
-      remainingTime: 0,
+      remainingTime: experimentTime,
       eyeOption: "Open",
       canCloseTab: true,
       surveyDone: false,
@@ -261,7 +262,10 @@ class RestingState extends React.Component {
         <div className="App text-center">
           <Dropdown
             onSelect={(value) => {
-              this.setState({ timeInterval: value });
+              this.setState({
+                timeInterval: value,
+                remainingTime: value * 60 * 1000,
+              });
             }}
           >
             {" "}
@@ -348,7 +352,6 @@ class RestingState extends React.Component {
               onClick={() => {
                 this.setState({ experimentStarted: true });
                 experimentTime = this.state.timeInterval * 60 * 1000;
-                this.state.remainingTime = experimentTime;
                 this.startExperiment();
               }}
             >
@@ -411,7 +414,7 @@ class RestingState extends React.Component {
               }}
             ></div>
             <div className="App text-center">
-              <h3>Please keep your focus on red dot.</h3>
+              <h3>Please keep your focus on the red dot.</h3>
             </div>
             <div
               className="App"
@@ -422,6 +425,7 @@ class RestingState extends React.Component {
                 now={(experimentTime - this.state.remainingTime) / 1000}
                 max={experimentTime / 1000}
               />
+              {console.log(this.state.remainingTime)}
             </div>
           </div>
         );
@@ -443,6 +447,7 @@ class RestingState extends React.Component {
                 now={(experimentTime - this.state.remainingTime) / 1000}
                 max={experimentTime / 1000}
               />
+              {console.log(this.state.remainingTime)}
             </div>
           </div>
         );
