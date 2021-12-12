@@ -3,7 +3,6 @@ import moment from "moment";
 import HelperUtil from "../../util/HelperUtil";
 import Results from "./results";
 import { ButtonGroup, Dropdown, ToggleButton } from "react-bootstrap";
-import ReactCountdownClock from "react-countdown-clock";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import audio1 from "../../audio/audio1.mp3";
 
