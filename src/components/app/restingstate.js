@@ -3,7 +3,7 @@ import moment from "moment";
 import HelperUtil from "../../util/HelperUtil";
 import Results from "./results";
 import { ButtonGroup, Dropdown, ToggleButton } from "react-bootstrap";
-import ReactCountdownClock from "react-countdown-clock";
+import ProgressBar from "react-bootstrap/ProgressBar";
 import audio1 from "../../audio/audio1.mp3";
 
 let headers = [
@@ -27,6 +27,8 @@ let headersWithAux = [
   { label: "participant_id", key: "participant_id" },
 ];
 
+let experimentTime = 120000;
+
 class RestingState extends React.Component {
   constructor(props) {
     super();
@@ -37,6 +39,7 @@ class RestingState extends React.Component {
       experimentStarted: false,
       experimentCompleted: false,
       timeInterval: "2",
+      remainingTime: 0,
       eyeOption: "Open",
       canCloseTab: true,
       surveyDone: false,
@@ -273,17 +276,18 @@ class RestingState extends React.Component {
                 >
                   0.5
                 </Dropdown.Item>
-                <Dropdown.Item
-                  eventKey="5"
-                  active={this.state.timeInterval === "5"}
-                >
-                  5
-                </Dropdown.Item>
+
                 <Dropdown.Item
                   eventKey="5"
                   active={this.state.timeInterval === "5"}
                 >
                   2
+                </Dropdown.Item>
+                <Dropdown.Item
+                  eventKey="5"
+                  active={this.state.timeInterval === "5"}
+                >
+                  5
                 </Dropdown.Item>
                 <Dropdown.Item
                   eventKey="10"
@@ -343,6 +347,8 @@ class RestingState extends React.Component {
               className="btn btn-secondary btn-block m-3"
               onClick={() => {
                 this.setState({ experimentStarted: true });
+                experimentTime = this.state.timeInterval * 60 * 1000;
+                this.state.remainingTime = experimentTime;
                 this.startExperiment();
               }}
             >
@@ -392,37 +398,50 @@ class RestingState extends React.Component {
     } else {
       if (this.state.eyeOption === "Open") {
         return (
-          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+          <div className="App">
             <div
-              className="App text-center`"
+              className="App text-center"
               style={{
                 width: "20px",
                 height: "20px",
                 backgroundColor: "red",
                 borderRadius: "50%",
-                marginLeft: "48%",
-                marginTop: "22%",
+                marginLeft: "50%",
+                marginTop: "17%",
               }}
             ></div>
             <div className="App text-center">
-              Please keep your focus on red dot.
+              <h3>Please keep your focus on red dot.</h3>
+            </div>
+            <div
+              className="App"
+              style={{ position: "fixed", bottom: "0", width: "100%" }}
+            >
+              <ProgressBar
+                variant="info"
+                now={(experimentTime - this.state.remainingTime) / 1000}
+                max={experimentTime / 1000}
+              />
             </div>
           </div>
         );
       } else {
         return (
-          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
-            <div className="App text-center">
-              {" "}
-              Please keep your eyes closed until the countdown timer goes to
-              zero and you hear a beep.{" "}
+          <div className="App">
+            <div className="App text-center" style={{ marginTop: "21%" }}>
+              <h3>
+                Please keep your eyes closed until the experiment is completed
+                and you hear a beep.
+              </h3>
             </div>
-            <div className="App text-center" style={{ marginLeft: "15%" }}>
-              <ReactCountdownClock
-                seconds={this.state.timeInterval * 60}
-                color="#000000"
-                size={300}
-                timeFormat="hms"
+            <div
+              className="App"
+              style={{ position: "fixed", bottom: "0", width: "100%" }}
+            >
+              <ProgressBar
+                variant="info"
+                now={(experimentTime - this.state.remainingTime) / 1000}
+                max={experimentTime / 1000}
               />
             </div>
           </div>
@@ -439,9 +458,16 @@ class RestingState extends React.Component {
   };
 
   startExperiment = () => {
-    setTimeout(() => {
+    if (this.state.remainingTime <= 0) {
       this.startSurvey();
-    }, this.state.timeInterval * 60 * 1000);
+    } else {
+      this.setState({
+        remainingTime: this.state.remainingTime - 1000,
+      });
+      setTimeout(() => {
+        this.startExperiment();
+      }, 1000);
+    }
   };
 
   startSurvey = () => {
