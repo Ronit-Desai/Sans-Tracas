@@ -28,6 +28,7 @@ let headersWithAux = [
 ];
 
 let experimentTime = 120000;
+let count = 0;
 
 class RestingState extends React.Component {
   constructor(props) {
@@ -43,12 +44,15 @@ class RestingState extends React.Component {
       eyeOption: "Open",
       canCloseTab: true,
       surveyDone: false,
-      surveyResponse: "",
+      surveyResponse: 0,
+      startTimestamp: 0,
+      expStartTimestamp: 0,
+      expEndTimestamp: 0,
     };
 
     this.client = props.museClient;
     this.readings = [];
-    this.restingstateReadings = [];
+    this.restingStateReadings = [];
     this.processedData = [];
     this.audio = new Audio(audio1);
   }
@@ -81,7 +85,7 @@ class RestingState extends React.Component {
               moment(new Date()).format("YYYYMMDDHHmmss") +
               ".csv"
             }
-            experimentReadings={this.restingstateReadings}
+            experimentReadings={this.restingStateReadings}
             experimentFileName={
               this.state.participantId +
               "_restingstate_readings_" +
@@ -95,168 +99,163 @@ class RestingState extends React.Component {
 
     if (this.state.surveyDone) {
       return (
-        <div className="App text-center">
-          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
-            <h5>
-              <span className="ml-1">
-                Please select the one statement that best describes your
-                sleepiness while you were perfroming the Resting-State
-                experiment.
-              </span>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  gap: "20px",
-                }}
-              >
-                {" "}
-                <br />
-                <div>
-                  <input
-                    type="radio"
-                    checked={this.state.surveyResponse === "Extremely alert"}
-                    onChange={() => {
-                      this.setState({ surveyResponse: "Extremely alert" });
-                    }}
-                  />
-                  Extremely alert
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    checked={this.state.surveyResponse === "Very alert"}
-                    onChange={() => {
-                      this.setState({ surveyResponse: "Very alert" });
-                    }}
-                  />
-                  Very alert
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    checked={this.state.surveyResponse === "Alert"}
-                    onChange={() => {
-                      this.setState({ surveyResponse: "Alert" });
-                    }}
-                  />
-                  Alert.
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    checked={this.state.surveyResponse === "Rather alert"}
-                    onChange={() => {
-                      this.setState({ surveyResponse: "Rather alert" });
-                    }}
-                  />
-                  Rather alert
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    checked={
-                      this.state.surveyResponse === "Neither alert nor sleepy"
-                    }
-                    onChange={() => {
-                      this.setState({
-                        surveyResponse: "Neither alert nor sleepy",
-                      });
-                    }}
-                  />
-                  Neither alert nor sleepy
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    checked={
-                      this.state.surveyResponse === "Some signs of sleepiness"
-                    }
-                    onChange={() => {
-                      this.setState({
-                        surveyResponse: "Some signs of sleepiness",
-                      });
-                    }}
-                  />
-                  Some signs of sleepiness
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    checked={
-                      this.state.surveyResponse ===
-                      "Sleepy, but no effort to keep awake"
-                    }
-                    onChange={() => {
-                      this.setState({
-                        surveyResponse: "Sleepy, but no effort to keep awake",
-                      });
-                    }}
-                  />
-                  Sleepy, but no effort to keep awake
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    checked={
-                      this.state.surveyResponse ===
-                      "Sleepy, but some effort to keep awake"
-                    }
-                    onChange={() => {
-                      this.setState({
-                        surveyResponse: "Sleepy, but some effort to keep awake",
-                      });
-                    }}
-                  />
-                  Sleepy, but some effort to keep awake
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    checked={
-                      this.state.surveyResponse ===
-                      "Very sleepy, great effort to keep awake, fighting sleep"
-                    }
-                    onChange={() => {
-                      this.setState({
-                        surveyResponse:
-                          "Very sleepy, great effort to keep awake, fighting sleep",
-                      });
-                    }}
-                  />
-                  Very sleepy, great effort to keep awake, fighting sleep
-                </div>
-                <div>
-                  <input
-                    type="radio"
-                    checked={
-                      this.state.surveyResponse ===
-                      "Extremely sleepy, can’t keep awake"
-                    }
-                    onChange={() => {
-                      this.setState({
-                        surveyResponse: "Extremely sleepy, can’t keep awake",
-                      });
-                    }}
-                  />
-                  Extremely sleepy, can’t keep awake
-                </div>
-              </div>
-            </h5>
-            <button
-              className="btn btn-primary btn-block m-3"
-              onClick={this.stopExperiment}
+        <div className="App text-left">
+          <h5>
+            Please select the one statement that best describes your sleepiness
+            while you were perfroming the Resting-State experiment.
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "left",
+                alignItems: "left",
+                gap: "20px",
+                marginLeft: "4%",
+              }}
             >
-              Submit
-            </button>
-          </div>
+              {" "}
+              <br />
+              <div>
+                <input
+                  type="radio"
+                  checked={this.state.surveyResponse === "1"}
+                  onChange={() => {
+                    this.setState({ surveyResponse: "1" });
+                  }}
+                />
+                1. Extremely alert
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  checked={this.state.surveyResponse === "2"}
+                  onChange={() => {
+                    this.setState({ surveyResponse: "2" });
+                  }}
+                />
+                2. Very alert
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  checked={this.state.surveyResponse === "3"}
+                  onChange={() => {
+                    this.setState({ surveyResponse: "3" });
+                  }}
+                />
+                3. Alert
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  checked={this.state.surveyResponse === "4"}
+                  onChange={() => {
+                    this.setState({ surveyResponse: "4" });
+                  }}
+                />
+                4. Rather alert
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  checked={this.state.surveyResponse === "5"}
+                  onChange={() => {
+                    this.setState({
+                      surveyResponse: "5",
+                    });
+                  }}
+                />
+                5. Neither alert nor sleepy
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  checked={this.state.surveyResponse === "6"}
+                  onChange={() => {
+                    this.setState({
+                      surveyResponse: "6",
+                    });
+                  }}
+                />
+                6. Some signs of sleepiness
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  checked={this.state.surveyResponse === "7"}
+                  onChange={() => {
+                    this.setState({
+                      surveyResponse: "7",
+                    });
+                  }}
+                />
+                7. Sleepy, but no effort to keep awake
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  checked={this.state.surveyResponse === "8"}
+                  onChange={() => {
+                    this.setState({
+                      surveyResponse: "8",
+                    });
+                  }}
+                />
+                8. Sleepy, but some effort to keep awake
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  checked={this.state.surveyResponse === "9"}
+                  onChange={() => {
+                    this.setState({
+                      surveyResponse: "9",
+                    });
+                  }}
+                />
+                9. Very sleepy, great effort to keep awake, fighting sleep
+              </div>
+              <div>
+                <input
+                  type="radio"
+                  checked={this.state.surveyResponse === "10"}
+                  onChange={() => {
+                    this.setState({
+                      surveyResponse: "10",
+                    });
+                  }}
+                />
+                10. Extremely sleepy, can’t keep awake
+              </div>
+            </div>
+          </h5>
+          <button
+            className="btn btn-primary btn-block m-3"
+            onClick={() => {
+              this.restingStateReadings.push({
+                participant_id: this.state.participantId,
+                start_timestamp: this.state.startTimestamp,
+                time_interval: this.state.timeInterval,
+                eyes: this.state.eyeOption,
+                exp_start_timestamp: this.state.expStartTimestamp,
+                exp_end_timestamp: this.state.expEndTimestamp,
+                sleepiness_rating: this.state.surveyResponse,
+              });
+              this.stopExperiment();
+            }}
+          >
+            Submit
+          </button>
         </div>
       );
     }
 
     if (!this.state.experimentStarted) {
+      if (count == 0) {
+        this.setState({ startTimestamp: Date.now() });
+        count = count + 1;
+      }
+
       return (
         <div className="App text-center">
           <Dropdown
@@ -281,8 +280,8 @@ class RestingState extends React.Component {
                 </Dropdown.Item>
 
                 <Dropdown.Item
-                  eventKey="5"
-                  active={this.state.timeInterval === "5"}
+                  eventKey="2"
+                  active={this.state.timeInterval === "2"}
                 >
                   2
                 </Dropdown.Item>
@@ -349,7 +348,10 @@ class RestingState extends React.Component {
             <button
               className="btn btn-secondary btn-block m-3"
               onClick={() => {
-                this.setState({ experimentStarted: true });
+                this.setState({
+                  experimentStarted: true,
+                  expStartTimestamp: Date.now(),
+                });
                 experimentTime = this.state.timeInterval * 60 * 1000;
                 this.startExperiment();
               }}
@@ -476,7 +478,7 @@ class RestingState extends React.Component {
 
   startSurvey = () => {
     this.audio.play();
-    this.setState({ surveyDone: true });
+    this.setState({ surveyDone: true, expEndTimestamp: Date.now() });
   };
 
   stopExperiment = () => {
@@ -493,7 +495,7 @@ class RestingState extends React.Component {
     jsonBody.experiment = "restingstate";
     jsonBody.isAuxConnected = this.state.isAuxConnected;
     jsonBody.eegResult = this.processedData;
-    jsonBody.restingstateReadings = this.restingstateReadings;
+    jsonBody.restingStateReadings = this.restingStateReadings;
     jsonBody = JSON.stringify(jsonBody);
 
     const postData = {
