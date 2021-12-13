@@ -99,7 +99,10 @@ class RestingState extends React.Component {
 
     if (this.state.surveyDone) {
       return (
-        <div className="App text-left">
+        <div
+          className="App"
+          style={{ textAlign: "left", marginLeft: "21%", marginTop: "7%" }}
+        >
           <h5>
             Please select the one statement that best describes your sleepiness
             while you were perfroming the Resting-State experiment.
@@ -107,10 +110,7 @@ class RestingState extends React.Component {
               style={{
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "left",
-                alignItems: "left",
                 gap: "20px",
-                marginLeft: "4%",
               }}
             >
               {" "}
@@ -251,7 +251,7 @@ class RestingState extends React.Component {
     }
 
     if (!this.state.experimentStarted) {
-      if (count == 0) {
+      if (count === 0) {
         this.setState({ startTimestamp: Date.now() });
         count = count + 1;
       }
