@@ -39,6 +39,7 @@ class RestingState extends React.Component {
       isAuxConnected: props.isAuxConnected,
       experimentStarted: false,
       experimentCompleted: false,
+      isLoading: false,
       timeInterval: "2",
       remainingTime: experimentTime,
       eyeOption: "Open",
@@ -70,9 +71,21 @@ class RestingState extends React.Component {
   }
 
   render() {
+    if (this.state.isLoading) {
+      return (
+        <div className="App text-center">
+          <h1>Please wait while we process your data.</h1>
+          {console.log("inside IS Loading")}
+        </div>
+      );
+    }
+
     if (this.state.experimentCompleted) {
+      console.log("into if statement");
+
       return (
         <div className="App">
+          {console.log("before calling results")}
           <Results
             rawReadings={this.readings}
             processedDataHeaders={
@@ -92,7 +105,11 @@ class RestingState extends React.Component {
               moment(new Date()).format("YYYYMMDDHHmmss") +
               ".csv"
             }
-          ></Results>
+          >
+            {" "}
+            {console.log("during calling results")}
+          </Results>
+          {console.log("after calling results")}
         </div>
       );
     }
@@ -246,6 +263,11 @@ class RestingState extends React.Component {
           >
             Submit
           </button>
+          <h5>
+            {" "}
+            After pressing the button, please wait for some time, while we
+            process your EEG data.{" "}
+          </h5>
         </div>
       );
     }
@@ -426,7 +448,6 @@ class RestingState extends React.Component {
                 now={(experimentTime - this.state.remainingTime) / 1000}
                 max={experimentTime / 1000}
               />
-              {console.log(this.state.remainingTime)}
             </div>
           </div>
         );
@@ -448,7 +469,6 @@ class RestingState extends React.Component {
                 now={(experimentTime - this.state.remainingTime) / 1000}
                 max={experimentTime / 1000}
               />
-              {console.log(this.state.remainingTime)}
             </div>
           </div>
         );
@@ -483,12 +503,18 @@ class RestingState extends React.Component {
 
   stopExperiment = () => {
     this.client.disconnect();
+    console.log("after disconnect");
+    this.setState({ isLoading: true });
+
     this.processedData = HelperUtil.cleanData(
       this.readings,
       "restingstate",
       this.state.participantId
     );
-    this.setState({ experimentCompleted: true });
+    //this.setState({ isLoading: false });
+    //this.setState({ experimentCompleted: true });
+    this.displayResults();
+    console.log("after calling helper util");
 
     let jsonBody = {};
     jsonBody.participantId = this.state.participantId;
@@ -515,6 +541,11 @@ class RestingState extends React.Component {
         window.removeEventListener("beforeunload", this.unLoadEvent);
         this.setState({ canCloseTab: true });
       });
+    console.log("after fetch");
+  };
+
+  displayResults = () => {
+    this.setState({ isLoading: false, experimentCompleted: true });
   };
 
   unLoadEvent = (e) => {
