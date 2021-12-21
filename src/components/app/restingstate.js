@@ -75,19 +75,14 @@ class RestingState extends React.Component {
       return (
         <div className="App text-center">
           <h1>Please wait while we process your data.</h1>
-          {console.log("inside IS Loading")}
         </div>
       );
     }
 
     if (this.state.experimentCompleted) {
-      console.log("into if statement");
-
       return (
         <div className="App">
-          {console.log("before calling results")}
           <Results
-            rawReadings={this.readings}
             processedDataHeaders={
               this.state.isAuxConnected ? headersWithAux : headers
             }
@@ -107,9 +102,7 @@ class RestingState extends React.Component {
             }
           >
             {" "}
-            {console.log("during calling results")}
           </Results>
-          {console.log("after calling results")}
         </div>
       );
     }
@@ -290,8 +283,10 @@ class RestingState extends React.Component {
           >
             {" "}
             <h3>
+              Please select the time interval for which you would be performing
+              the resting-state experiment: &nbsp;
               <Dropdown.Toggle variant="success" id="time-dropdown">
-                Select time interval
+                Select time interval:
               </Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item
@@ -335,9 +330,13 @@ class RestingState extends React.Component {
               &nbsp; {this.state.timeInterval} minutes.
             </h3>
           </Dropdown>
-
           <br />
+
           <ButtonGroup className="mb-2">
+            <h3>
+              Please select how you would like to keep your eyes during the
+              experiment: &nbsp;
+            </h3>
             <ToggleButton
               key={1}
               id={1}
@@ -349,9 +348,9 @@ class RestingState extends React.Component {
                 this.setState({ eyeOption: e.currentTarget.value });
               }}
             >
-              Open
+              Resting-state with Eyes Open
             </ToggleButton>
-
+            &nbsp; &nbsp; &nbsp; &nbsp;
             <ToggleButton
               key={2}
               id={2}
@@ -363,9 +362,10 @@ class RestingState extends React.Component {
                 this.setState({ eyeOption: e.currentTarget.value });
               }}
             >
-              Close
+              Resting-state with Eyes Close
             </ToggleButton>
           </ButtonGroup>
+          <br />
           <div className="App text-center">
             <button
               className="btn btn-secondary btn-block m-3"
@@ -503,7 +503,7 @@ class RestingState extends React.Component {
 
   stopExperiment = () => {
     this.client.disconnect();
-    console.log("after disconnect");
+
     this.setState({ isLoading: true });
 
     this.processedData = HelperUtil.cleanData(
@@ -514,7 +514,6 @@ class RestingState extends React.Component {
     //this.setState({ isLoading: false });
     //this.setState({ experimentCompleted: true });
     this.displayResults();
-    console.log("after calling helper util");
 
     let jsonBody = {};
     jsonBody.participantId = this.state.participantId;
@@ -541,7 +540,6 @@ class RestingState extends React.Component {
         window.removeEventListener("beforeunload", this.unLoadEvent);
         this.setState({ canCloseTab: true });
       });
-    console.log("after fetch");
   };
 
   displayResults = () => {

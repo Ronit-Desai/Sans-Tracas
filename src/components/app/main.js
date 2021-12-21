@@ -723,6 +723,7 @@ class AppMain extends React.Component {
                       value: "Muse Channels",
                       offset: -17,
                       position: "insideBottom",
+                      fontSize: 24,
                     }}
                   />
                   <YAxis
@@ -731,9 +732,10 @@ class AppMain extends React.Component {
                     domain={[0, 100]}
                     allowDataOverflow="True"
                     label={{
-                      value: "Signal Variability (Standard deviation)",
+                      value: "Signal Variability (standard deviation)",
                       angle: 90,
                       position: "insideBottomRight",
+                      fontSize: 23,
                     }}
                   />
                   <Tooltip

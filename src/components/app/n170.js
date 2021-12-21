@@ -675,7 +675,6 @@ class N170 extends React.Component {
     return (
       <div className="App">
         <Results
-          rawReadings={this.readings}
           processedDataHeaders={
             this.state.isAuxConnected ? headersWithAux : headers
           }
