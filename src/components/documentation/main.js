@@ -11,6 +11,7 @@ import ComponentS2 from "./step2";
 import ComponentS3 from "./step3";
 import ComponentS4 from "./step4";
 import ComponentPR from "./platformrequirements";
+import ComponentGG from "./guidelines";
 
 export default function DocMain() {
   let { path, url } = useRouteMatch();
@@ -22,6 +23,9 @@ export default function DocMain() {
           <ul>
             <li>
               <Link to={`${url}/requirements`}>Platform Requirements</Link>
+            </li>
+            <li>
+              <Link to={`${url}/guidelines`}>General guidelines</Link>
             </li>
             <li>
               <Link to={`${url}/step-1`}>Step 1</Link>
@@ -36,6 +40,8 @@ export default function DocMain() {
               <Link to={`${url}/step-4`}>Step 4</Link>
             </li>
           </ul>
+          Please use this navigation bar to traverse through different sections
+          of the Sans Tracas Documentation.
         </nav>
       </div>
 
@@ -56,6 +62,8 @@ function Docs() {
   switch (docId) {
     case "requirements":
       return <ComponentPR />;
+    case "guidelines":
+      return <ComponentGG />;
     case "step-1":
       return <ComponentS1 />;
     case "step-2":
