@@ -27,7 +27,7 @@ import HelperUtil from "../../util/HelperUtil";
 import RestingState from "./restingstate";
 import audio1 from "../../audio/audio1.mp3";
 
-const calibrationTime = 3000;
+const calibrationTime = 31000;
 const config = {};
 const math = create(all, config);
 
