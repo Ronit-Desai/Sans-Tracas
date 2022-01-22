@@ -50,7 +50,7 @@ class ComponentS1 extends React.Component {
               <p>
                 The second thing you will need is a GitHub account. GitHub is an
                 internet hosting provider, and it is mainly used for software
-                developer version control using git. It has a plethora of
+                development version control using git. It has a plethora of
                 features to aid the process. We will be using GitHub for almost
                 the entirety of this integration process, from uploading your
                 experiments on GitHub to modifying the platform code so that
@@ -76,14 +76,14 @@ class ComponentS1 extends React.Component {
                 you need to remember that Git is a version control system that
                 allows you to keep track of your source code history, and GitHub
                 is a cloud hosting service that lets you manage git
-                repositories.Git is a command-line tool, whereas GitHub provides
-                a web-based graphical interface.And using that interface , we
-                will be uploading the pavlovia experiments on GitHub. However,
-                the web-based interface only allows for a maximum number of 100
-                files to be uploaded at a time, so for projects that are larger
-                in size and number of files, we will have to use the
-                command-line tool, 'Git'. Thus, you will need to have git
-                installed on your personal computer.
+                repositories. Git is a command-line tool, whereas GitHub
+                provides a web-based graphical interface. And using that
+                interface, we will be uploading the pavlovia experiments on
+                GitHub. However, the web-based interface only allows for a
+                maximum number of 100 files to be uploaded at a time, so for
+                projects that are larger in size and number of files, we will
+                have to use the command-line tool, 'Git'. Thus, you will need to
+                have git installed on your personal computer.
               </p>
               <p>
                 To check whether Git is already installed on your computer:
