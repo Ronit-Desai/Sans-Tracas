@@ -8,12 +8,13 @@ import img6 from "../../images/documentation/step4/export_classname.PNG";
 import img7 from "../../images/documentation/step4/git_link.PNG";
 import img8 from "../../images/documentation/step4/commit.PNG";
 import img9 from "../../images/documentation/step4/edit_button.PNG";
-import img10 from "../../images/documentation/step4/import.PNG";
 import img11 from "../../images/documentation/step4/commit2.PNG";
 import img12 from "../../images/documentation/step4/pull_requests.PNG";
 import img13 from "../../images/documentation/step4/newpr.PNG";
 import img14 from "../../images/documentation/step4/comparing_changes.PNG";
 import img15 from "../../images/documentation/step4/createpr.PNG";
+import img17 from "../../images/documentation/step4/new_exp_1.PNG";
+import img18 from "../../images/documentation/step4/new_exp_2.PNG";
 
 class ComponentS4 extends React.Component {
   render() {
@@ -120,12 +121,12 @@ class ComponentS4 extends React.Component {
                 </li>
                 <br />
                 <li>
-                  Now, in the “Edit new file” section, paste the following
-                  lines: <br />{" "}
-                  <span className="bg-dark text-white p-1 mt-5">
-                    **insert the code for an external experiment file here**
-                    (make sure identation is correct).
-                  </span>{" "}
+                  Now, in the “Edit new file” section, paste the code from{" "}
+                  <a href="https://github.com/Ronit-Desai/adding_external_exp_sans_tracas/blob/main/xabfrompavlovia.js">
+                    this file
+                  </a>
+                  . (Use the 'copy raw contents' button for copying the entire
+                  file in one go)
                 </li>
                 <br />
                 <li>
@@ -140,15 +141,32 @@ class ComponentS4 extends React.Component {
                 </li>
                 <br />
                 <li>
-                  Go to the last line of the file (line 163) and there too,
-                  replace “XabFromPavlovia” to the name of your class we used
-                  earlier i.e. ‘FaceExp’ as per our example.Go to the last line
-                  of the file (line 163) and there too, replace
+                  Go to the last line of the file and there too, replace
                   “XabFromPavlovia” to the name of your class we used earlier
-                  i.e. ‘FaceExp’ as per our example.
+                  i.e. ‘FaceExp’ as per our example. Go to the last line of the
+                  file and there too, replace “XabFromPavlovia” to the name of
+                  your class we used earlier i.e. ‘FaceExp’ as per our example.
                   <br />
                   <img src={img6} alt="img6" className="img-fluid" />
                   <br />
+                </li>
+                <br />
+                <li>
+                  Now, go search for "xabfrompavlovia" in the entire file using
+                  'Control+F' or 'Command+F' (depending on whether you have a
+                  Mac machine). You will find 5 such instances (lines 44, 101,
+                  110, 123, 130), and on all those instances, replace
+                  “xabfrompavlovia” to the name of your experiment we used
+                  earlier i.e. ‘FaceExp’ as per our example. Be sure to not
+                  replace the entire words and just replace the letters
+                  "xabfrompavlovia" with your experiment name and keep every
+                  other letter as it is. (Eg: "startXabFromPavlovia" becomes
+                  "startFaceExp"). Please also ensure that just like in our
+                  example, please remeber to capitalize the words where they are
+                  already capitalized (lines 44, 110), and whereever they are
+                  not capitalized, you have to replace it with the non
+                  capitalized version of your experiment names too ('faceexp')
+                  (lines 101, 123, 130).
                 </li>
                 <br />
                 <li>
@@ -200,29 +218,38 @@ class ComponentS4 extends React.Component {
                 </li>
                 <br />
                 <li>
-                  After the first few lines of import statements, insert another
-                  import statement:
-                  <br />{" "}
-                  <span className="bg-dark text-white p-1 mt-5">
-                    import experiment-class-name from “./javascriptfilename”
-                  </span>{" "}
-                  i.e.{" "}
-                  <span className="bg-dark text-white p-1 mt-5">
-                    import FaceExp from “./faceexp”
-                  </span>{" "}
-                  for our example.
+                  Now, go search for "xabfrompavlovia" in the entire file using
+                  'Control+F' or 'Command+F' (depending on whether you have a
+                  Mac machine). You will find 5 such instances (lines 24 (2
+                  times), 299, 882, 884), and on all those instances, replace
+                  “xabfrompavlovia” to the name of your experiment we used
+                  earlier i.e. ‘FaceExp’ as per our example. Be sure to not
+                  replace the entire words and just replace the letters
+                  "xabfrompavlovia" with your experiment name and keep every
+                  other letter as it is. (Eg: "startXabFromPavlovia" becomes
+                  "startFaceExp"). Please also ensure that just like in our
+                  example, please remeber to capitalize the words where they are
+                  already capitalized (lines 24, 884), and whereever they are
+                  not capitalized, you have to replace it with the non
+                  capitalized version of your experiment names too ('faceexp')
+                  (lines 24, 299, 882).
+                </li>
+                <br />
+                <li>
+                  Now, go back to line 282, and instead of "Xab From Pavlovia",
+                  type the name of your experiment.
                   <br />
-                  <img src={img10} alt="img10" className="img-fluid" />
+                  <img src={img17} alt="img17" className="img-fluid" />
                   <br />
                 </li>
                 <br />
                 <li>
-                  <span className="bg-dark text-white p-1 mt-5">
-                    ****insert steps for editing the button code and function
-                    for selecting the experiment and the toggle function once
-                    the development is finished and we’re sure of what the flow
-                    would be****.
-                  </span>
+                  Now, go to line 318, and instead of "Xab From Pavlovia
+                  Experiemnt Description.", write the description of your
+                  experiment that you want to be displayed on the platform.
+                  <br />
+                  <img src={img18} alt="img18" className="img-fluid" />
+                  <br />
                 </li>
                 <br />
                 <li>
