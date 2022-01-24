@@ -62,6 +62,26 @@ class ComponentGG extends React.Component {
               in minute differences in the recorded timings as the systems
               participants use may not always be uniform.
             </h5>
+            <br />
+            If you want to add timestamps to your experiment via PsychoPy, then
+            you can do so by incoving the "time.time()" function after importing
+            the "time" module. Alternatively, you can also use the
+            "datetime.now()" function after importing the "datetime" module.
+            Both of these functions will give you similar results. Please follow{" "}
+            <a href="https://discourse.psychopy.org/t/adding-precise-measure-of-system-clock-to-psychopy-output/8426">
+              this thread
+            </a>{" "}
+            for more details. Please also refer to{" "}
+            <a href="https://discourse.psychopy.org/t/saving-timestamps/2890">
+              this thread on saving timestamps
+            </a>{" "}
+            if you need help clearing up whether and how to add those timestamps
+            to the log file.
+            <br />
+            However, if you prefer to incorporate timestamps to your experiment
+            using a JavaScript librabry such as PsychoJS or jsPsych, you can do
+            so by simply incoving the standard "Date.now()" function of
+            JavaScript.
           </li>
           <br />
           <li>
