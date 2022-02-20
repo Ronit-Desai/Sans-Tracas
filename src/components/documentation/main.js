@@ -25,19 +25,21 @@ export default function DocMain() {
               <Link to={`${url}/requirements`}>Platform Requirements</Link>
             </li>
             <li>
-              <Link to={`${url}/guidelines`}>General guidelines</Link>
-            </li>
-            <li>
-              <Link to={`${url}/step-1`}>Step 1</Link>
-            </li>
-            <li>
-              <Link to={`${url}/step-2`}>Step 2</Link>
-            </li>
-            <li>
-              <Link to={`${url}/step-3`}>Step 3</Link>
-            </li>
-            <li>
-              <Link to={`${url}/step-4`}>Step 4</Link>
+              <Link to={`${url}/guidelines`}>Researcher guidelines</Link>
+              <ul>
+                <li>
+                  <Link to={`${url}/step-1`}>Step 1</Link>
+                </li>
+                <li>
+                  <Link to={`${url}/step-2`}>Step 2</Link>
+                </li>
+                <li>
+                  <Link to={`${url}/step-3`}>Step 3</Link>
+                </li>
+                <li>
+                  <Link to={`${url}/step-4`}>Step 4</Link>
+                </li>
+              </ul>
             </li>
           </ul>
           Please use this navigation bar to traverse through different sections
