@@ -68,9 +68,9 @@ class AppMain extends React.Component {
         <div className="App">
           <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
             <h1>
-              Automatic deployment test. Welcome to Sans Tracas. The first of
-              its kind cross-platform tool that runs EEG experiments. It's
-              straightforward, entirely online, and hassle-free.{" "}
+              Welcome to Sans Tracas. The first of its kind cross-platform tool
+              that runs EEG experiments. It's straightforward, entirely online,
+              and hassle-free.{" "}
             </h1>{" "}
             <br />
             <br />
