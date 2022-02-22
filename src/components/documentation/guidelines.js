@@ -1,5 +1,7 @@
 import React from "react";
 import img1 from "../../images/documentation/guidelines/processed-eeg-data.png";
+import img2 from "../../images/documentation/guidelines/sanstracas-working.png";
+import img3 from "../../images/documentation/guidelines/runEEG.png";
 
 class ComponentGG extends React.Component {
   render() {
@@ -15,26 +17,30 @@ class ComponentGG extends React.Component {
           from the Muse device will be collected, processed, and stored.
         </p>
         <br />
+        <img src={img2} alt="img2" className="img-fluid" /> <br />
+        <h4> Figure 1 </h4>
+        <br />
         <ol>
           <li>
             <h5>Timestamps:</h5>
-            Sans Tracas runs your Pavlovia experiments on an added screen layer
-            on top of the existing Sans Tracas layer. Any experiment designed in
-            Sans Tracas will run natively on the platform’s index screen,
-            whereas any experiment imported from Pavlovia will run on the second
-            screen layer; this results in a lack of communication between the
-            live Pavlovia experiment and the Sans Tracas platform. The main
-            problem this creates is that while EEG data is being recorded in the
-            background, the Pavlovia experiment won’t be able to send any
-            trigger responses when it is running and presenting a stimulus on
-            the screen. Thus, you will need to incorporate and save timestamps
-            for all the stimuli you want to present on the screen. By saving the
-            timestamps, you will be able to sync your experiment response file
-            (the participant can download that after completing the experiment)
-            and the processed EEG file (that is received from Sans Tracas).
-            Whether it is implemented in Pavlovia or Sans Tracas, both
-            timestamps are taken from the participant’s browser in runtime
-            (which takes it from the participant’s system).
+            As shown in Figure 1, Sans Tracas runs your Pavlovia experiments on
+            an added screen layer on top of the existing Sans Tracas layer. Any
+            experiment designed in Sans Tracas will run natively on the
+            platform’s index screen, whereas any experiment imported from
+            Pavlovia will run on the second screen layer; this results in a lack
+            of communication between the live Pavlovia experiment and the Sans
+            Tracas platform. The main problem this creates is that while EEG
+            data is being recorded in the background, the Pavlovia experiment
+            won’t be able to send any trigger responses when it is running and
+            presenting a stimulus on the screen. Thus, you will need to
+            incorporate and save timestamps for all the stimuli you want to
+            present on the screen. By saving the timestamps, you will be able to
+            sync your experiment response file (the participant can download
+            that after completing the experiment) and the processed EEG file
+            (that is received from Sans Tracas). Whether it is implemented in
+            Pavlovia or Sans Tracas, both timestamps are taken from the
+            participant’s browser in runtime (which takes it from the
+            participant’s system).
             <br /> To sum it up;{" "}
             <h5>
               saving the timestamps for all your experiment stimuli is extremely
@@ -83,7 +89,10 @@ class ComponentGG extends React.Component {
             so by simply incoving the standard "Date.now()" function of
             JavaScript.
           </li>
-          <br />
+          <br /> <br />
+          <img src={img3} alt="img3" className="img-fluid" /> <br />
+          <h4> Figure 2 </h4>
+          <br /> <br />
           <li>
             <h5>Experiment records file vs EEG records file:</h5>
             As mentioned earlier, the experiment records file from Pavlovia
