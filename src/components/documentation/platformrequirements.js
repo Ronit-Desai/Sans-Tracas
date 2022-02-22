@@ -14,12 +14,15 @@ class ComponentPR extends React.Component {
           <tbody>
             <tr>
               <th scope="row">Android:</th>
-              <td>Requires Android 6.0 Marshmallow or later.</td>
+              <td>
+                Requires Android 6.0 Marshmallow or later + Google Chrome web
+                browser.
+              </td>
             </tr>
             <tr>
               <th scope="row">Mac:</th>
               <td>
-                Requires OS X Yosemite or later.
+                Requires OS X Yosemite or later + Google Chrome web browser.
                 <br />
                 But some MacBooks may still not work. For that, you will have to
                 go to "About this Mac" / "System Report" / "Bluetooth" and
@@ -35,7 +38,8 @@ class ComponentPR extends React.Component {
             <tr>
               <th scope="row">Linux:</th>
               <td>
-                Requires Kernel 3.19+ and BlueZ 5.41+ installed.
+                Requires Kernel 3.19+ and BlueZ 5.41+ installed + Google Chrome
+                web browser.
                 <br />
                 <a href="https://acassis.wordpress.com/2016/06/28/how-to-get-chrome-web-bluetooth-working-on-linux/">
                   Read How to get Chrome Web Bluetooth working on Linux for
@@ -52,7 +56,8 @@ class ComponentPR extends React.Component {
             <tr>
               <th scope="row">Windows:</th>
               <td>
-                Requires Windows 10 version 1706 (Creators Update) or later.
+                Requires Windows 10 version 1706 (Creators Update) or later +
+                Google Chrome web browser.
               </td>
             </tr>
             <tr>
