@@ -29,16 +29,22 @@ export default function DocMain() {
               <Link to={`${url}/guidelines`}>Researcher guidelines</Link>
               <ul>
                 <li>
-                  <Link to={`${url}/step-1`}>Step 1</Link>
+                  <Link to={`${url}/step-1`}>Step 1: Pre-requisites</Link>
                 </li>
                 <li>
-                  <Link to={`${url}/step-2`}>Step 2</Link>
+                  <Link to={`${url}/step-2`}>
+                    Step 2: Downloading experiments from Pavlovia
+                  </Link>
                 </li>
                 <li>
-                  <Link to={`${url}/step-3`}>Step 3</Link>
+                  <Link to={`${url}/step-3`}>
+                    Step 3: Uploading experiments to GitHub
+                  </Link>
                 </li>
                 <li>
-                  <Link to={`${url}/step-4`}>Step 4</Link>
+                  <Link to={`${url}/step-4`}>
+                    Step 4: Adding experiment to the ‘Sans Tracas’ platform
+                  </Link>
                 </li>
               </ul>
             </li>
