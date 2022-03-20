@@ -62,19 +62,19 @@ export default function DocMain() {
               <br />
               <p>
                 Here you will find everything about the platform, from its
-                requriements to the integration steps. Please use the panel on
-                the left side of the page to traverse through differnet
+                requirements to the integration steps. Please use the panel on
+                the left side of the page to traverse through different
                 sections. If you are an end-user, please go through the
                 "platform requirements" before starting with your experiments.{" "}
                 <br /> However, if you are a Researcher and wish to integrate
                 your behavioural experiments with the Sans Tracas platform,
                 please first go through the "Researcher Guidelines" before
-                begining the integration process.
+                beginning the integration process.
               </p>
               <br /> <br />
               <h3>How to run your own EEG study?</h3>
               Are you a neuroscience researcher? <br /> Do you already have a
-              behavioural exeriment up and running on Pavlovia? <br />
+              behavioural experiment up and running on Pavlovia? <br />
               Do you want to enhance your existing studies with EEG but setting
               it up is too time-consuming? <br /> Do you want to also collect
               EEG data from your participants on top of the behavioural data but
@@ -88,9 +88,10 @@ export default function DocMain() {
               <br />
               If you're ready to start adding EEG to your online behavioural
               studies, you may start with the integration process, but please
-              make sure that you go though the "researcher guidelines" first and
-              then follow along the integration steps. Everything is accesible
-              thorugh the navigation panel on the left side of your screen.
+              make sure that you go through the "researcher guidelines" first
+              and then follow along with the integration steps. Everything is
+              accessible through the navigation panel on the left side of your
+              screen.
             </div>
           </Route>
           <Route path={`${path}/:docId`}>
