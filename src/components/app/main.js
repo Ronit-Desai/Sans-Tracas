@@ -33,7 +33,7 @@ const config = {};
 const math = create(all, config);
 
 const queryParams = new URLSearchParams(window.location.search);
-const id = queryParams.get("rspId");
+const id = queryParams.get("respId");
 console.log(id);
 
 class AppMain extends React.Component {
