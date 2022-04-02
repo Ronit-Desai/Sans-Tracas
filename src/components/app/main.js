@@ -17,6 +17,7 @@ import {
   Legend,
   ComposedChart,
 } from "recharts";
+
 import ProgressBar from "react-bootstrap/ProgressBar";
 import N170 from "./n170";
 import XAB from "./xab";
@@ -31,12 +32,9 @@ const calibrationTime = 31000;
 const config = {};
 const math = create(all, config);
 
-const querystring = require("querystring");
-const url = require("url");
-const qs = "code=string&key=12&id=false";
-
-console.log(querystring.parse(qs));
-console.log(querystring.parse(url));
+const queryParams = new URLSearchParams(window.location.search);
+const id = queryParams.get("rspId");
+console.log(id);
 
 class AppMain extends React.Component {
   constructor(props) {
@@ -446,6 +444,15 @@ class AppMain extends React.Component {
     if (!this.state.isParticipantIdValid) {
       return (
         <div className="App text-center">
+          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+            <div className="m-3">
+              <h3> Your Random Participant Id is: </h3> <h1> {id} </h1>
+            </div>
+            <div>
+              Please make sure to copy this Participant Id and store it
+              somewhere as it will be needed during the post-study survey.
+            </div>
+          </div>
           <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
             <div className="m-3">
               <span
