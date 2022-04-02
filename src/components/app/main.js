@@ -31,6 +31,13 @@ const calibrationTime = 31000;
 const config = {};
 const math = create(all, config);
 
+const querystring = require("querystring");
+const url = require("url");
+const qs = "code=string&key=12&id=false";
+
+console.log(querystring.parse(qs));
+console.log(querystring.parse(url));
+
 class AppMain extends React.Component {
   constructor(props) {
     super();
