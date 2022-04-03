@@ -58,16 +58,22 @@ class Results extends React.Component {
           ) : null}
         </div>
         <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
-          <h5>
-            Please use the below button to perform another experiment or just
-            close the tab to exit.
-          </h5>
+          <h5>Please use the below button to perform another experiment.</h5>
           <button
             className="btn btn-primary btn-block m-3"
             onClick={this.doItAgain}
           >
             Reload
           </button>
+          <h3>
+            {" "}
+            However, if you're satisfied with your Evaluation, please{" "}
+            <a href="https://surveys.dal.ca/opinio/s?s=66104">
+              {" "}
+              Click Here to start the Post-Study Survey{" "}
+            </a>{" "}
+            .{" "}
+          </h3>
         </div>
       </div>
     );
