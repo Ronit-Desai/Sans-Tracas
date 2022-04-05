@@ -73,12 +73,9 @@ class AppMain extends React.Component {
         <div className="App">
           <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
             <h1>
-              Welcome to Sans Tracas. The first of its kind cross-platform tool
-              that runs EEG experiments. It's straightforward, entirely online,
-              and hassle-free.{" "}
+              Welcome to Sans Tracas - the first of its kind cross-platform tool
+              that runs EEG experiments online.{" "}
             </h1>{" "}
-            <br />
-            <br />
             <br /> <br />
             <h3>
               Before you start with any of our fun experiments, please go
@@ -94,7 +91,7 @@ class AppMain extends React.Component {
             </h3>
           </div>
           <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
-            <h2>Please select an experiment to begin!</h2>
+            <h2>Please select an experiment to begin.</h2>
             <br />
             <div className="card p-2">
               <div
@@ -144,7 +141,10 @@ class AppMain extends React.Component {
                 id="collapseExample"
               >
                 <div className="card-body">
-                  Visual N170 Experiemnt Description.
+                  In this experiment you will be asked to look at a series of
+                  faces and houses on the screen. Please keep your eyes fixated
+                  on the dot. There is no other task. This experiment takes
+                  approximately 3 minutes.
                   <br />
                 </div>
               </div>
@@ -350,9 +350,11 @@ class AppMain extends React.Component {
               </div>
             </h5>
             <h5>
-              Please turn on Bluetooth on your computer (and location too if
-              you're using a tablet/smartphone) and press the button below to
-              connect with the EEG device.
+              1. Please turn on Bluetooth on your computer (and your location
+              too if you're using a tablet/smartphone). <br /> 2. Press the
+              connect device button below to begin pairing your Muse with Sans
+              Tracas. <br /> 3. Press the power button on your Muse to turn it
+              on and pair.
             </h5>
             <button
               className="btn btn-primary btn-block m-3"
@@ -360,7 +362,11 @@ class AppMain extends React.Component {
             >
               Connect Device
             </button>
-            <p>Please ensure that your Muse device is turned on.</p>
+            <p>
+              If nothing happens after pressing the "Connect Device" button,
+              please ensure that your Muse device is turned on and that you are
+              using either Google Chrome or Bluefy browser.{" "}
+            </p>
           </div>
         </div>
       );
@@ -379,7 +385,9 @@ class AppMain extends React.Component {
                   your head and double-check that there is no hair between the
                   sensors and your skin, and that the headband fits snuggly on
                   your head.
-                  <br /> <br />
+                  <br /> <br /> <br />
+                  If you have a "Muse 2016" or a "Muse 2" headband, please
+                  follow this video:
                   <div className="iframe-container">
                     <iframe
                       width="560"
@@ -390,9 +398,8 @@ class AppMain extends React.Component {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                     ></iframe>{" "}
                   </div>
-                  Follow the above video for "Muse 2016", and "Muse 2"
-                  headbands.
-                  <br /> <br />
+                  <br /> <br /> <br /> <br />
+                  If you have a "Muse S" headband, please follow this video:
                   <div className="iframe-container">
                     <iframe
                       width="560"
@@ -403,7 +410,6 @@ class AppMain extends React.Component {
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
                     ></iframe>{" "}
                   </div>
-                  Follow the above video for the "Muse S" headband.
                   <br /> <br /> Before starting the experiment, let's first
                   ensure that the Muse sensors are receiving good signal. <br />{" "}
                   <br />
@@ -450,8 +456,15 @@ class AppMain extends React.Component {
                   />
                   <br />
                   <h1>
-                    {this.state.currentCalibrationTime / 1000} Seconds Remaining
+                    {this.state.currentCalibrationTime / 1000} seconds remaining
                   </h1>
+                  <h5>
+                    {" "}
+                    When the timer runs to 0, please give the platform some time
+                    to process and display your data. If you're stuck on "0
+                    seconds remaining" for more than 3 minutes, please refresh
+                    the website and follow the steps again.
+                  </h5>
                 </span>
               </div>
             </>
