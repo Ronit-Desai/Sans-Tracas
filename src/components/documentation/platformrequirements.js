@@ -14,6 +14,13 @@ class ComponentPR extends React.Component {
           <table className="table table-striped">
             <tbody>
               <tr>
+                <th scope="row">Windows:</th>
+                <td>
+                  Requires Windows 10 version 1706 (Creators Update) or later +
+                  Google Chrome web browser.
+                </td>
+              </tr>
+              <tr>
                 <th scope="row">Android:</th>
                 <td>
                   Requires Android 6.0 Marshmallow or later + Google Chrome web
@@ -37,6 +44,16 @@ class ComponentPR extends React.Component {
                 </td>
               </tr>
               <tr>
+                <th scope="row">iPhone/iPad:</th>
+                <td>
+                  Requires iOS 11.0 or later and{" "}
+                  <a href="https://apps.apple.com/us/app/bluefy-web-ble-browser/id1492822055">
+                    Bluefy
+                  </a>{" "}
+                  browser (free in app store).
+                </td>
+              </tr>
+              <tr>
                 <th scope="row">Linux:</th>
                 <td>
                   Requires Kernel 3.19+ and BlueZ 5.41+ installed + Google
@@ -52,23 +69,6 @@ class ComponentPR extends React.Component {
                   <span className="bg-dark text-white p-1 mt-5">
                     sudo /usr/sbin/bluetoothd -E
                   </span>
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">Windows:</th>
-                <td>
-                  Requires Windows 10 version 1706 (Creators Update) or later +
-                  Google Chrome web browser.
-                </td>
-              </tr>
-              <tr>
-                <th scope="row">iPhone/iPad:</th>
-                <td>
-                  Requires iOS 11.0 or later and{" "}
-                  <a href="https://apps.apple.com/us/app/bluefy-web-ble-browser/id1492822055">
-                    Bluefy
-                  </a>{" "}
-                  browser (free in app store).
                 </td>
               </tr>
             </tbody>
