@@ -632,7 +632,10 @@ class N170 extends React.Component {
     this.readings = [];
     this.n170Readings = [];
     this.processedData = [];
-    this.experimentTime = 5;
+    this.experimentTime = 300;
+    this.uniqueViewCount = this.experimentTime / 2;
+    this.houseViewCount = 0;
+    this.faceViewCount = 0;
   }
 
   componentDidMount() {
@@ -654,7 +657,7 @@ class N170 extends React.Component {
           <div
             style={{
               display: "flex",
-              marginTop: 50,
+              marginTop: "17%",
               justifyContent: "center",
               alignItems: "center",
             }}
@@ -663,10 +666,23 @@ class N170 extends React.Component {
               <img
                 alt="n170-main"
                 src={experimentImages[this.state.currentImageIndex].image}
-                height={200}
-                width={200}
+                height={210}
+                width={210}
               />
-            ) : null}
+            ) : (
+              <div>
+                <div
+                  className="App text-center"
+                  style={{
+                    width: "20px",
+                    height: "20px",
+                    backgroundColor: "red",
+                    borderRadius: "50%",
+                    marginTop: "84px",
+                  }}
+                ></div>
+              </div>
+            )}
           </div>
         </div>
       );
@@ -740,6 +756,7 @@ class N170 extends React.Component {
             teeth: experimentImages[this.state.currentImageIndex].teeth,
           });
           this.experimentTime = this.experimentTime - 1;
+          this.updateHouseCount();
           this.changeImageN170();
           document.body.requestPointerLock();
         }
@@ -791,31 +808,72 @@ class N170 extends React.Component {
             this.setState({ canCloseTab: true });
           });
       } else {
-        let nextImage = Math.floor(Math.random() * experimentImages.length);
-        while (nextImage === this.state.currentImageIndex) {
-          nextImage = Math.floor(Math.random() * experimentImages.length);
-          console.log("same index found in n170");
-        }
-        this.setState({
-          currentImageIndex: nextImage,
-        });
-        this.n170Readings.push({
-          timestamp: Date.now(),
-          participant_id: this.state.participantId,
-          type: experimentImages[this.state.currentImageIndex].type,
-          gender: experimentImages[this.state.currentImageIndex].gender,
-          face_orientation:
-            experimentImages[this.state.currentImageIndex].faceOrientation,
-          eye_orientation:
-            experimentImages[this.state.currentImageIndex].eyeOrientation,
-          smile: experimentImages[this.state.currentImageIndex].smile,
-          teeth: experimentImages[this.state.currentImageIndex].teeth,
-        });
+        this.setState({ currentImageIndex: undefined });
+        setTimeout(() => {
+          let nextImage = Math.floor(Math.random() * experimentImages.length);
+          while (nextImage === this.state.currentImageIndex) {
+            nextImage = Math.floor(Math.random() * experimentImages.length);
+            console.log("same index found in n170");
+          }
+          if (
+            this.houseViewCount >= this.uniqueViewCount &&
+            nextImage >= experimentImages.length / 2
+          ) {
+            nextImage = Math.floor(
+              Math.random() * (experimentImages.length / 2)
+            );
+            while (nextImage === this.state.currentImageIndex) {
+              nextImage = Math.floor(
+                Math.random() * (experimentImages.length / 2)
+              );
+              console.log("same index found in n170");
+            }
+          }
 
-        this.experimentTime = this.experimentTime - 1;
-        this.changeImageN170();
+          if (
+            this.faceViewCount >= this.uniqueViewCount &&
+            nextImage < experimentImages.length / 2
+          ) {
+            nextImage =
+              Math.floor(Math.random() * (experimentImages.length / 2)) +
+              experimentImages.length / 2;
+            while (nextImage === this.state.currentImageIndex) {
+              nextImage =
+                Math.floor(Math.random() * (experimentImages.length / 2)) +
+                experimentImages.length / 2;
+              console.log("same index found in n170");
+            }
+          }
+          this.setState({
+            currentImageIndex: nextImage,
+          });
+          this.n170Readings.push({
+            timestamp: Date.now(),
+            participant_id: this.state.participantId,
+            type: experimentImages[this.state.currentImageIndex].type,
+            gender: experimentImages[this.state.currentImageIndex].gender,
+            face_orientation:
+              experimentImages[this.state.currentImageIndex].faceOrientation,
+            eye_orientation:
+              experimentImages[this.state.currentImageIndex].eyeOrientation,
+            smile: experimentImages[this.state.currentImageIndex].smile,
+            teeth: experimentImages[this.state.currentImageIndex].teeth,
+          });
+
+          this.experimentTime = this.experimentTime - 1;
+          this.updateHouseCount();
+          this.changeImageN170();
+        }, 500);
       }
-    }, 1000);
+    }, 200);
+  };
+
+  updateHouseCount = () => {
+    if (this.state.currentImageIndex >= experimentImages.length / 2) {
+      this.houseViewCount = this.houseViewCount + 1;
+    } else {
+      this.faceViewCount = this.faceViewCount + 1;
+    }
   };
 
   unLoadEvent = (e) => {
