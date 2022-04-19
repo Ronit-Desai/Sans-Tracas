@@ -623,7 +623,8 @@ class N170 extends React.Component {
     this.state = {
       participantId: props.participantId,
       isAuxConnected: props.isAuxConnected,
-      experimentCompleted: false,
+      experimentStarted: false,
+      experimentCompleted: true,
       currentImageIndex: undefined,
       canCloseTab: true,
     };
@@ -632,7 +633,7 @@ class N170 extends React.Component {
     this.readings = [];
     this.n170Readings = [];
     this.processedData = [];
-    this.experimentTime = 300;
+    this.experimentTime = 10;
     this.uniqueViewCount = this.experimentTime / 2;
     this.houseViewCount = 0;
     this.faceViewCount = 0;
@@ -651,6 +652,33 @@ class N170 extends React.Component {
   }
 
   render() {
+    if (!this.state.experimentStarted) {
+      return (
+        <div className="App text-center">
+          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+            <h3>
+              Welcome to the Visual N170 experiment. <br /> This experiment will
+              last 3 minutes. You will see a series of photographs. Please
+              simply keep your eyes fixated on the red dot while trying to stay
+              still, with your jaws relaxed.
+            </h3>
+
+            <button
+              className="btn btn-secondary btn-block m-3"
+              onClick={() => {
+                this.setState({
+                  experimentStarted: true,
+                  experimentCompleted: false,
+                });
+              }}
+            >
+              Click here to begin.
+            </button>
+          </div>
+        </div>
+      );
+    }
+
     if (!this.state.experimentCompleted) {
       return (
         <div className="App">

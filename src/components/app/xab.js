@@ -505,7 +505,8 @@ class XAB extends React.Component {
     this.state = {
       participantId: props.participantId,
       isAuxConnected: props.isAuxConnected,
-      experimentCompleted: false,
+      experimentStarted: false,
+      experimentCompleted: true,
       xabShowingPrimary: true,
       xabPrimaryImageIndex: Math.floor(Math.random() * experimentImages.length),
       xabOptionLeftIndex: null,
@@ -536,6 +537,35 @@ class XAB extends React.Component {
   }
 
   render() {
+    if (!this.state.experimentStarted) {
+      return (
+        <div className="App text-center">
+          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+            <h3>
+              Welcome to the Face XAB experiment. <br /> This experiment will
+              last 2 minutes. You will be shown a face on the screen, your task
+              is to remember that face and then choose it from the available
+              choices using your left/right arrow keys. You can also simply
+              click on the image to select it. You will be asked to repeat this
+              process a few times.
+            </h3>
+
+            <button
+              className="btn btn-secondary btn-block m-3"
+              onClick={() => {
+                this.setState({
+                  experimentStarted: true,
+                  experimentCompleted: false,
+                });
+              }}
+            >
+              Click here to begin.
+            </button>
+          </div>
+        </div>
+      );
+    }
+
     if (!this.state.experimentCompleted) {
       if (this.state.xabShowingPrimary) {
         return (

@@ -198,7 +198,10 @@ class AppMain extends React.Component {
                 id="collapseExample"
               >
                 <div className="card-body">
-                  Face XAB Experiemnt Description.
+                  In this experiment you will be asked to look at remember a
+                  face and then choose it from available options. You will have
+                  to repeat this process a few times. This experiment takes
+                  approximately 5 minutes.
                   <br />
                 </div>
               </div>
@@ -253,7 +256,13 @@ class AppMain extends React.Component {
                 id="collapseExample"
               >
                 <div className="card-body">
-                  Resting State Experiemnt Description.
+                  In this experiment you will be asked to just relax for a few
+                  minutes of your choosing. You can choose to keep your eyes
+                  open or closed for the expeirment time. You can also choose to
+                  meditate for that time-period. After the experiment, you will
+                  be asked to answer a few questions regarding your sleepiness.
+                  There is no other task. The experiment time for this
+                  experiment will depend on what you choose it to be.
                   <br />
                 </div>
               </div>
