@@ -474,9 +474,14 @@ class AppMain extends React.Component {
               <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
                 <h5>
                   <span className="ml-1">
-                    Please see below the visualization of the Muse signal for
-                    its respective channel [Left Ear (TP9), Left Front (AF7),
-                    Right Front (AF8), Right Ear (TP10) and AUX (optional)]
+                    The figure below displays the recorded signals for the four
+                    Muse sensors across the 30 seconds:
+                    <br />
+                    Green - left ear, Blue - left front, Red - right front, Pink
+                    - right ear. You should see a line plot around zero. <br />
+                    If no data show up, or if the graph is completely covered in
+                    a colour, please follow the steps to improve signal quality
+                    and repeat the signal check again.
                   </span>
                 </h5>
               </div>{" "}
@@ -551,9 +556,11 @@ class AppMain extends React.Component {
               <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
                 <h5>
                   <span className="ml-1">
-                    Check the channel of bars below to see their Signal Quality.
-                    Hovering over the Bars will display additional information
-                    associated with it.
+                    The bars below display the total amount of signal
+                    variability in each channel, with higher bars indicating
+                    poorer signal quality. Hovering over the Bars will display
+                    additional information associated with it. <br /> Note: If
+                    the graph is empty, assume that the quality is poor.
                   </span>
                 </h5>
               </div>
@@ -655,17 +662,18 @@ class AppMain extends React.Component {
                       "Okay."{" "}
                     </h3>{" "}
                     <br />
-                    If your Signal Quality is "Poor." (even for just 1 channel),
-                    it is strongly advised that you Make sure the Muse fits
-                    properly on your head by following the video on the
-                    connection page, and re-check the Signal Quality by clicking
-                    the "Recheck Signal Quality" button. <br /> You can also use
-                    the "Recheck Signal Quality" button to improve your Muse
-                    signals. <br />
+                    If the signal quality is poor for one or more channels,
+                    please click on 'Recheck Signal Quality' button to repeat
+                    this step. Before repeating, please re-adjust the headband's
+                    fit to ensure it fits snugly on your head and that there is
+                    no hair between the sensors and your skin. You can also
+                    moisten the skin under the sensors with a bit of water.
+                    Watch the video on the connection page for more tips. <br />{" "}
                     <br />
-                    However, if you're satisfied with your Muse Signal Quality,
-                    please click on the "Start Experiment" button to begin your
-                    experiment. <br />
+                    If the Muse signal quality is satisfactory, click on the
+                    "Start Experiment" button to begin. <br />
+                    The experiment will start right away.
+                    <br />
                     Once you start the experiment, please focus all your
                     attention on the screen. <br /> <br />
                     <button
