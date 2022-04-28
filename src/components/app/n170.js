@@ -633,14 +633,13 @@ class N170 extends React.Component {
     this.readings = [];
     this.n170Readings = [];
     this.processedData = [];
-    this.experimentTime = 10;
+    this.experimentTime = 300;
     this.uniqueViewCount = this.experimentTime / 2;
     this.houseViewCount = 0;
     this.faceViewCount = 0;
   }
 
   componentDidMount() {
-    this.startN170();
     this.setState({ canCloseTab: false });
     window.addEventListener("beforeunload", this.unLoadEvent);
   }
@@ -670,6 +669,7 @@ class N170 extends React.Component {
                   experimentStarted: true,
                   experimentCompleted: false,
                 });
+                this.startN170();
               }}
             >
               Click here to begin.

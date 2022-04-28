@@ -525,7 +525,6 @@ class XAB extends React.Component {
   }
 
   componentDidMount() {
-    this.startXab();
     this.setState({ canCloseTab: false });
     window.addEventListener("beforeunload", this.unLoadEvent);
   }
@@ -557,6 +556,7 @@ class XAB extends React.Component {
                   experimentStarted: true,
                   experimentCompleted: false,
                 });
+                this.startXab();
               }}
             >
               Click here to begin.

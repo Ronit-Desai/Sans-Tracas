@@ -77,6 +77,19 @@ class AppMain extends React.Component {
               that runs EEG experiments online.{" "}
             </h1>{" "}
             <br /> <br />
+            <h3>The video below demonstrates Sans Tracas in action.</h3>
+            <div className="iframe-container">
+              <iframe
+                width="560"
+                height="315"
+                src="https://www.youtube.com/embed/feILrGkdO8A"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"
+              ></iframe>{" "}
+            </div>{" "}
+            <br />
+            <br />
             <h3>
               Before you start with any of our fun experiments, please go
               through the{" "}
