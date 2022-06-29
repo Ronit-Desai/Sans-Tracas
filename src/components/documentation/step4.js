@@ -339,8 +339,13 @@ class ComponentS4 extends React.Component {
               I will personally guide you in case of any modifications to your
               pull requests. Thank you so much for contributing your experiment
               to the ‘Sans Tracas’ platform. Please take part in our post study
-              survey here to complete your participation in the research study.
+              survey to complete your participation in the research study.
             </p>
+            <a href="https://surveys.dal.ca/opinio/s?s=67344">
+              {" "}
+              Click Here to start the Post-Study Survey{" "}
+            </a>
+            <br />
             <br />
           </div>
         </div>

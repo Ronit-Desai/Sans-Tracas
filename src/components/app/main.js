@@ -390,6 +390,21 @@ class AppMain extends React.Component {
               using either Google Chrome or Bluefy browser.{" "}
             </p>
           </div>
+          <div className="col-md-4 mx-auto mt-5 p-5 w-50 bg-white shadow rounded">
+            <h3>
+              {" "}
+              If you've tried connecting the device multiple times and its not
+              working and if you're having any other issues with the device and
+              don't want to continue with the experiment, please take part in
+              our feedback survey to let us know what issues you're facing and
+              we'll figure out a way to solve them.
+              <br /> <br />
+              <a href="https://surveys.dal.ca/opinio/s?s=68874">
+                {" "}
+                Click Here to start the Feedback Survey{" "}
+              </a>
+            </h3>
+          </div>
         </div>
       );
     }
