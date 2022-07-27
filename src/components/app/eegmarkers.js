@@ -24,7 +24,7 @@ let headersWithAux = [
   { label: "participant_id", key: "participant_id" },
 ];
 
-class EEGmarkers extends React.Component {
+class EegMarkers extends React.Component {
   constructor(props) {
     super();
 
@@ -159,4 +159,4 @@ class EEGmarkers extends React.Component {
   };
 }
 
-export default EEGmarkers;
+export default EegMarkers;
