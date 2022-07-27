@@ -22,7 +22,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import N170 from "./n170";
 import XAB from "./xab";
 import MaskAndFaces from "./masksandfaces";
-import XabFromPavlovia from "./xabfrompavlovia";
+import EEGmarkers from "./eegmarkers";
 import BreathCounting from "./breathcounting";
 import HelperUtil from "../../util/HelperUtil";
 import RestingState from "./restingstate";
