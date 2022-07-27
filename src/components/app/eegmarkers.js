@@ -41,7 +41,7 @@ class EegMarkers extends React.Component {
   }
 
   componentDidMount() {
-    this.startXabFromPavlovia();
+    this.startEegMarkers();
     this.setState({ canCloseTab: false });
     window.addEventListener("beforeunload", this.unLoadEvent);
   }
@@ -98,7 +98,7 @@ class EegMarkers extends React.Component {
           processedData={this.processedData}
           processedFileName={
             this.state.participantId +
-            "_EEGmaerkers_eeg_" +
+            "_eegmarkers_eeg_" +
             moment(new Date()).format("YYYYMMDDHHmmss") +
             ".csv"
           }
@@ -107,7 +107,7 @@ class EegMarkers extends React.Component {
     );
   }
 
-  startEEGmarkers = async () => {
+  startEegMarkers = async () => {
     await this.client.start();
     this.client.eegReadings.subscribe((reading) => {
       this.readings.push(reading);
