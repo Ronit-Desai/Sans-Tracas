@@ -227,7 +227,7 @@ class ComponentS4 extends React.Component {
                     Now, go search for "xabfrompavlovia" in the entire file
                     using 'Control+F' or 'Command+F' (depending on whether you
                     have a Mac machine). You will find 5 such instances (lines
-                    24 (2 times), 299, 882, 884), and on all those instances,
+                    25 (2 times), 313, 896, 898), and on all those instances,
                     replace “xabfrompavlovia” to the name of your experiment we
                     used earlier i.e. ‘FaceExp’ as per our example. Be sure to
                     not replace the entire words and just replace the letters
@@ -235,14 +235,14 @@ class ComponentS4 extends React.Component {
                     other letter as it is. (Eg: "startXabFromPavlovia" becomes
                     "startFaceExp"). Please also ensure that just like in our
                     example, please remeber to capitalize the words where they
-                    are already capitalized (lines 24, 884), and whereever they
+                    are already capitalized (lines 25, 898), and whereever they
                     are not capitalized, you have to replace it with the non
                     capitalized version of your experiment names too ('faceexp')
-                    (lines 24, 299, 882).
+                    (lines 25, 313, 896).
                   </li>
                   <br />
                   <li>
-                    Now, go back to line 282, and instead of "Xab From
+                    Now, go back to line 296, and instead of "Xab From
                     Pavlovia", type the name of your experiment.
                     <br />
                     <img src={img17} alt="img17" className="img-fluid" />
@@ -250,7 +250,7 @@ class ComponentS4 extends React.Component {
                   </li>
                   <br />
                   <li>
-                    Now, go to line 318, and instead of "Xab From Pavlovia
+                    Now, go to line 332, and instead of "Xab From Pavlovia
                     Experiemnt Description.", write the description of your
                     experiment that you want to be displayed on the platform.
                     <br />

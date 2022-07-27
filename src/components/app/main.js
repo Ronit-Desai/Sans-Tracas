@@ -22,6 +22,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import N170 from "./n170";
 import XAB from "./xab";
 import MaskAndFaces from "./masksandfaces";
+import XabFromPavlovia from "./xabfrompavlovia";
 import EegMarkers from "./eegmarkers";
 import BreathCounting from "./breathcounting";
 import HelperUtil from "../../util/HelperUtil";
@@ -885,6 +886,16 @@ class AppMain extends React.Component {
     if (this.state.experimentSelected === "eegmarkers") {
       return (
         <EegMarkers
+          museClient={this.client}
+          participantId={this.state.participantId}
+          isAuxConnected={this.state.auxConnected}
+        />
+      );
+    }
+
+    if (this.state.experimentSelected === "xabfrompavlovia") {
+      return (
+        <XabFromPavlovia
           museClient={this.client}
           participantId={this.state.participantId}
           isAuxConnected={this.state.auxConnected}
