@@ -220,7 +220,6 @@ class AppMain extends React.Component {
               </div>
             </div>
             <br />
-
             <div className="card p-2">
               <div
                 className="row"
@@ -276,6 +275,115 @@ class AppMain extends React.Component {
                   be asked to answer a few questions regarding your sleepiness.
                   There is no other task. The experiment time for this
                   experiment will depend on what you choose it to be.
+                  <br />
+                </div>
+              </div>
+            </div>
+            <br />
+            <div className="card p-2">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <div className="col-md-6 col-sm-6 text-start fw-bold">
+                  <span
+                    className="material-icons"
+                    style={{ fontSize: 35, color: "#57a8ff" }}
+                  >
+                    psychology
+                  </span>
+                  Xab From Pavlovia
+                </div>
+                <div className="col-md-6 col-sm-6 text-end">
+                  <button
+                    className="btn btn-link"
+                    onClick={() => this.toggleNav(4)}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#333634" }}
+                    >
+                      menu
+                    </span>
+                  </button>
+                  <button
+                    className="btn btn-link"
+                    onClick={() => {
+                      this.setState({ experimentSelected: "xabfrompavlovia" });
+                    }}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#21eb89" }}
+                    >
+                      play_circle_outline
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div
+                className={
+                  (this.state.exp4DescShow ? "show" : "") + " collapse"
+                }
+                id="collapseExample"
+              >
+                <div className="card-body">
+                  Xab From Pavlovia Experiemnt Description.
+                  <br />
+                </div>
+              </div>
+            </div>
+            <br />
+            <div className="card p-2">
+              <div
+                className="row"
+                style={{ display: "flex", alignItems: "center" }}
+              >
+                <div className="col-md-6 col-sm-6 text-start fw-bold">
+                  <span
+                    className="material-icons"
+                    style={{ fontSize: 35, color: "#57a8ff" }}
+                  >
+                    psychology
+                  </span>
+                  Eeg Markers
+                </div>
+                <div className="col-md-6 col-sm-6 text-end">
+                  <button
+                    className="btn btn-link"
+                    onClick={() => this.toggleNav(7)}
+                  >
+                    <spanline
+                      className="material-icons"
+                      style={{ color: "#333634" }}
+                    >
+                      menu
+                    </spanline>
+                  </button>
+                  <button
+                    className="btn btn-link"
+                    onClick={() => {
+                      this.setState({ experimentSelected: "eegmarkers" });
+                    }}
+                  >
+                    <span
+                      className="material-icons"
+                      style={{ color: "#21eb89" }}
+                    >
+                      play_circle_outline
+                    </span>
+                  </button>
+                </div>
+              </div>
+              <div
+                className={
+                  (this.state.exp7DescShow ? "show" : "") + " collapse"
+                }
+                id="collapseExample"
+              >
+                <div className="card-body">
+                  Eeg Markers experiment description to be filled in by Dr.
+                  Benjamin Godde.
                   <br />
                 </div>
               </div>
@@ -979,6 +1087,10 @@ class AppMain extends React.Component {
     } else if (expNo === 6) {
       this.setState({
         exp6DescShow: !this.state.exp6DescShow,
+      });
+    } else if (expNo === 7) {
+      this.setState({
+        exp7DescShow: !this.state.exp7DescShow,
       });
     }
   }
