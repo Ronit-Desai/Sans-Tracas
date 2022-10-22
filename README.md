@@ -16,7 +16,7 @@
 
 
 
-`Sans Tracas` is an interactive cross-platform tool that enables enables users to run EEG experiments online from the comfort of their homes instead of going to the laboratory. You don't need to be an EEG expert to use the platform. It is designed in such a way that even a user with no knowledge about EEG and BCI can use this platform and perform online EEG experiments all on their own by just following the tutoriol videos and instructions provided on the platform. Users can also view their real-time live EEG signal and understand more about EEG using the platform.
+`Sans Tracas` is an interactive cross-platform tool that enables users to run EEG experiments online from the comfort of their homes instead of going to the laboratory. You don't need to be an EEG expert to use the platform. It is designed in such a way that even a user with no knowledge about EEG and BCI can use this platform and perform online EEG experiments all on their own by just following the tutoriol videos and instructions provided on the platform. Users can also view their real-time live EEG signal and understand more about EEG using the platform.
 
 `Sans Tracas` is also designed for neuroscience researchers, as it allows neuroscience researchers to add their own experiments to the ever growing Sans Tracas library. Behavioural neuroscientists can now add an EEG component to their research by integrating their own behavioural experiments with the platform and start recording EEG data in the background. The behavioural experiments can either be self-designed or designed using tools such as [PsychoPy](https://www.psychopy.org/), [PsychoJS](https://github.com/psychopy/psychojs), [JSPsych](https://www.jspsych.org/7.3/), and [Pavlovia](https://pavlovia.org/). The integreation process is so simple and straightforward that even a researcher with little to no programming knowledge can integrate their experiments with the platform by just following the documentation.
 
@@ -54,7 +54,7 @@ If you are interested in developing Sans Tracas, you can directly create a Pull 
 
 # Credits
 
-`Sans Tracas` - A Cross-Platform tool for running online EEG experiments with the Interaxon Muse brought to you by Ronit Umeshbhai Desai. A [Ronit Desai](https://www.linkedin.com/in/ronitdesai/) Production.
+`Sans Tracas` - An Interactive Cross-Platform tool for running online EEG experiments with the Interaxon Muse brought to you by Ronit Umeshbhai Desai. A [Ronit Desai](https://www.linkedin.com/in/ronitdesai/) Production.
 
 # License
 
