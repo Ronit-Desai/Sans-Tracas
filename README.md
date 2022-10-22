@@ -1,8 +1,6 @@
 # Sans Tracas
 
 
-# EEGEdu
-
 <p align="center"> 
 <a href="https://github.com/Ronit-Desai/Sans-Tracas/blob/main/LICENSE.md" target="_blank">
 <img src="https://img.shields.io/badge/License-MIT-brightgreen.svg" alt="MIT license" />
