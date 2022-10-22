@@ -37,7 +37,7 @@ Currently, there are only two options for running EEG studies remotely: [EEG-not
 
 If you are interested in developing Sans Tracas, you can directly create a Pull Request or email me at: [Ronit Desai](mailto:ronitdesai97@gmail.com)
 
-## Deployment
+# Deployment
 
 [Sans Tracas](https://polite-mud-086cd3610.1.azurestaticapps.net/) is hosted on [Microsoft Azure](https://azure.microsoft.com/en-ca/). Its CI/CD deployment occurs automagically using GitHub post-commit hooks, or [Actions](https://github.com/Ronit-Desai/Sans-Tracas/actions), as they are commonly called. You can see how the application is build and deployed by [inspecting the workflow](https://github.com/Ronit-Desai/Sans-Tracas/blob/main/.github/workflows/azure-static-web-apps-polite-mud-086cd3610.yml). 
 
